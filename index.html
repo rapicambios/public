@@ -13,10 +13,13 @@
     <style>
         /* 1. Definición de Variables CSS */
         :root {
-            /* Colores primarios para el branding y acentos */
-            --color-primary-green: #84d97d; /* Inicio del degradado verde/amarillo para botones y acentos */
-            --color-secondary-green: #b4f569; /* Fin del degradado verde/amarillo para botones */
-            --color-accent-yellow: #FFBF00; /* Un color amarillo vibrante para posibles futuros usos */
+            /* Colores primarios para el branding y acentos (se mantienen para el header y la sección VISA) */
+            --color-primary-green: #84d97d; /* Inicio del degradado verde/amarillo para branding y header */
+            --color-secondary-green: #b4f569; /* Fin del degradado verde/amarillo para branding y header */
+
+            /* Colores para el degradado naranja de los botones */
+            --color-orange-button-start: #FFBF00;
+            --color-orange-button-end: #FF8C00;
 
             /* Colores de fondo y texto generales */
             --color-body-bg: #f8f9fa; /* Fondo blanco sutil para el cuerpo */
@@ -53,17 +56,19 @@
             background: linear-gradient(to bottom, var(--color-dark-blue-header-start), var(--color-dark-blue-header-end));
         }
 
+        /* CLASE DEGRADADO NARANJA PARA TODOS LOS BOTONES */
         .bg-gradient-rapicambios-button {
-            background: linear-gradient(to right, var(--color-primary-green), var(--color-secondary-green));
+            background: linear-gradient(to right, var(--color-orange-button-start), var(--color-orange-button-end));
             color: var(--color-white-text); /* Asegura que el texto dentro sea blanco */
         }
 
-        /* Efecto Hover para los botones con degradado */
+        /* Efecto Hover para los botones con degradado naranja */
         .bg-gradient-rapicambios-button:hover {
-            background: linear-gradient(to left, var(--color-primary-green), var(--color-secondary-green)); /* Invertir el degradado en hover para un efecto visual */
+            background: linear-gradient(to left, var(--color-orange-button-start), var(--color-orange-button-end)); /* Invertir el degradado en hover para un efecto visual */
         }
 
-        .bg-gradient-visa-worldwide { /* Nueva clase para la sección "Tu VISA en cualquier parte del mundo" */
+        /* Degradado verde para la sección "Tu VISA en cualquier parte del mundo" (fondo, no botón) */
+        .bg-gradient-visa-worldwide {
             background: linear-gradient(to right, var(--color-primary-green), var(--color-secondary-green));
         }
 
@@ -123,11 +128,13 @@
             color: var(--color-light-yellow);
         }
 
+        /* Ahora bg-button-orange también será un degradado naranja */
         .bg-button-orange {
-            background-color: var(--color-light-orange);
+            background: linear-gradient(to right, var(--color-orange-button-start), var(--color-orange-button-end));
+            color: var(--color-white-text);
         }
         .bg-button-orange:hover {
-            background-color: #e67e00; /* Un tono un poco más oscuro al hacer hover */
+            background: linear-gradient(to left, var(--color-orange-button-start), var(--color-orange-button-end)); /* Invertir el degradado en hover */
         }
 
 
@@ -288,8 +295,9 @@
             color: var(--color-light-gray-text);
             margin-bottom: 1.5rem; /* mb-6 */
         }
+        /* Worldcoin button ahora usa el mismo degradado naranja que los demás botones */
         .worldcoin-button {
-            background: linear-gradient(to right, var(--color-primary-green), var(--color-secondary-green));
+            background: linear-gradient(to right, var(--color-orange-button-start), var(--color-orange-button-end));
             color: var(--color-white-text);
             font-weight: 600; /* font-semibold */
             border-radius: 9999px; /* rounded-full */
@@ -302,13 +310,11 @@
             text-decoration: none; /* Remove underline from link */
         }
         .worldcoin-button:hover {
-            background: linear-gradient(to left, var(--color-primary-green), var(--color-secondary-green)); /* Invert on hover */
+            background: linear-gradient(to left, var(--color-orange-button-start), var(--color-orange-button-end)); /* Invert on hover */
         }
+        /* La clase .orange en worldcoin-button ahora es redundante pero no causa problemas */
         .worldcoin-button.orange {
-            background: linear-gradient(to right, #FFBF00, #FF8C00); /* Orange gradient */
-        }
-        .worldcoin-button.orange:hover {
-            background: linear-gradient(to left, #FFBF00, #FF8C00); /* Invert on hover */
+            /* No se necesita cambiar, ya que .worldcoin-button ya usa el degradado naranja */
         }
 
         /* Adjustments for the hero section button layout */
@@ -442,7 +448,8 @@
                     <p class="worldcoin-estimated">
                         Precio en vivo (vía Binance)
                     </p>
-                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button orange text-lg px-8 py-4 rounded-full shadow-lg">
+                    <!-- Este botón ahora usa el degradado naranja por defecto de .worldcoin-button -->
+                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-lg px-8 py-4 rounded-full shadow-lg">
                         Comprar Worldcoin
                     </a>
                 </div>
@@ -468,7 +475,7 @@
                         Conoce más sobre el Módulo Cripto <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
-                <!-- Replaced the smartphone image with the shield image -->
+                <!-- Image of a security shield representing cryptocurrency buying and selling -->
                 <img alt="Imagen de un escudo de seguridad representando la compra y venta de criptomonedas" class="w-56 sm:w-64 rounded-2xl shadow-2xl order-1 sm:order-2" height="574" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-check-shield@2x.webp" width="580"/>
             </div>
         </div>
@@ -514,6 +521,7 @@
                     <p class="text-sm text-paragraph-light">Nuevos clientes</p>
                 </div>
             </div>
+            <!-- Este botón ahora usa el degradado naranja -->
             <button class="bg-button-orange text-white-on-dark font-semibold rounded-full px-8 py-4 transition duration-300 shadow-lg text-lg" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                 ¡Comienza ahora!
             </button>
@@ -551,6 +559,7 @@
             </div>
         </div>
         <div class="text-center">
+            <!-- Este botón ahora usa el degradado naranja -->
             <button class="bg-gradient-rapicambios-button font-semibold rounded-full px-8 py-4 transition duration-300 shadow-lg text-lg" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                 Vender
             </button>
@@ -646,7 +655,7 @@
             <!-- Con tu wallet -->
             <div class="bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl lg:col-span-2">
                 <div class="mb-6 w-full h-auto flex items-center justify-center">
-                    <img alt="Smartphone con logos de Google Pay y Apple Pay" class="w-full h-full object-contain max-w-xs" src="./image 35.png"/>
+                    <img alt="Smartphone con logos de Google Pay y Apple Pay" class="w-full h-full object-contain max-w-xs" src="./assets/img/logo/dolarsimbol.png"/>
                 </div>
                 <h3 class="font-bold text-xl mb-3">Una oferta tan buena que tendrás que probarnos</h3>
                 <p class="text-base leading-relaxed opacity-90">
@@ -707,6 +716,7 @@
             </ul>
             <form class="flex flex-col sm:flex-row gap-4">
                 <input class="rounded-full px-6 py-4 border border-gray-300 focus:border-rapicambios-accent-green focus:ring-2 focus:ring-rapicambios-accent-green text-black flex-1 shadow-md" placeholder="Tu email" type="email"/>
+                <!-- Este botón ahora usa el degradado naranja -->
                 <button class="bg-gradient-rapicambios-button font-semibold rounded-full px-8 py-4 transition duration-300 shadow-lg w-full sm:w-auto" type="submit" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                         Recibir invitación
                 </button>
@@ -776,7 +786,7 @@
             <!-- Paga con tu móvil o smartwatch -->
             <div class="bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl lg:col-span-2">
                 <div class="mb-6 w-full h-auto flex items-center justify-center">
-                    <img alt="Teléfono móvil y smartwatch con iconos de pago" class="w-full h-full object-contain" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/bitsa-contactless-q0sqbztj321nfecr30wj5n1yvds8ew24buyplp9pn2.png"/>
+                    <img alt="Teléfono móvil y smartwatch con iconos de pago" class="w-full h-full object-contain" src="./assets/img/logo/magicmoney.png"/>
                 </div>
                 <h3 class="font-bold text-xl mb-3">Paga con tu móvil o smartwatch</h3>
                 <p class="text-base leading-relaxed opacity-90">
@@ -825,6 +835,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                 </p>
                 <form class="flex flex-col sm:flex-row gap-4">
                     <input class="rounded-full px-6 py-4 text-black flex-1 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-rapicambios-accent-green shadow-md" placeholder="Tu email" type="email"/>
+                    <!-- Este botón ahora usa el degradado naranja -->
                     <button class="bg-gradient-rapicambios-button font-semibold rounded-full px-8 py-4 transition duration-300 shadow-lg w-full sm:w-auto" type="submit" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                         Recibir invitación
                     </button>
