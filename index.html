@@ -60,6 +60,7 @@
         .bg-gradient-rapicambios-button {
             background: linear-gradient(to right, var(--color-orange-button-start), var(--color-orange-button-end));
             color: var(--color-white-text); /* Asegura que el texto dentro sea blanco */
+            border-radius: 0.5rem; /* Se cambió a bordes menos redondeados */
         }
 
         /* Efecto Hover para los botones con degradado naranja */
@@ -132,6 +133,7 @@
         .bg-button-orange {
             background: linear-gradient(to right, var(--color-orange-button-start), var(--color-orange-button-end));
             color: var(--color-white-text);
+            border-radius: 0.5rem; /* Se cambió a bordes menos redondeados */
         }
         .bg-button-orange:hover {
             background: linear-gradient(to left, var(--color-orange-button-start), var(--color-orange-button-end)); /* Invertir el degradado en hover */
@@ -300,7 +302,7 @@
             background: linear-gradient(to right, var(--color-orange-button-start), var(--color-orange-button-end));
             color: var(--color-white-text);
             font-weight: 600; /* font-semibold */
-            border-radius: 9999px; /* rounded-full */
+            border-radius: 0.5rem; /* rounded-md, se cambió a bordes menos redondeados */
             padding: 1rem 2rem; /* px-8 py-4 */
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
@@ -367,7 +369,7 @@
                    
                 </div>
                 <!-- Botón de acceso a WhatsApp -->
-                <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" aria-label="Contactar por WhatsApp" class="bg-gradient-rapicambios-button font-semibold rounded-full px-5 py-2 transition duration-300 shadow-md">Contactar</a>
+                <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" aria-label="Contactar por WhatsApp" class="bg-gradient-rapicambios-button font-semibold rounded-md px-5 py-2 transition duration-300 shadow-md">Contactar</a>
             </div>
 
             <!-- Mobile Menu Button (Hamburger) -->
@@ -405,7 +407,7 @@
             <div class="w-full lg:w-1/2 text-white-on-dark text-center lg:text-left mb-10 lg:mb-0">
                 <div class="flex items-center justify-center lg:justify-start mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="70" height="24" viewBox="0 0 70 24" fill="none" class="mr-2">
-                        <path d="M45.5935 0.115234C40.6233 0.115234 36.1816 2.72771 36.1816 7.55447C36.1816 13.0898 44.0591 13.4721 44.0591 16.2529C44.0591 17.4238 42.7359 18.4719 40.4759 18.4719C37.2686 18.4719 34.8714 17.0074 34.8714 17.0074L33.8457 21.8781C33.8457 21.8781 36.6072 23.1152 40.2735 23.1152C45.7076 23.1152 49.9836 20.3744 49.9836 15.4652C49.9836 9.61612 42.0734 9.24513 42.0734 6.66413C42.0734 5.74678 43.1595 4.74182 45.413 4.74182C47.9556 4.74182 50.0301 5.80697 50.0301 5.80697L51.0339 1.10271C51.0339 1.10271 48.7768 0.115234 45.5935 0.115234ZM0.12038 0.470306L0 1.18038C0 1.18038 2.09103 1.56842 3.9743 2.34259C6.39915 3.23023 6.57194 3.74703 6.98031 5.35206L11.4305 22.7491H17.3961L26.5865 0.470306H20.6346L14.7292 15.6177L12.3195 2.77802C12.0985 1.30856 10.9791 0.470306 9.60885 0.470306H0.12038V0.470306ZM28.9798 0.470306L24.3107 22.749H29.9863L34.639 0.470235H28.9798V0.470306ZM60.6346 0.470306C59.266 0.470306 58.5409 1.21335 58.0088 2.51177L49.6936 22.749H55.6455L56.7971 19.3761H64.0481L64.7484 22.749H70L65.4185 0.470306H60.6346V0.470306ZM61.4086 6.48933L63.1729 14.8494H58.4464L61.4086 6.48933Z" fill="var(--color-white-text)"></path>
+                        <path d="M45.5935 0.115234C40.6233 0.115234 36.1816 2.72771 36.1816 7.55447C36.1816 13.0898 44.0591 13.4721 44.0591 16.2529C44.0591 17.4238 42.7359 18.4719 40.4759 18.4719C37.2686 18.4719 34.8714 17.0074 34.8714 17.0074L33.8457 21.8781C33.8457 21.8781 36.6072 23.1152 40.2735 23.1152C45.7076 23.1152 49.9836 20.3744 49.9836 15.4652C49.9836 9.61612 42.0734 9.24513 42.0734 6.66413C42.0734 5.74678 43.1595 4.74182 45.413 4.74182C47.9556 4.74182 50.0301 5.80697 50.0301 5.80697L51.0339 1.10271C51.0339 1.10271 48.7768 0.115234 45.5935 0.115234ZM0.12038 0.470306L0 1.18038C0 1.18038 2.09103 1.56842 3.97430 2.34259C6.39915 3.23023 6.57194 3.74703 6.98031 5.35206L11.4305 22.7491H17.3961L26.5865 0.470306H20.6346L14.7292 15.6177L12.3195 2.77802C12.0985 1.30856 10.9791 0.470306 9.60885 0.470306H0.12038V0.470306ZM28.9798 0.470306L24.3107 22.749H29.9863L34.639 0.470235H28.9798V0.470306ZM60.6346 0.470306C59.266 0.470306 58.5409 1.21335 58.0088 2.51177L49.6936 22.749H55.6455L56.7971 19.3761H64.0481L64.7484 22.749H70L65.4185 0.470306H60.6346V0.470306ZM61.4086 6.48933L63.1729 14.8494H58.4464L61.4086 6.48933Z" fill="var(--color-white-text)"></path>
                     </svg>
                     <span class="text-base font-semibold">Tu mejor aliado de cambio</span>
                 </div>
@@ -422,10 +424,10 @@
                 </p>
                 <!-- Combined Vender and Chatear buttons -->
                 <div class="hero-buttons-container mb-4">
-                    <button class="bg-gradient-rapicambios-button font-semibold rounded-full px-8 py-4 transition duration-300 shadow-lg w-full sm:w-auto" type="button" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
+                    <button class="bg-gradient-rapicambios-button font-semibold rounded-md px-8 py-4 transition duration-300 shadow-lg w-full sm:w-auto" type="button" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                         Vender
                     </button>
-                    <a aria-label="Contactar por WhatsApp" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="flex items-center justify-center px-6 py-3 bg-gradient-rapicambios-button text-white-on-dark rounded-full text-lg shadow-lg transition duration-300 w-full sm:w-auto">
+                    <a aria-label="Contactar por WhatsApp" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="flex items-center justify-center px-6 py-3 bg-gradient-rapicambios-button text-white-on-dark rounded-md text-lg shadow-lg transition duration-300 w-full sm:w-auto">
                         <i class="fab fa-whatsapp text-2xl mr-2"></i> Chatear
                     </a>
                 </div>
@@ -449,7 +451,7 @@
                         Precio en vivo (vía Binance)
                     </p>
                     <!-- Este botón ahora usa el degradado naranja por defecto de .worldcoin-button -->
-                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-lg px-8 py-4 rounded-full shadow-lg">
+                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-lg px-8 py-4 rounded-md shadow-lg">
                         Comprar Worldcoin
                     </a>
                 </div>
@@ -460,7 +462,7 @@
     <!-- Section: Tus criptos y euros en la misma App -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <h2 class="text-center font-extrabold text-3xl mb-12 text-heading-primary">
-            Tus criptos y pesos chilenos, dolares, euros en la misma web  App
+            Tus criptos y pesos chilenos, dolares, euros en la misma web App
         </h2>
         <div class="relative max-w-4xl mx-auto">
             <div class="bg-section-dark-blue rounded-3xl p-10 flex flex-col sm:flex-row items-center gap-10 sm:gap-20 relative z-10 shadow-xl">
@@ -522,7 +524,7 @@
                 </div>
             </div>
             <!-- Este botón ahora usa el degradado naranja -->
-            <button class="bg-button-orange text-white-on-dark font-semibold rounded-full px-8 py-4 transition duration-300 shadow-lg text-lg" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
+            <button class="bg-button-orange text-white-on-dark font-semibold rounded-md px-8 py-4 transition duration-300 shadow-lg text-lg" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                 ¡Comienza ahora!
             </button>
         </div>
@@ -560,7 +562,7 @@
         </div>
         <div class="text-center">
             <!-- Este botón ahora usa el degradado naranja -->
-            <button class="bg-gradient-rapicambios-button font-semibold rounded-full px-8 py-4 transition duration-300 shadow-lg text-lg" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
+            <button class="bg-gradient-rapicambios-button font-semibold rounded-md px-8 py-4 transition duration-300 shadow-lg text-lg" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                 Vender
             </button>
         </div>
@@ -626,7 +628,7 @@
                 </div>
                 <h3 class="font-bold text-xl mb-3">Cupones</h3>
                 <p class="text-base leading-relaxed opacity-90">
-                    Obten tus codigos y gana tokens worldcoin si aun no has sido verificado por un orb  desde nuestra Web App.
+                    Obten tus codigos y gana tokens worldcoin si aun no has sido verificado por un orb desde nuestra Web App.
                 </p>
             </div>
             <!-- Criptomonedas -->
@@ -717,7 +719,7 @@
             <form class="flex flex-col sm:flex-row gap-4">
                 <input class="rounded-full px-6 py-4 border border-gray-300 focus:border-rapicambios-accent-green focus:ring-2 focus:ring-rapicambios-accent-green text-black flex-1 shadow-md" placeholder="Tu email" type="email"/>
                 <!-- Este botón ahora usa el degradado naranja -->
-                <button class="bg-gradient-rapicambios-button font-semibold rounded-full px-8 py-4 transition duration-300 shadow-lg w-full sm:w-auto" type="submit" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
+                <button class="bg-gradient-rapicambios-button font-semibold rounded-md px-8 py-4 transition duration-300 shadow-lg w-full sm:w-auto" type="submit" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                         Recibir invitación
                 </button>
             </form>
@@ -760,7 +762,7 @@
                 </div>
                 <h3 class="font-bold text-xl mb-3">Hasta un 2% de cashback en tus tiendas favoritas</h3>
                 <p class="text-base leading-relaxed opacity-90">
-                    Obtén recompensas por cada compra que realices con tu tarjeta prepago adquirida en  Rapicambios.
+                    Obtén recompensas por cada compra que realices con tu tarjeta prepago adquirida en Rapicambios.
                 </p>
             </div>
             <!-- Recibe y envía dinero -->
@@ -836,7 +838,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                 <form class="flex flex-col sm:flex-row gap-4">
                     <input class="rounded-full px-6 py-4 text-black flex-1 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-rapicambios-accent-green shadow-md" placeholder="Tu email" type="email"/>
                     <!-- Este botón ahora usa el degradado naranja -->
-                    <button class="bg-gradient-rapicambios-button font-semibold rounded-full px-8 py-4 transition duration-300 shadow-lg w-full sm:w-auto" type="submit" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
+                    <button class="bg-gradient-rapicambios-button font-semibold rounded-md px-8 py-4 transition duration-300 shadow-lg w-full sm:w-auto" type="submit" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                         Recibir invitación
                     </button>
                 </form>
@@ -911,7 +913,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
     </footer>
 
     <script>
-        // JavaScript for mobile menu toggle
+        // JavaScript para alternar el menú móvil
         document.addEventListener('DOMContentLoaded', () => {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -922,7 +924,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                 });
             }
 
-            // JavaScript for animated text in Hero Section
+            // JavaScript para texto animado en la Sección Hero
             // Palabras adaptadas para Rapicambios/Worldcoin
             const words = ["Worldcoins", "Criptomonedas", "Tokens", "Activos Digitales"];
             let currentWordIndex = 0;
@@ -957,7 +959,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
 
             // Worldcoin Price Fetcher
             const worldcoinPriceElement = document.getElementById('wld-price');
-            const worldcoinPriceStatus = document.querySelector('.worldcoin-estimated'); // Updated selector
+            const worldcoinPriceStatus = document.querySelector('.worldcoin-estimated'); // Selector actualizado
             const BINANCE_API_URL = "https://api.binance.com/api/v3/ticker/price?symbol=WLDUSDT";
 
             async function fetchWorldcoinPrice() {
@@ -982,7 +984,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                     if (data && data.price) {
                         const price = parseFloat(data.price);
                         const formattedPrice = price.toFixed(3);
-                        worldcoinPriceElement.textContent = formattedPrice; // Changed to only number
+                        worldcoinPriceElement.textContent = formattedPrice; // Cambiado a solo el número
                         worldcoinPriceStatus.textContent = 'Precio en vivo (vía Binance)';
                     } else {
                         worldcoinPriceElement.textContent = 'N/A';
@@ -994,12 +996,12 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                     console.error('Error al obtener el precio de Worldcoin desde Binance:', error);
                     worldcoinPriceElement.textContent = 'Error';
                     worldcoinPriceStatus.textContent = 'No se pudo cargar el precio';
-                    // Do not use alert(), but rather a custom message box if needed.
+                    // No usar alert(), sino un cuadro de mensaje personalizado si es necesario.
                 }
             }
 
-            fetchWorldcoinPrice(); // Initial call
-            setInterval(fetchWorldcoinPrice, 30000); // Update every 30 seconds
+            fetchWorldcoinPrice(); // Llamada inicial
+            setInterval(fetchWorldcoinPrice, 30000); // Actualizar cada 30 segundos
         });
     </script>
 </body>
