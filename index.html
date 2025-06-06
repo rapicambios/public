@@ -14,8 +14,8 @@
         /* 1. Definición de Variables CSS */
         :root {
             /* Colores primarios para el branding y acentos (se mantienen para el header y la sección VISA) */
-            --color-primary-green: #84d97d; /* Inicio del degradado verde/amarillo para branding y header */
-            --color-secondary-green: #b4f569; /* Fin del degradado verde/amarillo para branding y header */
+            --color-primary-green: #6AD960; /* Verde más vivo para el inicio del degradado */
+            --color-secondary-green: #A8F04B; /* Verde más brillante para el final del degradado */
 
             /* Colores para el degradado naranja de los botones */
             --color-orange-button-start: #FFBF00;
@@ -30,8 +30,8 @@
             --color-border-gray: #e5e7eb; /* Gris para bordes y separadores */
 
             /* Colores específicos de secciones y componentes */
-            --color-dark-blue-header-start: #84d97d;  /* Inicio del degradado oscuro del header */
-            --color-dark-blue-header-end: #b4f569; /* Fin del degradado oscuro del header y fondo de menú móvil */
+            --color-dark-blue-header-start: #6AD960;  /* Inicio del degradado oscuro del header (ahora más vivo) */
+            --color-dark-blue-header-end: #A8F04B; /* Fin del degradado oscuro del header y fondo de menú móvil (ahora más vivo) */
             --color-section-dark-blue: #0B1B3F; /* Color para las secciones y tarjetas de fondo oscuro */
             --color-heading-blue: #0B1B3F; /* Color para títulos principales sobre fondos claros */
             --color-section-light-bg: #F3F7FA; /* Fondo para la sección "Un mundo de ventajas" y "Envía dinero a estos países" */
@@ -595,7 +595,7 @@
                 <div class="w-28 h-28 rounded-full bg-white flex items-center justify-center mb-4 shadow-md">
                 <img src="https://bit2me.com/assets/img/products/pay/advantages/social.svg" alt="Imagen de personas socializando" />
                 </div>
-                <h3 class="font-bold text-lg mb-2 text-heading-primary">Sin registro previo</h3>
+                <h3 class="font-bold text-xl mb-3">Sin registro previo</h3>
                 <p class="text-paragraph-normal leading-relaxed">
                     Paga a quien quieras, incluso si no tiene una cuenta.
                 </p>
@@ -604,7 +604,7 @@
                 <div class="w-28 h-28 rounded-full bg-white flex items-center justify-center mb-4 shadow-md">
                     <img src="https://bit2me.com/assets/img/products/pay/advantages/instant.svg" alt="Imagen de un reloj con flechas" />
                 </div>
-                <h3 class="font-bold text-lg mb-2 text-heading-primary">Instante</h3>
+                <h3 class="font-bold text-xl mb-3">Instante</h3>
                 <p class="text-paragraph-normal leading-relaxed">
                     Envía dinero con un clic y llegará en segundos.
                 </p>
@@ -729,8 +729,8 @@
 
     <!-- Section: Seguridad -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-rapicambios-button">
-            <!-- Aplica el degradado a esta sección -->
+        <!-- Revertir esta sección para usar el degradado verde de visa-worldwide -->
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-visa-worldwide">
             <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-black/70 to-black/40 -z-10"></div>
             <div class="p-12 sm:p-20 flex flex-col sm:flex-row items-center gap-10">
                 <div class="sm:w-1/2 text-white-on-dark max-w-lg text-center sm:text-left">
