@@ -339,6 +339,22 @@
                 justify-content: flex-start;
             }
         }
+
+        /* Adjustments for the footer on mobile */
+        @media (max-width: 1023px) { /* Applies to screens smaller than lg (1024px) */
+            .footer-links-col {
+                text-align: center; /* Center align text for each column */
+                margin-bottom: 1.5rem; /* Add space between columns */
+            }
+            .footer-links-col ul {
+                display: flex;
+                flex-direction: column;
+                align-items: center; /* Center align list items */
+            }
+            .footer-social-icons {
+                justify-content: center; /* Center align social icons */
+            }
+        }
     </style>
 </head>
 <body class="bg-white text-black">
@@ -447,7 +463,7 @@
                         <span class="currency-symbol">$</span>
                         <span class="usd-text">USD</span>
                     </div>
-                    <p class="worldcoin-estimated">
+                    <p class="worldcoin-estimated" id="worldcoin-price-status">
                         Precio en vivo (vía Binance)
                     </p>
                     <!-- Este botón ahora usa el degradado naranja por defecto de .worldcoin-button -->
@@ -855,7 +871,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
     <!-- Footer -->
     <footer class="bg-footer-dark text-white-on-dark py-16">
         <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            <div>
+            <div class="footer-links-col">
                 <h3 class="font-extrabold text-lg mb-6">RAPICAMBIOS</h3>
                 <ul class="space-y-3 text-sm">
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Inicio</a></li>
@@ -866,7 +882,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Contacto</a></li>
                 </ul>
             </div>
-            <div>
+            <div class="footer-links-col">
                 <h3 class="font-extrabold text-lg mb-6">Legal</h3>
                 <ul class="space-y-3 text-sm">
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Política de privacidad</a></li>
@@ -878,14 +894,14 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Proveedor servicios</a></li>
                 </ul>
             </div>
-            <div>
+            <div class="footer-links-col">
                 <h3 class="font-extrabold text-lg mb-6">Contacto</h3>
                 <ul class="space-y-3 text-sm">
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">WhatsApp</a></li>
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Telegram</a></li>
                 </ul>
             </div>
-            <div class="flex flex-col items-center sm:items-start">
+            <div class="flex flex-col text-center sm:text-left footer-links-col">
                 <h3 class="font-extrabold text-lg mb-6"><a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" target="_blank" rel="nofollow">Ayuda</a></h3>
                 <ul class="space-y-3 text-sm">
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Pagos</a></li>
@@ -895,7 +911,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Recargas</a></li>
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Criptomonedas</a></li>
                 </ul>
-                <div class="flex space-x-4 text-2xl mt-6">
+                <div class="flex space-x-4 text-2xl mt-6 footer-social-icons lg:justify-start">
                     <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="text-white-on-dark social-icon-hover transition duration-300" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                     <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="text-white-on-dark social-icon-hover transition duration-300" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="text-white-on-dark social-icon-hover transition duration-300" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -959,7 +975,8 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
 
             // Worldcoin Price Fetcher
             const worldcoinPriceElement = document.getElementById('wld-price');
-            const worldcoinPriceStatus = document.querySelector('.worldcoin-estimated'); // Selector actualizado
+            // Se ha cambiado el ID del elemento para el estado del precio
+            const worldcoinPriceStatus = document.getElementById('worldcoin-price-status'); 
             const BINANCE_API_URL = "https://api.binance.com/api/v3/ticker/price?symbol=WLDUSDT";
 
             async function fetchWorldcoinPrice() {
@@ -975,8 +992,9 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                     const response = await fetch(BINANCE_API_URL);
 
                     if (!response.ok) {
-                        const errorText = await response.text();
-                        throw new Error(`Network response was not ok: ${response.status} - ${response.statusText}. Error response: ${errorText}`);
+                        // Intenta leer el texto del error, pero a veces los errores de red no tienen uno
+                        const errorText = await response.text().catch(() => 'No hay información de error adicional');
+                        throw new Error(`La respuesta de la red no fue correcta: ${response.status} - ${response.statusText}. Detalles del error: ${errorText}`);
                     }
 
                     const data = await response.json();
@@ -995,8 +1013,11 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                 } catch (error) {
                     console.error('Error al obtener el precio de Worldcoin desde Binance:', error);
                     worldcoinPriceElement.textContent = 'Error';
-                    worldcoinPriceStatus.textContent = 'No se pudo cargar el precio';
-                    // No usar alert(), sino un cuadro de mensaje personalizado si es necesario.
+                    worldcoinPriceStatus.textContent = 'No se pudo cargar el precio. Inténtalo de nuevo más tarde o verifica tu conexión.';
+                    // Registro adicional para depurar errores de red
+                    if (error instanceof TypeError && error.message === 'Failed to fetch') {
+                        console.error('Posible problema de CORS o conectividad de red. Revisa la consola del navegador para más detalles.');
+                    }
                 }
             }
 
