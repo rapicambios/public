@@ -486,6 +486,7 @@
             padding: 0 1rem 2.5rem 1rem; /* Aumentado el padding lateral para dejar espacio a las flechas */
             position: relative; /* Importante para el posicionamiento de las flechas */
             box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+            overflow: hidden; /* **CRÍTICO: Oculta el contenido que se desborda** */
         }
 
         @media (min-width: 1024px) { /* En desktop */
@@ -493,7 +494,6 @@
                 display: none !important; /* Ocultar el slider de info cards en desktop */
             }
         }
-
 
         .swiper-container-info-cards .swiper-slide { /* Renombrado */
             display: flex;
@@ -509,7 +509,8 @@
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
             min-height: 280px; /* Asegura que las tarjetas tengan una altura consistente en el slider */
             flex-shrink: 0; /* Important for Swiper to handle widths correctly */
-            /* Se eliminó esta línea: width: 100% !important; */
+            /* Se eliminó esta línea: width: 100% !important; (esto fue en la iteración anterior) */
+            /* Asegúrate de que no haya propiedades de ancho fijo aquí que puedan causar desbordamiento */
         }
         
         .swiper-container-info-cards .swiper-slide:hover { /* Renombrado */
@@ -546,7 +547,6 @@
             top: 50% !important;
             transform: translateY(-50%) !important;
             transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-            /* margin: 0 0.5rem; */ /* Eliminado ya que el padding en el contenedor del swiper lo maneja */
             position: absolute; /* Asegura que estén posicionados absolutamente dentro del contenedor Swiper */
             z-index: 10; /* Asegura que estén por encima de las slides */
             cursor: pointer; /* Indica que son clicables */
