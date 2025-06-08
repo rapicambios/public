@@ -7,7 +7,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
     <!-- Montserrat font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
     <!-- Swiper.js CSS -->
@@ -730,7 +730,7 @@
         }
 
         /* Estilos para las tarjetas de "Productos más Populares" */
-        .popular-product-card {
+        .popular-product-card-ecommerce { /* Renamed to avoid conflict */
             background-color: #0B1B3F; /* Color de fondo oscuro */
             color: white; /* Texto blanco */
             border-radius: 1rem; /* rounded-xl */
@@ -745,28 +745,28 @@
             min-height: 200px; /* Asegura una altura mínima para las tarjetas */
         }
 
-        .popular-product-card:hover {
+        .popular-product-card-ecommerce:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 8px 12px rgba(0,0,0,0.2);
         }
 
-        .popular-product-card img {
+        .popular-product-card-ecommerce img {
             width: 60px; /* Tamaño del logo */
             height: 60px;
             object-fit: contain;
             margin-bottom: 1rem;
             filter: brightness(0) invert(1); /* Para que los logos de las tarjetas se vean blancos */
         }
-        .popular-product-card h3 {
+        .popular-product-card-ecommerce h3 {
             font-size: 1.125rem; /* text-lg */
             font-weight: 600; /* font-semibold */
             margin-bottom: 0.5rem;
         }
-        .popular-product-card p {
+        .popular-product-card-ecommerce p {
             font-size: 0.875rem; /* text-sm */
             color: #d1d5db; /* text-gray-300 */
         }
-        .popular-product-card .price-range {
+        .popular-product-card-ecommerce .price-range {
             font-weight: 500; /* medium */
             color: #9ca3af; /* text-gray-400 */
         }
@@ -811,7 +811,7 @@
         .icon-green { color: var(--color-primary-green); }
         .icon-purple { color: #7b61ff; } /* Keeping a specific purple */
 
-        /* Styles for "Tu cuenta en 5 minutos" section */
+        /* Styles for the "Tu cuenta en 5 minutos" section */
         .steps-section-card {
             background-color: var(--color-body-bg);
             border-radius: 1.5rem;
@@ -887,10 +887,27 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
+        /* Estilos para ocultar/mostrar secciones (carrito) */
+        .hidden-section {
+            display: none;
+        }
+        /* Animaciones para el carrito */
+        .cart-sidebar {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        .cart-sidebar.open {
+            transform: translateX(0);
+        }
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            transition: opacity 0.3s ease-in-out;
+        }
 
     </style>
 </head>
-<body class="bg-white text-black">
+<body class="bg-white text-black min-h-screen flex flex-col">
 
     <!-- Header Section -->
     <header class="bg-header-gradient shadow-lg">
@@ -915,7 +932,6 @@
                     <button aria-label="Cambiar idioma" class="text-white-on-dark text-sm font-semibold hover:text-rapicambios-accent-green transition duration-300 flex items-center">
                         <img src="https://bitsacard.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/es.png" alt="[Bandera de España]" class="w-4 h-auto mr-2"> ES <i class="fas fa-caret-down ml-1 text-xs"></i>
                     </button>
-                   
                 </div>
                 <!-- Botón de acceso a WhatsApp -->
                 <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" aria-label="Contactar por WhatsApp" class="bg-gradient-rapicambios-button font-semibold rounded-md px-5 py-2 transition duration-300 shadow-md">Contactar</a>
@@ -927,10 +943,19 @@
                 <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" aria-label="Contactar por WhatsApp" class="text-white-on-dark text-xl">
                     <i class="fab fa-whatsapp"></i>
                 </a>
+                <button id="open-cart-btn-mobile" class="relative text-white-on-dark focus:outline-none">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-item-count-mobile" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
                 <button id="mobile-menu-button" aria-label="Toggle mobile menu" class="text-white-on-dark focus:outline-none">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
+            <!-- Desktop Cart Button -->
+            <button id="open-cart-btn" class="relative bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 hidden lg:flex items-center ml-4">
+                <i class="fas fa-shopping-cart mr-2"></i>Carrito
+                <span id="cart-item-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </button>
         </div>
 
         <!-- Mobile Navigation (hidden by default) -->
@@ -946,7 +971,6 @@
                     <button aria-label="Cambiar idioma" class="text-white-on-dark text-sm font-semibold hover:text-rapicambios-accent-green transition duration-300 flex items-center justify-center w-full py-2">
                         <img src="https://bitsacard.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/es.png" alt="[Bandera de España]" class="w-4 h-auto mr-2"> ES <i class="fas fa-caret-down ml-1 text-xs"></i>
                     </button>
-                   
                 </div>
             </nav>
         </div>
@@ -1019,7 +1043,7 @@
         </div>
     </header>
 
-   
+   <main id="main-content" class="flex-grow">
     <!-- Slider de Ofertas de la Semana y Productos Populares (Mobile Only) -->
     <section class="my-10 full-width-section mobile-only">
         <div class="max-w-7xl mx-auto px-0 sm:px-0"> <!-- Removido px-6 sm:px-10 para que el padding del swiper lo maneje -->
@@ -1029,7 +1053,7 @@
             <div class="swiper-container-info-cards w-full text-white-on-dark text-center py-10">
                 <div class="swiper-wrapper">
                     <!-- Slide: Worldcoin Cotizador (Añadido al carrusel móvil) -->
-                    <div class="swiper-slide worldcoin-widget-mobile-card card-glow interactive-card">
+                    <div class="swiper-slide worldcoin-widget-mobile-card card-glow interactive-card" data-product-id="worldcoin">
                         <div class="worldcoin-widget-header">
                             <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png" alt="[Logo de Worldcoin]" class="w-10 h-10 mr-3">
                             <h3 class="text-2xl font-bold text-heading-blue">Worldcoin</h3>
@@ -1042,87 +1066,94 @@
                         <p class="worldcoin-estimated" id="worldcoin-price-status-mobile">
                             Precio en vivo (vía Binance)
                         </p>
-                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-base px-6 py-3 rounded-md">
+                        <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="worldcoin">
                             Comprar Worldcoin
-                        </a>
+                        </button>
                     </div>
                     <!-- Slide 1: Mastercard Gift Card -->
-                    <div class="swiper-slide card-glow interactive-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/My-Prepaid-Center-Mastercard.webp" alt="[Imagen de una Mastercard My Prepaid Center]" class="mb-4">
+                    <div class="swiper-slide card-glow interactive-card" data-product-id="mastercard-gift-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/My-Prepaid-Center-Mastercard.webp" alt="[Imagen de una Mastercard My Prepaid Center]" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Mastercard Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Hasta -30% de descuento en tu compra.</p>
-                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-base px-6 py-3 rounded-md">Ver producto</a>
+                        <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="mastercard-gift-card">Añadir al Carrito</button>
                     </div>
                     <!-- Slide 2: OnlyFans Gift Card -->
-                    <div class="swiper-slide card-glow interactive-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp" alt="[Imagen de una Gift Card OnlyFans por Rewarble]" class="mb-4">
+                    <div class="swiper-slide card-glow interactive-card" data-product-id="onlyfans-gift-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp" alt="[Imagen de una Gift Card OnlyFans por Rewarble]" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">OnlyFans Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Ahorra hasta un 9% en tu suscripción.</p>
-                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-base px-6 py-3 rounded-md">Ver producto</a>
+                        <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="onlyfans-gift-card">Añadir al Carrito</button>
                     </div>
                     <!-- Slide 3: Google Play Gift Card -->
-                    <div class="swiper-slide card-glow interactive-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Google-Play.webp" alt="[Imagen de una Gift Card de Google Play]" class="mb-4">
+                    <div class="swiper-slide card-glow interactive-card" data-product-id="google-play-gift-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Google-Play.webp" alt="[Imagen de una Gift Card de Google Play]" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Google Play Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Consigue hasta un 9.6% de descuento.</p>
-                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-base px-6 py-3 rounded-md">Ver producto</a>
+                        <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="google-play-gift-card">Añadir al Carrito</button>
                     </div>
                     <!-- Slide 4: Uber Eats Gift Card -->
-                    <div class="swiper-slide card-glow interactive-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp" alt="[Imagen de una Gift Card de Uber Eats]" class="mb-4">
+                    <div class="swiper-slide card-glow interactive-card" data-product-id="uber-eats-gift-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp" alt="[Imagen de una Gift Card de Uber Eats]" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Uber Eats Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Obtén hasta un 2% de ahorro en tus pedidos.</p>
-                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-base px-6 py-3 rounded-md">Ver producto</a>
+                        <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="uber-eats-gift-card">Añadir al Carrito</button>
                     </div>
                     <!-- Slide 5: Mastercard prepagada Gift Card -->
-                    <div class="swiper-slide card-glow interactive-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mastercard-by-Rewarble.webp" alt="[Imagen de una Mastercard Rewarble prepagada]" class="mb-4">
+                    <div class="swiper-slide card-glow interactive-card" data-product-id="mastercard-prepagada-gift-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mastercard-by-Rewarble.webp" alt="[Imagen de una Mastercard Rewarble prepagada]" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Mastercard prepagada</h3>
                         <p class="text-paragraph-normal mb-4">Hasta un 3% de descuento en tarjetas.</p>
-                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-base px-6 py-3 rounded-md">Ver producto</a>
+                        <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="mastercard-prepagada-gift-card">Añadir al Carrito</button>
                     </div>
                      <!-- Slide 6: Vanilla Gift Gift Card -->
-                     <div class="swiper-slide card-glow interactive-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Vanilla-Gift.webp" alt="[Imagen de una Gift Card Vanilla Gift]" class="mb-4">
+                     <div class="swiper-slide card-glow interactive-card" data-product-id="vanilla-gift-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Vanilla-Gift.webp" alt="[Imagen de una Gift Card Vanilla Gift]" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Vanilla Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Hasta un 9.6% de ahorro en Vanilla Gift.</p>
-                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-base px-6 py-3 rounded-md">Ver producto</a>
+                        <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="vanilla-gift-card">Añadir al Carrito</button>
                     </div>
                     <!-- Sección de Productos más populares en móvil -->
-                    <div class="swiper-slide popular-product-card interactive-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.webp" alt="[Logo de Amazon]" class="card-image">
+                    <div class="swiper-slide popular-product-card-ecommerce interactive-card" data-product-id="amazon-gift-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Amazon.webp" alt="[Logo de Amazon]" class="card-image">
                         <h3 class="font-semibold">Amazon Gift Card</h3>
                         <p class="price-range">USD 1.00 - 2000.00</p>
+                        <button class="add-to-cart-btn bg-button-orange text-base px-6 py-3 rounded-md mt-4" data-product-id="amazon-gift-card">Añadir al Carrito</button>
                     </div>
-                    <div class="swiper-slide popular-product-card interactive-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.webp" alt="[Logo de Steam]" class="card-image">
+                    <div class="swiper-slide popular-product-card-ecommerce interactive-card" data-product-id="steam-gift-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Steam.webp" alt="[Logo de Steam]" class="card-image">
                         <h3 class="font-semibold">Steam Gift Card</h3>
                         <p class="price-range">USD 10.00 - 200.00</p>
+                        <button class="add-to-cart-btn bg-button-orange text-base px-6 py-3 rounded-md mt-4" data-product-id="steam-gift-card">Añadir al Carrito</button>
                     </div>
-                    <div class="swiper-slide popular-product-card interactive-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.webp" alt="[Logo de OnlyFans by Rewarble]" class="card-image">
+                    <div class="swiper-slide popular-product-card-ecommerce interactive-card" data-product-id="onlyfans-by-rewarble">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp" alt="[Logo de OnlyFans by Rewarble]" class="card-image">
                         <h3 class="font-semibold">OnlyFans by Rewarble</h3>
                         <p class="price-range">USD 1.00 - 500.00</p>
+                        <button class="add-to-cart-btn bg-button-orange text-base px-6 py-3 rounded-md mt-4" data-product-id="onlyfans-by-rewarble">Añadir al Carrito</button>
                     </div>
-                    <div class="swiper-slide popular-product-card interactive-card">
+                    <div class="swiper-slide popular-product-card-ecommerce interactive-card" data-product-id="itunes-gift-card">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Apple_logo_black.svg/1724px-Apple_logo_black.svg.png" alt="[Logo de iTunes]" class="card-image">
                         <h3 class="font-semibold">iTunes Gift Card</h3>
                         <p class="price-range">USD 2.00 - 50.00</p>
+                        <button class="add-to-cart-btn bg-button-orange text-base px-6 py-3 rounded-md mt-4" data-product-id="itunes-gift-card">Añadir al Carrito</button>
                     </div>
-                    <div class="swiper-slide popular-product-card interactive-card">
+                    <div class="swiper-slide popular-product-card-ecommerce interactive-card" data-product-id="playstation-gift-card">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/2560px-PlayStation_logo.svg.png" alt="[Logo de PlayStation]" class="card-image">
                         <h3 class="font-semibold">PlayStation Gift Card</h3>
                         <p class="price-range">USD 10.00 - 250.00</p>
+                        <button class="add-to-cart-btn bg-button-orange text-base px-6 py-3 rounded-md mt-4" data-product-id="playstation-gift-card">Añadir al Carrito</button>
                     </div>
-                    <div class="swiper-slide popular-product-card interactive-card">
+                    <div class="swiper-slide popular-product-card-ecommerce interactive-card" data-product-id="roblox-gift-card">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Roblox_logo_2019.svg/1200px-Roblox_logo_2019.svg.png" alt="[Logo de Roblox]" class="card-image">
                         <h3 class="font-semibold">Roblox Gift Card</h3>
                         <p class="price-range">USD 5.00 - 200.00</p>
+                        <button class="add-to-cart-btn bg-button-orange text-base px-6 py-3 rounded-md mt-4" data-product-id="roblox-gift-card">Añadir al Carrito</button>
                     </div>
-                    <div class="swiper-slide popular-product-card interactive-card">
+                    <div class="swiper-slide popular-product-card-ecommerce interactive-card" data-product-id="airbnb-gift-card">
                         <img src="https://a.travel-assets.com/findhotels/images/Applesign-Airbnb-Icon.png" alt="[Logo de Airbnb]" class="card-image">
                         <h3 class="font-semibold">Airbnb Gift Card</h3>
                         <p class="price-range">USD 25.00 - 200.00</p>
+                        <button class="add-to-cart-btn bg-button-orange text-base px-6 py-3 rounded-md mt-4" data-product-id="airbnb-gift-card">Añadir al Carrito</button>
                     </div>
                 </div>
                 <!-- Paginación -->
@@ -1140,7 +1171,7 @@
         <section class="my-10">
             <div class="border-slate-200 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 border-0 shadow-none bg-green-900 text-white p-8 md:p-10 lg:px-16 lg:py-8 -mx-4 lg:mx-auto rounded-none lg:rounded-xl">
                 <div class="max-w-7xl mx-auto flex flex-col gap-6 md:py-8 lg:py-4">
-                    <h1 class="text-3xl md:text-4xl font-semibold">¡Compre Tarjetas de Regalo con Tarjetas de Crédito, Crypto y Monedero Móvil!</h1>
+                    <h1 class="text-3xl md:text-4xl font-semibold">¡Compre Tarjetas Regalo con Tarjetas de Crédito, Crypto y Monedero Móvil!</h1>
                     <p>Compra tarjetas regalo electrónicas o tarjetas prepago en todo el mundo con entrega instantánea: ¡disfruta de un pago rápido, fácil y seguro! Pague con Visa/Mastercard, Apple Pay, Google Pay, Binance Pay o criptomonedas como Bitcoin, Ethereum, USDC, USDT, Litecoin y muchas más.</p>
                     <a type="button" id="visit-store-button" class="h-fit flex group items-center justify-center cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 bg-green-500 border border-green-500 text-white transition-colors hover:bg-green-600 hover:border-green-600 active:bg-green-700 active:border-green-700 disabled:bg-slate-200 disabled:border-slate-200 min-h-14 px-10 text-base gap-3 rounded-xl w-full md:w-fit max-sm:text-sm font-semibold" href="/es/gift-cards/category/all">
                         <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"></path><path d="M9 11v-5a3 3 0 0 1 6 0v5"></path></svg>Explora la tienda
@@ -1189,7 +1220,7 @@
                                         </div>
                                         <!-- Adjusted buttons layout for desktop and their styling -->
                                         <div class="transition duration-200 ease-linear w-full flex flex-col sm:flex-row sm:justify-start gap-2" style="transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);">
-                                            <button type="button" id="deal-of-the-day-add-to-cart-button-34630" class="h-fit flex group items-center justify-center cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-10 px-4 text-sm rounded-lg gap-2 overflow-hidden w-full sm:w-auto font-semibold deal-button-green" aria-label="Añadir al carrito">
+                                            <button type="button" id="deal-of-the-day-add-to-cart-button-34630" class="add-to-cart-btn h-fit flex group items-center justify-center cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-10 px-4 text-sm rounded-lg gap-2 overflow-hidden w-full sm:w-auto font-semibold deal-button-green" aria-label="Añadir al carrito" data-product-id="eneba-10eur">
                                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 21h-3.926a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304h11.339a2 2 0 0 1 1.977 2.304l-.263 1.708"></path><path d="M16 19h6"></path><path d="M19 16v6"></path><path d="M9 11v-5a3 3 0 0 1 6 0v5"></path></svg>
                                                 Añadir al carrito
                                             </button>
@@ -1217,7 +1248,7 @@
                                         </div>
                                         <div class="w-full flex flex-col justify-between gap-1">
                                             <h3 class="font-semibold">Mastercard Gift Card</h3>
-                                            <button type="button" id="deal-of-the-week-view-product-button-14270" class="h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700">Ver producto<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
+                                            <button type="button" id="deal-of-the-week-view-product-button-14270" class="add-to-cart-btn h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700" data-product-id="mastercard-gift-card">Añadir al Carrito<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
                                         </div>
                                     </div>
                                     <div id="deal-of-the-week-card-37785" class="relative w-full h-auto flex items-center gap-4 p-3 group/card rounded-xl bg-gray-50 border border-slate-200 text-neutral-700 cursor-pointer transition-all hover:scale-[1.025]">
@@ -1233,7 +1264,7 @@
                                         </div>
                                         <div class="w-full flex flex-col justify-between gap-1">
                                             <h3 class="font-semibold">OnlyFans Gift Card</h3>
-                                            <button type="button" id="deal-of-the-week-view-product-button-37785" class="h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700">Ver producto<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
+                                            <button type="button" id="deal-of-the-week-view-product-button-37785" class="add-to-cart-btn h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700" data-product-id="onlyfans-gift-card">Añadir al Carrito<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
                                         </div>
                                     </div>
                                     <div id="deal-of-the-week-card-163507" class="relative w-full h-auto flex items-center gap-4 p-3 group/card rounded-xl bg-gray-50 border border-slate-200 text-neutral-700 cursor-pointer transition-all hover:scale-[1.025]">
@@ -1249,7 +1280,7 @@
                                         </div>
                                         <div class="w-full flex flex-col justify-between gap-1">
                                             <h3 class="font-semibold">Google Play Gift Card</h3>
-                                            <button type="button" id="deal-of-the-week-view-product-button-163507" class="h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700">Ver producto<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
+                                            <button type="button" id="deal-of-the-week-view-product-button-163507" class="add-to-cart-btn h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700" data-product-id="google-play-gift-card">Añadir al Carrito<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
                                         </div>
                                     </div>
                                     <div id="deal-of-the-week-card-181176" class="relative w-full h-auto flex items-center gap-4 p-3 group/card rounded-xl bg-gray-50 border border-slate-200 text-neutral-700 cursor-pointer transition-all hover:scale-[1.025]">
@@ -1265,7 +1296,7 @@
                                         </div>
                                         <div class="w-full flex flex-col justify-between gap-1">
                                             <h3 class="font-semibold">Uber Eats Gift Card</h3>
-                                            <button type="button" id="deal-of-the-week-view-product-button-181176" class="h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700">Ver producto<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
+                                            <button type="button" id="deal-of-the-week-view-product-button-181176" class="add-to-cart-btn h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700" data-product-id="uber-eats-gift-card">Añadir al Carrito<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
                                         </div>
                                     </div>
                                     <div id="deal-of-the-week-card-114801" class="relative w-full h-auto flex items-center gap-4 p-3 group/card rounded-xl bg-gray-50 border border-slate-200 text-neutral-700 cursor-pointer transition-all hover:scale-[1.025]">
@@ -1281,7 +1312,7 @@
                                         </div>
                                         <div class="w-full flex flex-col justify-between gap-1">
                                             <h3 class="font-semibold">Mastercard prepagada Gift Card</h3>
-                                            <button type="button" id="deal-of-the-week-view-product-button-114801" class="h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700">Ver producto<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
+                                            <button type="button" id="deal-of-the-week-view-product-button-114801" class="add-to-cart-btn h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700" data-product-id="mastercard-prepagada-gift-card">Añadir al Carrito<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
                                         </div>
                                     </div>
                                     <div id="deal-of-the-week-card-17009" class="relative w-full h-auto flex items-center gap-4 p-3 group/card rounded-xl bg-gray-50 border border-slate-200 text-neutral-700 cursor-pointer transition-all hover:scale-[1.025]">
@@ -1297,7 +1328,7 @@
                                         </div>
                                         <div class="w-full flex flex-col justify-between gap-1">
                                             <h3 class="font-semibold">Vanilla Gift Gift Card</h3>
-                                            <button type="button" id="deal-of-the-week-view-product-button-17009" class="h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700">Ver producto<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
+                                            <button type="button" id="deal-of-the-week-view-product-button-17009" class="add-to-cart-btn h-fit flex group items-center justify-center font-medium cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-8 text-xs rounded-lg gap-1 w-max p-0 text-neutral-700" data-product-id="vanilla-gift-card">Añadir al Carrito<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></button>
                                         </div>
                                     </div>
                                 </div>
@@ -1307,6 +1338,8 @@
                 </div>
             </section>
         </section>
+
+        
     <!-- Section: Tus criptos y pesos chilenos, dolares, euros en la misma web App -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <h2 class="text-center font-extrabold text-3xl mb-12 text-heading-primary">
@@ -1329,130 +1362,6 @@
                 <img alt="[Imagen de un escudo de seguridad que representa la compra y venta de criptomonedas]" class="w-56 sm:w-64 rounded-2xl shadow-2xl order-1 sm:order-2" height="574" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-check-shield@2x.webp" width="580"/>
             </div>
         </div>
-
-        <!-- NEW Swiper Container for Mobile Only -->
-        <div class="mobile-only mt-10">
-            <h3 class="text-center font-extrabold text-2xl mb-8 text-heading-primary px-6 sm:px-10">
-                Otras Ventajas y Métodos de Recarga
-            </h3>
-            <div class="swiper-container-combined-cards w-full text-center py-10">
-                <div class="swiper-wrapper">
-                    <!-- Slides from "Recarga tu tarjeta como prefieras" -->
-                    <!-- Slide: Cupones -->
-                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
-                        <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de cupones Bitsa con logotipos de tiendas]" class="w-full h-full object-contain max-w-xs" src="https://images.ctfassets.net/wqi8u1luxsv0/5XmMqMeAhV2YaQCyEu6FyL/e2b233b061135796ed833001b7416beb/Crypto_hero_static.svg"/>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3">Cupones</h3>
-                        <p class="text-base leading-relaxed opacity-90">
-                            Obten tus codigos y gana tokens worldcoin si aun no has sido verificado por un orb desde nuestra Web App.
-                        </p>
-                    </div>
-                    <!-- Slide: Criptomonedas -->
-                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
-                        <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de iconos de criptomonedas como Bitcoin, Ethereum, Tron y Litecoin]" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/Criptomonedas-r3pu02e09qriw0f9pyqx2rtyhwsri4es6sdgff2ebk.png"/>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3">Criptomonedas</h3>
-                        <p class="text-base leading-relaxed opacity-90">
-                            Intercambia en pocos segundos tus criptos por pesos chilenos, dolares, euros y gástalos pagando online o en comercios físicos.
-                        </p>
-                        <a class="text-rapicambios-accent-green font-semibold mt-4 hover:underline text-base transition duration-300 flex items-center interactive-link" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">
-                            Quiero saber más <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                    <!-- Slide: Tarjeta o transferencia -->
-                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
-                        <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de tarjetas de crédito y un icono de banco]" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/IBAN1-q4rlv1lbowr9bwjfs9m4wwh3x3f2wq6os36t1if2f4.png"/>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3">Tarjeta o transferencia</h3>
-                        <p class="text-base leading-relaxed opacity-90">
-                            Recarga pesos chilenos, dolares, euros desde otra tarjeta o a través de una transferencia bancaria a tu propio IBAN personal de Rapicambios 
-                        </p>
-                    </div>
-                    <!-- Slide: Con tu wallet -->
-                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
-                        <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de smartphone con logotipos de Google Pay y Apple Pay]" class="w-full h-full object-contain max-w-xs" src="./assets/img/logo/dolarsimbol.png"/>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3">Una oferta tan buena que tendrás que probarnos</h3>
-                        <p class="text-base leading-relaxed opacity-90">
-                            Ahorra dinero enviando, gastando y recibiendo pagos en diferentes divisas. Todo lo que necesitas, en Rapicambios, donde lo necesites..
-                        </p>
-                    </div>
-                    <!-- Slide: Otros métodos de recarga -->
-                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
-                        <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <!-- Placeholder de imagen para "Otros" métodos de recarga -->
-                            <img alt="[Imagen de un icono de métodos de recarga adicionales]" class="w-full h-full object-contain max-w-xs" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-coins@2x.webp"/>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3">Otros métodos</h3>
-                        <p class="text-base leading-relaxed opacity-90">
-                            Descubre más formas de recargar tu tarjeta prepagada en Rapicambios. en tu primera transferencia personal. Se aplican términos y condiciones.
-                        </p>
-                    </div>
-                    <!-- Slides from "Disfruta de todas sus ventajas" -->
-                    <!-- Slide: Hasta un 15% de cashback -->
-                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
-                        <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de logotipos de tiendas como Spotify, Netflix, Amazon, etc.]" class="w-full h-full object-contain" src="https://cdn.prod.website-files.com/6604526310f4c7f24d8e3435/6741f920be6d1746e18d8762_Group%2048097871.png"/>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3">Hasta un 2% de cashback en tus tiendas favoritas</h3>
-                        <p class="text-base leading-relaxed opacity-90">
-                            Obtén recompensas por cada compra que realices con tu tarjeta prepago adquirida en Rapicambios.
-                        </p>
-                    </div>
-                    <!-- Slide: Recibe y envía dinero -->
-                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
-                        <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de personas y un mapa mundial]" class="w-full h-full object-contain" src="https://bitsacard.com/wp-content/uploads/2023/04/IBAN2.svg"/>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3">Recibe y envía dinero</h3>
-                        <p class="text-base leading-relaxed opacity-90">
-                            Envía dinero a tus amigos o familiares de forma sencilla e instantánea, estés donde estés, con tu cuenta bancaria.
-                        </p>
-                    </div>
-                    <!-- Slide: Hasta 8 tarjetas con su propio saldo -->
-                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
-                        <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de varias tarjetas Bitsa con saldos]" class="w-full h-full object-contain" src="https://global66.com/assets/home/cuenta-global.png"/>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3">Convierte a tu moneda favorita</h3>
-                        <p class="text-paragraph-normal leading-relaxed">
-                            Puedes convertir tu dinero a +8 monedas, como el Dólar o el Euro, para ahorrar, enviar o comprar con tarjetas prepagadas.
-                        </p>
-                    </div>
-                    <!-- Slide: Paga con tu móvil o smartwatch -->
-                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
-                        <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de teléfono móvil y smartwatch con iconos de pago]" class="w-full h-full object-contain" src="./assets/img/logo/dolarsimbol.png"/>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3">Dinero Magico</h3>
-                        <p class="text-base leading-relaxed opacity-90">
-                            Desarrollamos la mejor manera de mover y gestionar el dinero del mundo. Comisiones mínimas. Máxima facilidad. Máxima velocidad.
-                        </p>
-                    </div>
-                    <!-- Slide: Cuidamos de tu privacidad -->
-                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
-                        <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de un icono de escudo de privacidad con tarjetas apiladas]" class="w-full h-full object-contain" src="https://wise.com/web-art/assets/illustrations/lock-large@2x.webp"/>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3">Cuidamos de tu privacidad</h3>
-                        <p class="text-base leading-relaxed opacity-90">
-                            Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantener su dinero seguro.
-                        </p>
-                        <p>Guardamos su dinero en instituciones financieras establecidas</p>
-                    </div>
-                </div>
-                <!-- Paginación -->
-                <div class="swiper-pagination"></div>
-                <!-- Navegación -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-        </div>
-    </section>
 <!-- Section: Por qué somos los mejores? (Nueva sección) -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <div class="bg-card-light rounded-3xl p-8 sm:p-12 shadow-xl text-center interactive-card">
@@ -1584,9 +1493,131 @@
   
         </div>
     </section>
-
-    <!-- NEW SECTION: Most Popular Products -->
-    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+        <!-- NEW Swiper Container for Mobile Only -->
+        <div class="mobile-only mt-10">
+            <h3 class="text-center font-extrabold text-2xl mb-8 text-heading-primary px-6 sm:px-10">
+                Otras Ventajas y Métodos de Recarga
+            </h3>
+            <div class="swiper-container-combined-cards w-full text-center py-10">
+                <div class="swiper-wrapper">
+                    <!-- Slides from "Recarga tu tarjeta como prefieras" -->
+                    <!-- Slide: Cupones -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de cupones Bitsa con logotipos de tiendas]" class="w-full h-full object-contain max-w-xs" src="https://images.ctfassets.net/wqi8u1luxsv0/5XmMqMeAhV2YaQCyEu6FyL/e2b233b061135796ed833001b7416beb/Crypto_hero_static.svg"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Cupones</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Obten tus codigos y gana tokens worldcoin si aun no has sido verificado por un orb desde nuestra Web App.
+                        </p>
+                    </div>
+                    <!-- Slide: Criptomonedas -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de iconos de criptomonedas como Bitcoin, Ethereum, Tron y Litecoin]" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/Criptomonedas-r3pu02e09qriw0f9pyqx2rtyhwsri4es6sdgff2ebk.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Criptomonedas</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Intercambia en pocos segundos tus criptos por pesos chilenos, dolares, euros y gástalos pagando online o en comercios físicos.
+                        </p>
+                        <a class="text-rapicambios-accent-green font-semibold mt-4 hover:underline text-base transition duration-300 flex items-center interactive-link" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">
+                            Quiero saber más <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    <!-- Slide: Tarjeta o transferencia -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de tarjetas de crédito y un icono de banco]" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/IBAN1-q4rlv1lbowr9bwjfs9m4wwh3x3f2wq6os36t1if2f4.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Tarjeta o transferencia</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Recarga pesos chilenos, dolares, euros desde otra tarjeta o a través de una transferencia bancaria a tu propio IBAN personal de Rapicambios 
+                        </p>
+                    </div>
+                    <!-- Slide: Con tu wallet -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de smartphone con logotipos de Google Pay y Apple Pay]" class="w-full h-full object-contain max-w-xs" src="./assets/img/logo/dolarsimbol.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Una oferta tan buena que tendrás que probarnos</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Ahorra dinero enviando, gastando y recibiendo pagos en diferentes divisas. Todo lo que necesitas, en Rapicambios, donde lo necesites..
+                        </p>
+                    </div>
+                    <!-- Slide: Otros métodos de recarga -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <!-- Placeholder de imagen para "Otros" métodos de recarga -->
+                            <img alt="[Imagen de un icono de métodos de recarga adicionales]" class="w-full h-full object-contain max-w-xs" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-coins@2x.webp"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Otros métodos</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Descubre más formas de recargar tu tarjeta prepagada en Rapicambios. en tu primera transferencia personal. Se aplican términos y condiciones.
+                        </p>
+                    </div>
+                    <!-- Slides from "Disfruta de todas sus ventajas" -->
+                    <!-- Slide: Hasta un 15% de cashback -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de logotipos de tiendas como Spotify, Netflix, Amazon, etc.]" class="w-full h-full object-contain" src="https://cdn.prod.website-files.com/6604526310f4c7f24d8e3435/6741f920be6d1746e18d8762_Group%2048097871.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Hasta un 2% de cashback en tus tiendas favoritas</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Obtén recompensas por cada compra que realices con tu tarjeta prepago adquirida en Rapicambios.
+                        </p>
+                    </div>
+                    <!-- Slide: Recibe y envía dinero -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de personas y un mapa mundial]" class="w-full h-full object-contain" src="https://bitsacard.com/wp-content/uploads/2023/04/IBAN2.svg"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Recibe y envía dinero</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Envía dinero a tus amigos o familiares de forma sencilla e instantánea, estés donde estés, con tu cuenta bancaria.
+                        </p>
+                    </div>
+                    <!-- Slide: Hasta 8 tarjetas con su propio saldo -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de varias tarjetas Bitsa con saldos]" class="w-full h-full object-contain" src="https://global66.com/assets/home/cuenta-global.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Convierte a tu moneda favorita</h3>
+                        <p class="text-paragraph-normal leading-relaxed">
+                            Puedes convertir tu dinero a +8 monedas, como el Dólar o el Euro, para ahorrar, enviar o comprar con tarjetas prepagadas.
+                        </p>
+                    </div>
+                    <!-- Slide: Paga con tu móvil o smartwatch -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de teléfono móvil y smartwatch con iconos de pago]" class="w-full h-full object-contain" src="./assets/img/logo/dolarsimbol.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Dinero Magico</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Desarrollamos la mejor manera de mover y gestionar el dinero del mundo. Comisiones mínimas. Máxima facilidad. Máxima velocidad.
+                        </p>
+                    </div>
+                    <!-- Slide: Cuidamos de tu privacidad -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de un icono de escudo de privacidad con tarjetas apiladas]" class="w-full h-full object-contain" src="https://wise.com/web-art/assets/illustrations/lock-large@2x.webp"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Cuidamos de tu privacidad</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantener su dinero seguro.
+                        </p>
+                        <p>Guardamos su dinero en instituciones financieras establecidas</p>
+                    </div>
+                </div>
+                <!-- Paginación -->
+                <div class="swiper-pagination"></div>
+                <!-- Navegación -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </section>
+<!-- NEW SECTION: Most Popular Products -->
+    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 desktop-only">
         <div class="flex flex-col md:flex-row items-center justify-between mb-8">
             <h2 class="text-2xl sm:text-3xl font-extrabold text-heading-primary text-center md:text-left mb-4 md:mb-0">
                 <img class="inline-block w-6 h-auto mr-2" loading="lazy" alt="[Icono de opción seleccionada]" src="https://cdn.coinsbee.com/version2/dist/assets/img/flags/US.png?v=2">
@@ -1597,250 +1628,12 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            <!-- Card 1: Amazon -->
-            <a href="/en/gift-cards/e-commerce/amazon/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Amazon.webp">
-                            <img alt="[Tarjeta de regalo de Amazon]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Amazon.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">Amazon</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 1.00 - 2000.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 2: Steam -->
-            <a href="/en/gift-cards/games/steam/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Steam.webp">
-                            <img alt="[Tarjeta de regalo de Steam]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Steam.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">Steam</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 10.00 - 200.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 3: OnlyFans by Rewarble -->
-            <a href="/en/gift-cards/entertainment/onlyfans-by-rewarble/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp">
-                            <img alt="[Tarjeta de regalo de OnlyFans por Rewarble]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">OnlyFans by Rewarble</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 1.00 - 500.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 4: iTunes -->
-            <a href="/en/gift-cards/entertainment/itunes/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/iTunes.webp">
-                            <img alt="[Tarjeta de regalo de iTunes]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/iTunes.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">iTunes</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 2.00 - 500.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 5: PlayStation -->
-            <a href="/en/gift-cards/games/playstation/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/PlayStation.webp">
-                            <img alt="[Tarjeta de regalo de PlayStation]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/PlayStation.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">PlayStation</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 10.00 - 200.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 6: Apple -->
-            <a href="/en/gift-cards/entertainment/apple/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Apple.webp">
-                            <img alt="[Tarjeta de regalo de Apple]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Apple.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">Apple</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 2.00 - 500.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 7: Razer -->
-            <a href="/en/gift-cards/games/razer/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Razer.webp">
-                            <img alt="[Tarjeta de regalo de Razer]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Razer.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">Razer</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 1.00 - 500.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 8: DoorDash -->
-            <a href="/en/gift-cards/foods-and-restaurants/doordash/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/DoorDash.webp">
-                            <img alt="[Tarjeta de regalo de DoorDash]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/DoorDash.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">DoorDash</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 5.00 - 250.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 9: Macys -->
-            <a href="/en/gift-cards/clothing/macys/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Macys.webp">
-                            <img alt="[Tarjeta de regalo de Macys]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Macys.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">Macys</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 5.00 - 500.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 10: Uber -->
-            <a href="/en/gift-cards/travel/uber/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber.webp">
-                            <img alt="[Tarjeta de regalo de Uber]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">Uber</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 5.00 - 500.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 11: Roblox -->
-            <a href="/en/gift-cards/games/roblox/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Roblox.webp">
-                            <img alt="[Tarjeta de regalo de Roblox]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Roblox.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">Roblox</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 5.00 - 200.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 12: Airbnb -->
-            <a href="/en/gift-cards/travel/airbnb/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.webp">
-                            <img alt="[Tarjeta de regalo de Airbnb]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">Airbnb</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 25.00 - 300.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 13: Best Buy -->
-            <a href="/en/gift-cards/electronics/best-buy/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Best-Buy.webp">
-                            <img alt="[Tarjeta de regalo de Best Buy]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Best-Buy.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">Best Buy</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 10.00 - 500.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 14: AT&T -->
-            <a href="/en/mobile-top-ups/at-t/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/AT-T.webp">
-                            <img alt="[Tarjeta de regalo de AT&T]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/AT-T.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">AT&amp;T</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 10.00 - 100.00</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 15: Target -->
-            <a href="/en/gift-cards/e-commerce/target/" class="block w-full h-full text-white interactive-card">
-                <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
-                    <div class="relative flex justify-center items-center h-32 mb-2">
-                        <picture>
-                            <source type="image/webp" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Target.webp">
-                            <img alt="[Tarjeta de regalo de Target]" class="w-auto h-full object-contain" data-mdb-lazy-delay="1000" src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Target.png" height="125" width="198">
-                        </picture>
-                    </div>
-                    <div class="flex flex-col justify-between pt-2 pb-0">
-                        <span class="card-title font-bold text-lg mb-0">Target</span>
-                        <p class="card-text-price text-sm text-gray-300 mb-0">USD 1.00 - 2000.00</p>
-                    </div>
-                </div>
-            </a>
+        <div id="popular-products-grid-desktop" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            <!-- Product cards will be rendered here by JS -->
         </div>
     </section>
-    <!-- Original Sections - now desktop-only -->
-    <!-- Section: Recarga tu tarjeta como prefieras (Desktop Only) -->
+   </main>
+<!-- Section: Recarga tu tarjeta como prefieras (Desktop Only) -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 desktop-only">
         <h2 class="text-center font-extrabold text-3xl mb-12 text-heading-primary">
             Recarga tu tarjeta como prefieras
@@ -1999,10 +1792,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
             </div>
         </div>
     </section>
-
-    
-
-    <!-- Section: Tu VISA en cualquier parte del mundo (con degradado) -->
+     <!-- Section: Tu VISA en cualquier parte del mundo (con degradado) -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-visa-worldwide interactive-card">
         <div class="relative max-w-6xl mx-auto flex flex-col sm:flex-row items-center gap-10 text-white-on-dark p-8 sm:p-12">
             <div class="sm:w-1/2 max-w-lg text-center sm:text-left">
@@ -2016,9 +1806,6 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
             </div>
         </div>
     </section>
-
-  
-
     <!-- Section: La tarjeta cripto -->
     <section class="bg-section-dark-blue py-20 shadow-inner full-width-section">
         <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col lg:flex-row items-center gap-12">
@@ -2044,6 +1831,104 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
             </div>
         </div>
     </section>
+    <!-- Sidebar del Carrito -->
+    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-full md:w-96 bg-white shadow-xl flex flex-col z-50 cart-sidebar">
+        <div class="flex justify-between items-center p-4 border-b border-gray-200 bg-gradient-rapicambios-button text-white rounded-t-lg">
+            <h3 class="text-xl font-bold">Tu Carrito</h3>
+            <button id="close-cart-btn" class="text-white hover:text-gray-200 text-2xl">&times;</button>
+        </div>
+        <div id="cart-items" class="flex-grow overflow-y-auto p-4 space-y-4">
+            <!-- Items del carrito se renderizarán aquí -->
+            <p class="text-gray-500 text-center" id="empty-cart-message">El carrito está vacío.</p>
+        </div>
+        <div class="p-4 border-t border-gray-200">
+            <div class="flex justify-between text-lg font-semibold mb-2">
+                <span>Subtotal:</span>
+                <span id="cart-subtotal">$0.00</span>
+            </div>
+            <div class="flex justify-between text-lg font-semibold mb-4">
+                <span>Total:</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button id="proceed-to-checkout-btn" class="w-full bg-gradient-rapicambios-button text-white py-3 rounded-lg hover:bg-green-600 transition duration-300 font-bold text-lg shadow-md">Proceder al Pago</button>
+        </div>
+    </div>
+
+    <!-- Overlay para el carrito -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none z-40 transition-opacity duration-300"></div>
+
+    <!-- Mini-Checkout Section (oculta inicialmente) -->
+    <section id="checkout-section" class="hidden-section fixed inset-0 bg-gray-100 p-8 z-50 overflow-y-auto">
+        <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-xl p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Finalizar Compra</h2>
+
+            <!-- Resumen del Pedido en Checkout -->
+            <div class="mb-8 border-b pb-4 border-gray-200">
+                <h3 class="text-2xl font-semibold mb-4">Resumen de Tu Pedido</h3>
+                <div id="checkout-summary-items" class="space-y-3 mb-6">
+                    <!-- Los items del carrito se cargarán aquí -->
+                </div>
+                <div class="text-xl font-bold flex justify-between">
+                    <span>Total a Pagar:</span>
+                    <span id="checkout-total-summary">$0.00</span>
+                </div>
+            </div>
+
+            <!-- Formulario de Información de Envío -->
+            <h3 class="text-2xl font-semibold mb-4">Información de Envío</h3>
+            <form id="checkout-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <label for="full-name" class="block text-gray-700 font-medium mb-2">Nombre Completo</label>
+                    <input type="text" id="full-name" name="full-name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Juan Pérez" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="juan.perez@example.com" required>
+                </div>
+                <div class="md:col-span-2">
+                    <label for="address" class="block text-gray-700 font-medium mb-2">Dirección</label>
+                    <input type="text" id="address" name="address" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Calle Falsa 123" required>
+                </div>
+                <div>
+                    <label for="city" class="block text-gray-700 font-medium mb-2">Ciudad</label>
+                    <input type="text" id="city" name="city" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Caracas" required>
+                </div>
+                <div>
+                    <label for="zip" class="block text-gray-700 font-medium mb-2">Código Postal</label>
+                    <input type="text" id="zip" name="zip" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="1010" required>
+                </div>
+            </form>
+
+            <!-- Métodos de Pago (simplificado) -->
+            <h3 class="text-2xl font-semibold mb-4">Método de Pago</h3>
+            <div class="mb-8">
+                <div class="flex items-center mb-4">
+                    <input type="radio" id="credit-card" name="payment-method" value="credit-card" class="h-5 w-5 text-blue-600" checked>
+                    <label for="credit-card" class="ml-3 text-lg text-gray-700">Tarjeta de Crédito / Débito</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="paypal" name="payment-method" value="paypal" class="h-5 w-5 text-blue-600">
+                    <label for="paypal" class="ml-3 text-lg text-gray-700">PayPal</label>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center">
+                <button id="back-to-cart-btn" class="bg-gray-300 text-gray-800 py-3 px-6 rounded-lg hover:bg-gray-400 transition duration-300 font-bold text-lg">Volver al Carrito</button>
+                <button id="place-order-btn" class="bg-gradient-rapicambios-button text-white py-3 px-8 rounded-lg hover:bg-blue-700 transition duration-300 font-bold text-lg shadow-md">Confirmar Pedido</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Confirmación de Pedido -->
+    <div id="order-confirmation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[100]">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full text-center">
+            <i class="fas fa-check-circle text-green-500 text-6xl mb-4"></i>
+            <h3 class="text-2xl font-bold mb-3 text-gray-800">¡Pedido Confirmado!</h3>
+            <p class="text-gray-600 mb-6">Gracias por tu compra. Recibirás un correo de confirmación pronto.</p>
+            <button id="close-confirmation-modal-btn" class="bg-gradient-rapicambios-button text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Continuar Comprando</button>
+        </div>
+    </div>
+
 
     <!-- Footer -->
     <footer class="bg-footer-dark text-white-on-dark py-16 full-width-section">
@@ -2462,6 +2347,424 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
             // Update the countdown every second
             setInterval(updateCountdown, 1000);
             updateCountdown(); // Initial call to display immediately
+
+
+            // --- E-commerce Logic ---
+            // Array de productos simulado (adaptado a los productos de tu nuevo index2.html)
+            const products = [
+                { id: 'worldcoin', name: 'Worldcoin', price: 3.50, image: 'https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png', type: 'crypto' },
+                { id: 'eneba-10eur', name: 'Eneba (10 EUR)', price: 9.64, originalPrice: 10.00, discount: 3.6, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Facebook-Ads-by-Rewarble.webp', type: 'offer-of-day' },
+                { id: 'mastercard-gift-card', name: 'Mastercard Gift Card', price: 70.00, originalPrice: 100.00, discount: 30, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/My-Prepaid-Center-Mastercard.webp', type: 'weekly-offer' },
+                { id: 'onlyfans-gift-card', name: 'OnlyFans Gift Card', price: 91.00, originalPrice: 100.00, discount: 9, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp', type: 'weekly-offer' },
+                { id: 'google-play-gift-card', name: 'Google Play Gift Card', price: 90.40, originalPrice: 100.00, discount: 9.6, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Google-Play.webp', type: 'weekly-offer' },
+                { id: 'uber-eats-gift-card', name: 'Uber Eats Gift Card', price: 98.00, originalPrice: 100.00, discount: 2, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp', type: 'weekly-offer' },
+                { id: 'mastercard-prepagada-gift-card', name: 'Mastercard prepagada Gift Card', price: 97.00, originalPrice: 100.00, discount: 3, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mastercard-by-Rewarble.webp', type: 'weekly-offer' },
+                { id: 'vanilla-gift-card', name: 'Vanilla Gift Gift Card', price: 90.40, originalPrice: 100.00, discount: 9.6, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Vanilla-Gift.webp', type: 'weekly-offer' },
+
+                { id: 'amazon-gift-card', name: 'Amazon Gift Card', price: 1.00, minVal: 1, maxVal: 2000, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Amazon.webp', type: 'popular' },
+                { id: 'steam-gift-card', name: 'Steam Gift Card', price: 10.00, minVal: 10, maxVal: 200, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Steam.webp', type: 'popular' },
+                { id: 'onlyfans-by-rewarble', name: 'OnlyFans by Rewarble', price: 1.00, minVal: 1, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp', type: 'popular' },
+                { id: 'itunes-gift-card', name: 'iTunes Gift Card', price: 2.00, minVal: 2, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/iTunes.webp', type: 'popular' },
+                { id: 'playstation-gift-card', name: 'PlayStation Gift Card', price: 10.00, minVal: 10, maxVal: 250, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/PlayStation.webp', type: 'popular' },
+                { id: 'apple-gift-card', name: 'Apple Gift Card', price: 2.00, minVal: 2, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Apple.webp', type: 'popular' },
+                { id: 'razer-gold-gift-card', name: 'Razer Gold Gift Card', price: 1.00, minVal: 1, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Razer.webp', type: 'popular' },
+                { id: 'doordash-gift-card', name: 'DoorDash Gift Card', price: 5.00, minVal: 5, maxVal: 250, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/DoorDash.webp', type: 'popular' },
+                { id: 'macys-gift-card', name: 'Macy\'s Gift Card', price: 5.00, minVal: 5, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Macys.webp', type: 'popular' },
+                { id: 'uber-gift-card', name: 'Uber Gift Card', price: 5.00, minVal: 5, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber.webp', type: 'popular' },
+                { id: 'roblox-gift-card', name: 'Roblox Gift Card', price: 5.00, minVal: 5, maxVal: 200, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Roblox.webp', type: 'popular' },
+                { id: 'airbnb-gift-card', name: 'Airbnb Gift Card', price: 25.00, minVal: 25, maxVal: 300, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.webp', type: 'popular' },
+                { id: 'best-buy-gift-card', name: 'Best Buy Gift Card', price: 10.00, minVal: 10, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Best-Buy.webp', type: 'popular' },
+                { id: 'att-gift-card', name: 'AT&T Gift Card', price: 10.00, minVal: 10, maxVal: 100, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/AT-T.webp', type: 'popular' },
+                { id: 'target-gift-card', name: 'Target Gift Card', price: 1.00, minVal: 1, maxVal: 2000, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Target.webp', type: 'popular' }
+            ];
+
+            // Estado del carrito
+            let cart = [];
+
+            // Referencias del DOM
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const openCartBtn = document.getElementById('open-cart-btn'); // Desktop cart button
+            const openCartBtnMobile = document.getElementById('open-cart-btn-mobile'); // Mobile cart button
+            const closeCartBtn = document.getElementById('close-cart-btn');
+            const cartOverlay = document.getElementById('cart-overlay');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartItemCount = document.getElementById('cart-item-count'); // Desktop cart count
+            const cartItemCountMobile = document.getElementById('cart-item-count-mobile'); // Mobile cart count
+            const cartSubtotalSpan = document.getElementById('cart-subtotal');
+            const cartTotalSpan = document.getElementById('cart-total');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const proceedToCheckoutBtn = document.getElementById('proceed-to-checkout-btn');
+
+            const mainContent = document.querySelector('main'); // Use main content
+            const checkoutSection = document.getElementById('checkout-section');
+            const backToCartBtn = document.getElementById('back-to-cart-btn');
+            const placeOrderBtn = document.getElementById('place-order-btn');
+            const checkoutSummaryItems = document.getElementById('checkout-summary-items');
+            const checkoutTotalSummary = document.getElementById('checkout-total-summary');
+            const orderConfirmationModal = document.getElementById('order-confirmation-modal');
+            const closeConfirmationModalBtn = document.getElementById('close-confirmation-modal-btn');
+
+            // Add a check to ensure mainContent exists
+            if (!mainContent) {
+                console.error("Main content element not found!");
+                return; // Exit if main content is not available
+            }
+
+
+            /**
+             * Carga el carrito desde sessionStorage.
+             */
+            const loadCartFromSessionStorage = () => {
+                try {
+                    const storedCart = sessionStorage.getItem('shoppingCart');
+                    if (storedCart) {
+                        cart = JSON.parse(storedCart);
+                    }
+                } catch (error) {
+                    console.error('Error al cargar el carrito de sessionStorage:', error);
+                    cart = []; // Restablecer el carrito si hay un error de parseo
+                }
+            };
+
+            /**
+             * Guarda el carrito en sessionStorage.
+             */
+            const saveCartToSessionStorage = () => {
+                try {
+                    sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
+                } catch (error) {
+                    console.error('Error al guardar el carrito en sessionStorage:', error);
+                }
+            };
+
+            /**
+             * Renderiza los productos en la sección de "Productos más Populares" (desktop).
+             * Los sliders móviles ya tienen sus elementos, solo hay que añadir los botones si no están.
+             */
+            const renderProducts = () => {
+                const popularProductsGridDesktop = document.getElementById('popular-products-grid-desktop');
+                if (popularProductsGridDesktop) {
+                    popularProductsGridDesktop.innerHTML = ''; // Limpiar existentes
+                    products.filter(p => p.type === 'popular').forEach(product => {
+                        popularProductsGridDesktop.appendChild(createPopularProductCardDesktop(product));
+                    });
+                }
+            };
+
+            /**
+             * Crea el HTML para una tarjeta de producto popular (desktop).
+             * @param {Object} product - El objeto producto.
+             * @returns {HTMLElement} - El elemento HTML de la tarjeta.
+             */
+            const createPopularProductCardDesktop = (product) => {
+                const cardLink = document.createElement('a');
+                cardLink.href = "#"; // No hay enlace real, por ahora.
+                cardLink.className = "block w-full h-full text-white interactive-card";
+                cardLink.dataset.productId = product.id; // Add product ID for event delegation
+
+                cardLink.innerHTML = `
+                    <div class="flex flex-col h-full mx-auto p-4 xl:p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-gray-800">
+                        <div class="relative flex justify-center items-center h-32 mb-2">
+                            <picture>
+                                <source type="image/webp" srcset="${product.image}">
+                                <img alt="[Tarjeta de regalo de ${product.name}]" class="w-auto h-full object-contain" src="${product.image}" height="125" width="198" onerror="this.onerror=null; this.src='https://placehold.co/198x125/cccccc/333333?text=No+Image';">
+                            </picture>
+                        </div>
+                        <div class="flex flex-col justify-between pt-2 pb-0">
+                            <span class="card-title font-bold text-lg mb-0">${product.name}</span>
+                            <p class="card-text-price text-sm text-gray-300 mb-2">USD ${product.minVal.toFixed(2)} - ${product.maxVal.toFixed(2)}</p>
+                            <button class="add-to-cart-btn bg-button-orange text-white py-2 px-4 rounded-md text-sm font-semibold mt-auto" data-product-id="${product.id}">
+                                Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return cardLink;
+            };
+
+
+            /**
+             * Abre la barra lateral del carrito.
+             */
+            const openCartSidebar = () => {
+                cartSidebar.classList.add('open');
+                cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                cartOverlay.classList.add('opacity-100', 'pointer-events-auto');
+            };
+
+            /**
+             * Cierra la barra lateral del carrito.
+             */
+            const closeCartSidebar = () => {
+                cartSidebar.classList.remove('open');
+                cartOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+                cartOverlay.classList.add('opacity-0', 'pointer-events-none');
+            };
+
+            /**
+             * Añade un producto al carrito.
+             * @param {string} productId - El ID del producto a añadir.
+             */
+            const addToCart = (productId) => {
+                const product = products.find(p => p.id === productId);
+                if (!product) {
+                    console.error('Producto no encontrado:', productId);
+                    return;
+                }
+
+                const existingCartItem = cart.find(item => item.productId === productId);
+
+                if (existingCartItem) {
+                    existingCartItem.quantity++;
+                } else {
+                    cart.push({
+                        productId: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+                saveCartToSessionStorage();
+                renderCart();
+                openCartSidebar(); // Abre el carrito automáticamente al añadir
+            };
+
+            /**
+             * Actualiza la cantidad de un producto en el carrito.
+             * @param {string} productId - El ID del producto.
+             * @param {number} quantity - La nueva cantidad.
+             */
+            const updateCartItemQuantity = (productId, quantity) => {
+                const itemIndex = cart.findIndex(item => item.productId === productId);
+                if (itemIndex > -1) {
+                    if (quantity <= 0) {
+                        removeFromCart(productId);
+                    } else {
+                        cart[itemIndex].quantity = quantity;
+                    }
+                    saveCartToSessionStorage();
+                    renderCart();
+                }
+            };
+
+            /**
+             * Elimina un producto del carrito.
+             * @param {string} productId - El ID del producto a eliminar.
+             */
+            const removeFromCart = (productId) => {
+                cart = cart.filter(item => item.productId !== productId);
+                saveCartToSessionStorage();
+                renderCart();
+            };
+
+            /**
+             * Renderiza los elementos del carrito en la barra lateral.
+             */
+            const renderCart = () => {
+                cartItemsContainer.innerHTML = ''; // Limpiar items existentes
+                if (cart.length === 0) {
+                    emptyCartMessage.classList.remove('hidden');
+                    proceedToCheckoutBtn.disabled = true;
+                    proceedToCheckoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    emptyCartMessage.classList.add('hidden');
+                    proceedToCheckoutBtn.disabled = false;
+                    proceedToCheckoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+                    cart.forEach(item => {
+                        const cartItemDiv = document.createElement('div');
+                        cartItemDiv.className = 'flex items-center space-x-4 p-3 bg-white rounded-lg shadow-sm border border-gray-200';
+                        cartItemDiv.innerHTML = `
+                            <img src="${item.image}" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/333333?text=Item';" alt="${item.name}" class="w-16 h-16 object-contain rounded-md">
+                            <div class="flex-grow">
+                                <h4 class="font-semibold text-gray-800">${item.name}</h4>
+                                <p class="text-gray-600">$${item.price.toFixed(2)}</p>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="decrease-quantity-btn text-blue-600 hover:text-blue-800 font-bold text-lg" data-product-id="${item.productId}">-</button>
+                                <span class="quantity-display font-medium text-gray-700">${item.quantity}</span>
+                                <button class="increase-quantity-btn text-blue-600 hover:text-blue-800 font-bold text-lg" data-product-id="${item.productId}">+</button>
+                            </div>
+                            <button class="remove-from-cart-btn text-red-500 hover:text-red-700 text-xl" data-product-id="${item.productId}">&times;</button>
+                        `;
+                        cartItemsContainer.appendChild(cartItemDiv);
+                    });
+                }
+                calculateCartTotals();
+                updateCartItemCount();
+            };
+
+            /**
+             * Calcula y actualiza los totales del carrito (subtotal, total).
+             */
+            const calculateCartTotals = () => {
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                // Podrías añadir lógica de impuestos, envío aquí
+                const total = subtotal; // Simplificado por ahora
+
+                cartSubtotalSpan.textContent = `$${total.toFixed(2)}`;
+                cartTotalSpan.textContent = `$${total.toFixed(2)}`;
+            };
+
+            /**
+             * Actualiza el contador de ítems en el icono del carrito del encabezado.
+             */
+            const updateCartItemCount = () => {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                if (cartItemCount) cartItemCount.textContent = totalItems;
+                if (cartItemCountMobile) cartItemCountMobile.textContent = totalItems;
+
+                if (cartItemCount) { // Check for desktop count
+                    if (totalItems === 0) {
+                        cartItemCount.classList.add('hidden');
+                    } else {
+                        cartItemCount.classList.remove('hidden');
+                    }
+                }
+                if (cartItemCountMobile) { // Check for mobile count
+                    if (totalItems === 0) {
+                        cartItemCountMobile.classList.add('hidden');
+                    } else {
+                        cartItemCountMobile.classList.remove('hidden');
+                    }
+                }
+            };
+
+            /**
+             * Muestra la sección de checkout y oculta el contenido principal.
+             */
+            const showCheckoutSection = () => {
+                mainContent.classList.add('hidden-section');
+                checkoutSection.classList.remove('hidden-section');
+                closeCartSidebar(); // Cierra el carrito si está abierto
+                renderCheckoutSummary();
+            };
+
+            /**
+             * Muestra la sección principal y oculta el checkout.
+             */
+            const showMainContent = () => {
+                checkoutSection.classList.add('hidden-section');
+                mainContent.classList.remove('hidden-section');
+            };
+
+            /**
+             * Renderiza el resumen de los ítems en la sección de checkout.
+             */
+            const renderCheckoutSummary = () => {
+                checkoutSummaryItems.innerHTML = ''; // Limpiar
+                cart.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'flex justify-between items-center text-gray-700';
+                    itemDiv.innerHTML = `
+                        <span>${item.name} x ${item.quantity}</span>
+                        <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                    `;
+                    checkoutSummaryItems.appendChild(itemDiv);
+                });
+                checkoutTotalSummary.textContent = cartTotalSpan.textContent; // Usar el total ya calculado
+            };
+
+            /**
+             * Maneja el evento de confirmar pedido.
+             */
+            const handlePlaceOrder = (event) => {
+                event.preventDefault(); // Evitar el envío del formulario
+                const form = document.getElementById('checkout-form');
+                if (form.checkValidity()) {
+                    // Simular un proceso de pedido
+                    console.log('Pedido confirmado:', {
+                        fullName: document.getElementById('full-name').value,
+                        email: document.getElementById('email').value,
+                        address: document.getElementById('address').value,
+                        city: document.getElementById('city').value,
+                        zip: document.getElementById('zip').value,
+                        paymentMethod: document.querySelector('input[name="payment-method"]:checked').value,
+                        cart: cart
+                    });
+
+                    // Mostrar modal de confirmación
+                    orderConfirmationModal.classList.remove('hidden');
+
+                    // Limpiar carrito después del pedido simulado
+                    cart = [];
+                    saveCartToSessionStorage();
+                    renderCart();
+                    // Opcional: limpiar el formulario
+                    form.reset();
+                } else {
+                    // Si el formulario no es válido, activamos la validación nativa del navegador
+                    form.reportValidity();
+                }
+            };
+
+            // --- Manejadores de Eventos ---
+
+            // Abrir y cerrar carrito (Desktop)
+            if (openCartBtn) { // Check if desktop button exists
+                openCartBtn.addEventListener('click', openCartSidebar);
+            }
+            // Abrir carrito (Mobile)
+            if (openCartBtnMobile) { // Check if mobile button exists
+                openCartBtnMobile.addEventListener('click', openCartSidebar);
+            }
+
+            closeCartBtn.addEventListener('click', closeCartSidebar);
+            cartOverlay.addEventListener('click', closeCartSidebar);
+
+            // Delegación de eventos para los botones de añadir al carrito
+            // Se escuchan los clics en todo el documento y se filtran por la clase 'add-to-cart-btn'
+            document.addEventListener('click', (event) => {
+                // Ensure the clicked element or its parent has the 'add-to-cart-btn' class
+                const targetButton = event.target.closest('.add-to-cart-btn');
+                if (targetButton) {
+                    const productId = targetButton.dataset.productId;
+                    if (productId) {
+                        addToCart(productId);
+                    }
+                }
+            });
+
+            // Delegación de eventos para botones de cantidad y remover en el carrito
+            cartItemsContainer.addEventListener('click', (event) => {
+                const productId = event.target.dataset.productId;
+                if (!productId) return;
+
+                if (event.target.classList.contains('increase-quantity-btn')) {
+                    const item = cart.find(item => item.productId === productId);
+                    if (item) {
+                        updateCartItemQuantity(productId, item.quantity + 1);
+                    }
+                } else if (event.target.classList.contains('decrease-quantity-btn')) {
+                    const item = cart.find(item => item.productId === productId);
+                    if (item) {
+                        updateCartItemQuantity(productId, item.quantity - 1);
+                    }
+                } else if (event.target.classList.contains('remove-from-cart-btn')) {
+                    removeFromCart(productId);
+                }
+            });
+
+            // Botón "Proceder al Pago"
+            proceedToCheckoutBtn.addEventListener('click', showCheckoutSection);
+
+            // Botón "Volver al Carrito" en checkout (realmente vuelve a la vista principal)
+            backToCartBtn.addEventListener('click', showMainContent);
+
+            // Botón "Confirmar Pedido" en checkout
+            placeOrderBtn.addEventListener('click', handlePlaceOrder);
+
+            // Cerrar modal de confirmación
+            closeConfirmationModalBtn.addEventListener('click', () => {
+                orderConfirmationModal.classList.add('hidden');
+                showMainContent(); // Vuelve a la vista principal después de confirmar el pedido
+            });
+
+            // Initial load and render
+            loadCartFromSessionStorage();
+            renderProducts(); // Render desktop popular products
+            renderCart(); // Render cart items
         });
     </script>
 </body>
