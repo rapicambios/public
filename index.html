@@ -499,7 +499,8 @@
         }
 
         /* Nuevos estilos para el slider de Rapicambios en móvil */
-        .swiper-container-info-cards { /* Renombrado para claridad */
+        .swiper-container-info-cards,
+        .swiper-container-combined-cards { /* Añadido el nuevo contenedor */
             width: 100%;
             padding: 0 1rem 2.5rem 1rem; /* Aumentado el padding lateral para dejar espacio a las flechas */
             position: relative; /* Importante para el posicionamiento de las flechas */
@@ -508,18 +509,20 @@
         }
 
         @media (min-width: 1024px) { /* En desktop */
-            .swiper-container-info-cards {
-                display: none !important; /* Ocultar el slider de info cards en desktop */
+            .swiper-container-info-cards,
+            .swiper-container-combined-cards { /* Ocultar ambos en desktop */
+                display: none !important;
             }
         }
 
-        .swiper-container-info-cards .swiper-slide { /* Renombrado */
+        .swiper-container-info-cards .swiper-slide,
+        .swiper-container-combined-cards .swiper-slide { /* Añadido el nuevo contenedor */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Changed to flex-start to allow content to grow */
             text-align: center;
-            background-color: white;
+            background-color: white; /* Default para las cards que no son dark */
             border-radius: 1.5rem;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             padding: 1.5rem; /* Reduced padding for mobile to allow more space */
@@ -530,32 +533,71 @@
             /* Se eliminó esta línea: width: 100% !important; (esto fue en la iteración anterior) */
             /* Asegúrate de que no haya propiedades de ancho fijo aquí que puedan causar desbordamiento */
         }
+
+        /* Ajuste específico para slides de fondo oscuro dentro del nuevo carrusel */
+        .swiper-container-combined-cards .swiper-slide.bg-section-dark-blue {
+            background-color: var(--color-section-dark-blue); /* Asegurar el color de fondo */
+            color: var(--color-white-text); /* Asegurar texto blanco */
+        }
         
-        .swiper-container-info-cards .swiper-slide:hover { /* Renombrado */
+        .swiper-container-info-cards .swiper-slide:hover,
+        .swiper-container-combined-cards .swiper-slide:hover { /* Añadido el nuevo contenedor */
             transform: translateY(-8px) scale(1.03);
             box-shadow: 0 18px 25px -3px rgba(0, 0, 0, 0.2), 0 8px 10px -2px rgba(0, 0, 0, 0.1);
         }
 
-        .swiper-container-info-cards .swiper-slide img {
-            width: 80px; /* Más grande para que la imagen del producto sea más clara */
-            height: auto;
-            margin-bottom: 1rem;
-            object-fit: contain; /* Asegura que la imagen se ajuste sin distorsionarse */
+        /* Adjusted image size for better visibility in mobile Swipers */
+        .swiper-container-info-cards .swiper-slide img,
+        .swiper-container-combined-cards .swiper-slide img {
+            width: 120px; /* Increased size for better visibility */
+            height: 120px; /* Increased size for better visibility */
+            object-fit: contain; /* Ensures the entire image is visible and scaled within the box */
+            margin-bottom: 1.5rem; /* Increased margin for better separation */
+            /* Remove fixed width for Worldcoin logo if it is too small */
         }
 
-        .swiper-container-info-cards .swiper-slide h3 {
+        /* Specific adjustment for the Worldcoin logo in mobile Swiper */
+        .swiper-container-info-cards .swiper-slide .worldcoin-widget-header img {
+            width: 60px; /* Original size is w-10 (40px), increasing to 60px */
+            height: 60px; /* Original size is h-10 (40px), increasing to 60px */
+        }
+
+        /* Ajuste específico para imágenes de tarjetas en el carrusel para que no sean demasiado grandes */
+        .swiper-container-info-cards .swiper-slide .card-image,
+        .swiper-container-combined-cards .swiper-slide .card-image {
+            width: 100px; /* Tamaño fijo para las imágenes de tarjetas */
+            height: 100px; /* Altura fija para las imágenes de tarjetas */
+            object-fit: contain; /* Asegura que la imagen completa sea visible */
+            margin-bottom: 1rem;
+        }
+
+
+        .swiper-container-info-cards .swiper-slide h3,
+        .swiper-container-combined-cards .swiper-slide h3 { /* Añadido el nuevo contenedor */
             font-weight: bold;
             font-size: 1.25rem; /* Reducido ligeramente para encajar mejor */
             margin-bottom: 0.5rem;
-            color: var(--color-heading-blue);
+            color: var(--color-heading-blue); /* Por defecto */
             line-height: 1.2; /* Ajusta la altura de línea */
         }
 
-        .swiper-container-info-cards .swiper-slide p {
+        /* Asegurar color de heading en slides de fondo oscuro */
+        .swiper-container-combined-cards .swiper-slide.bg-section-dark-blue h3 {
+            color: var(--color-white-text);
+        }
+
+
+        .swiper-container-info-cards .swiper-slide p,
+        .swiper-container-combined-cards .swiper-slide p { /* Añadido el nuevo contenedor */
             font-size: 0.9rem; /* Reducido ligeramente */
-            color: var(--color-paragraph-gray);
+            color: var(--color-paragraph-gray); /* Por defecto */
             margin-bottom: 1rem; /* Menos margen */
             line-height: 1.4; /* Ajusta la altura de línea */
+        }
+
+        /* Asegurar color de párrafo en slides de fondo oscuro */
+        .swiper-container-combined-cards .swiper-slide.bg-section-dark-blue p {
+            color: var(--color-white-text);
         }
 
         /* Estilos para los botones de navegación y paginación del Swiper */
@@ -686,6 +728,166 @@
             border-radius: 1.5rem; /* Rounded corners for the GIF */
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Shadow for depth */
         }
+
+        /* Estilos para las tarjetas de "Productos más Populares" */
+        .popular-product-card {
+            background-color: #0B1B3F; /* Color de fondo oscuro */
+            color: white; /* Texto blanco */
+            border-radius: 1rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            text-align: center;
+            display: flex; /* Para centrar contenido */
+            flex-direction: column; /* Contenido en columna */
+            align-items: center; /* Centrar horizontalmente */
+            justify-content: space-between; /* Espaciar contenido */
+            min-height: 200px; /* Asegura una altura mínima para las tarjetas */
+        }
+
+        .popular-product-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+
+        .popular-product-card img {
+            width: 60px; /* Tamaño del logo */
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1); /* Para que los logos de las tarjetas se vean blancos */
+        }
+        .popular-product-card h3 {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            margin-bottom: 0.5rem;
+        }
+        .popular-product-card p {
+            font-size: 0.875rem; /* text-sm */
+            color: #d1d5db; /* text-gray-300 */
+        }
+        .popular-product-card .price-range {
+            font-weight: 500; /* medium */
+            color: #9ca3af; /* text-gray-400 */
+        }
+
+        /* Styles for the "Descubre un nuevo mundo de posibilidades" section */
+        .feature-card {
+            background-color: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            min-height: 240px; /* Added for consistent height */
+            justify-content: center; /* Center content vertically */
+        }
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 18px 25px -3px rgba(0, 0, 0, 0.2), 0 8px 10px -2px rgba(0, 0, 0, 0.1);
+        }
+        .feature-card .icon {
+            width: 64px; /* Icon size */
+            height: 64px;
+            margin-bottom: 1.5rem;
+            color: var(--color-icon-fill-dark); /* Default icon color */
+        }
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--color-heading-blue);
+            margin-bottom: 0.75rem;
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--color-paragraph-normal);
+        }
+        /* Specific icon colors */
+        .icon-yellow { color: var(--color-light-yellow); }
+        .icon-blue { color: #1ca0fb; } /* Keeping a specific blue */
+        .icon-green { color: var(--color-primary-green); }
+        .icon-purple { color: #7b61ff; } /* Keeping a specific purple */
+
+        /* Styles for "Tu cuenta en 5 minutos" section */
+        .steps-section-card {
+            background-color: var(--color-body-bg);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            text-align: center;
+        }
+        .steps-section-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 18px 25px -3px rgba(0, 0, 0, 0.2), 0 8px 10px -2px rgba(0, 0, 0, 0.1);
+        }
+        .steps-section-card .icon-circle {
+            background-color: var(--color-section-light-bg);
+            border-radius: 9999px; /* full rounded */
+            width: 96px; /* w-24 */
+            height: 96px; /* h-24 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto; /* mb-6 */
+        }
+        .steps-section-card .icon-circle img {
+            width: 64px; /* w-16 */
+            height: 64px; /* h-16 */
+            object-fit: contain;
+        }
+        .steps-section-card h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: bold;
+            color: var(--color-heading-blue);
+            margin-bottom: 0.75rem;
+        }
+        .steps-section-card p {
+            font-size: 1rem; /* text-base */
+            color: var(--color-paragraph-normal);
+        }
+
+        /* Ajustes para la sección "Tu cuenta en 5 minutos" del segundo tipo (con imagen y formulario) */
+        .account-5min-container {
+            background-color: white; /* As per the image, it has a white background */
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+        }
+        .account-5min-container .form-input {
+            border: 1px solid var(--color-border-gray);
+            border-radius: 9999px; /* rounded-full */
+            padding: 1rem 1.5rem; /* px-6 py-4 */
+            font-size: 1rem;
+            color: var(--color-default-text);
+            flex-grow: 1; /* Allows input to take available space */
+            outline: none; /* Remove default focus outline */
+        }
+        .account-5min-container .form-input:focus {
+            ring: 2px;
+            ring-color: var(--color-primary-green); /* Example focus ring color */
+            border-color: var(--color-primary-green);
+        }
+
+        /* Styles for the "Mostrar todos" button */
+        .show-all-button {
+            background-color: var(--color-orange-button-start); /* Orange color */
+            color: white;
+            padding: 0.5rem 1.25rem; /* py-2 px-5 */
+            border-radius: 0.5rem; /* rounded-md */
+            font-weight: 600; /* font-semibold */
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .show-all-button:hover {
+            background-color: var(--color-orange-button-end); /* Slightly darker orange */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
     </style>
 </head>
 <body class="bg-white text-black">
@@ -817,11 +1019,12 @@
         </div>
     </header>
 
-    <!-- Slider de Ofertas de la Semana (Mobile Only) -->
+   
+    <!-- Slider de Ofertas de la Semana y Productos Populares (Mobile Only) -->
     <section class="my-10 full-width-section mobile-only">
         <div class="max-w-7xl mx-auto px-0 sm:px-0"> <!-- Removido px-6 sm:px-10 para que el padding del swiper lo maneje -->
             <h2 class="text-center font-extrabold text-3xl mb-8 text-heading-primary px-6 sm:px-10">
-                Ofertas de la Semana
+                Ofertas y Productos Populares
             </h2>
             <div class="swiper-container-info-cards w-full text-white-on-dark text-center py-10">
                 <div class="swiper-wrapper">
@@ -866,7 +1069,7 @@
                     </div>
                     <!-- Slide 4: Uber Eats Gift Card -->
                     <div class="swiper-slide card-glow interactive-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp" alt="" class="mb-4">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp" alt="[Imagen de una Gift Card de Uber Eats]" class="mb-4">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Uber Eats Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Obtén hasta un 2% de ahorro en tus pedidos.</p>
                         <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-base px-6 py-3 rounded-md">Ver producto</a>
@@ -885,6 +1088,42 @@
                         <p class="text-paragraph-normal mb-4">Hasta un 9.6% de ahorro en Vanilla Gift.</p>
                         <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="worldcoin-button text-base px-6 py-3 rounded-md">Ver producto</a>
                     </div>
+                    <!-- Sección de Productos más populares en móvil -->
+                    <div class="swiper-slide popular-product-card interactive-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.webp" alt="[Logo de Amazon]" class="card-image">
+                        <h3 class="font-semibold">Amazon Gift Card</h3>
+                        <p class="price-range">USD 1.00 - 2000.00</p>
+                    </div>
+                    <div class="swiper-slide popular-product-card interactive-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.webp" alt="[Logo de Steam]" class="card-image">
+                        <h3 class="font-semibold">Steam Gift Card</h3>
+                        <p class="price-range">USD 10.00 - 200.00</p>
+                    </div>
+                    <div class="swiper-slide popular-product-card interactive-card">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.webp" alt="[Logo de OnlyFans by Rewarble]" class="card-image">
+                        <h3 class="font-semibold">OnlyFans by Rewarble</h3>
+                        <p class="price-range">USD 1.00 - 500.00</p>
+                    </div>
+                    <div class="swiper-slide popular-product-card interactive-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Apple_logo_black.svg/1724px-Apple_logo_black.svg.png" alt="[Logo de iTunes]" class="card-image">
+                        <h3 class="font-semibold">iTunes Gift Card</h3>
+                        <p class="price-range">USD 2.00 - 50.00</p>
+                    </div>
+                    <div class="swiper-slide popular-product-card interactive-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/2560px-PlayStation_logo.svg.png" alt="[Logo de PlayStation]" class="card-image">
+                        <h3 class="font-semibold">PlayStation Gift Card</h3>
+                        <p class="price-range">USD 10.00 - 250.00</p>
+                    </div>
+                    <div class="swiper-slide popular-product-card interactive-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Roblox_logo_2019.svg/1200px-Roblox_logo_2019.svg.png" alt="[Logo de Roblox]" class="card-image">
+                        <h3 class="font-semibold">Roblox Gift Card</h3>
+                        <p class="price-range">USD 5.00 - 200.00</p>
+                    </div>
+                    <div class="swiper-slide popular-product-card interactive-card">
+                        <img src="https://a.travel-assets.com/findhotels/images/Applesign-Airbnb-Icon.png" alt="[Logo de Airbnb]" class="card-image">
+                        <h3 class="font-semibold">Airbnb Gift Card</h3>
+                        <p class="price-range">USD 25.00 - 200.00</p>
+                    </div>
                 </div>
                 <!-- Paginación -->
                 <div class="swiper-pagination"></div>
@@ -901,7 +1140,7 @@
         <section class="my-10">
             <div class="border-slate-200 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 border-0 shadow-none bg-green-900 text-white p-8 md:p-10 lg:px-16 lg:py-8 -mx-4 lg:mx-auto rounded-none lg:rounded-xl">
                 <div class="max-w-7xl mx-auto flex flex-col gap-6 md:py-8 lg:py-4">
-                    <h1 class="text-3xl md:text-4xl font-semibold">¡Compre Tarjetas Regalo con Tarjetas de Crédito, Crypto y Monedero Móvil!</h1>
+                    <h1 class="text-3xl md:text-4xl font-semibold">¡Compre Tarjetas de Regalo con Tarjetas de Crédito, Crypto y Monedero Móvil!</h1>
                     <p>Compra tarjetas regalo electrónicas o tarjetas prepago en todo el mundo con entrega instantánea: ¡disfruta de un pago rápido, fácil y seguro! Pague con Visa/Mastercard, Apple Pay, Google Pay, Binance Pay o criptomonedas como Bitcoin, Ethereum, USDC, USDT, Litecoin y muchas más.</p>
                     <a type="button" id="visit-store-button" class="h-fit flex group items-center justify-center cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 bg-green-500 border border-green-500 text-white transition-colors hover:bg-green-600 hover:border-green-600 active:bg-green-700 active:border-green-700 disabled:bg-slate-200 disabled:border-slate-200 min-h-14 px-10 text-base gap-3 rounded-xl w-full md:w-fit max-sm:text-sm font-semibold" href="/es/gift-cards/category/all">
                         <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"></path><path d="M9 11v-5a3 3 0 0 1 6 0v5"></path></svg>Explora la tienda
@@ -1068,7 +1307,7 @@
                 </div>
             </section>
         </section>
-    <!-- Section: Tus criptos y euros en la misma App -->
+    <!-- Section: Tus criptos y pesos chilenos, dolares, euros en la misma web App -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <h2 class="text-center font-extrabold text-3xl mb-12 text-heading-primary">
             Tus criptos y pesos chilenos, dolares, euros en la misma web App
@@ -1090,9 +1329,131 @@
                 <img alt="[Imagen de un escudo de seguridad que representa la compra y venta de criptomonedas]" class="w-56 sm:w-64 rounded-2xl shadow-2xl order-1 sm:order-2" height="574" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-check-shield@2x.webp" width="580"/>
             </div>
         </div>
-    </section>
 
-    <!-- Section: Por qué somos los mejores? (Nueva sección) -->
+        <!-- NEW Swiper Container for Mobile Only -->
+        <div class="mobile-only mt-10">
+            <h3 class="text-center font-extrabold text-2xl mb-8 text-heading-primary px-6 sm:px-10">
+                Otras Ventajas y Métodos de Recarga
+            </h3>
+            <div class="swiper-container-combined-cards w-full text-center py-10">
+                <div class="swiper-wrapper">
+                    <!-- Slides from "Recarga tu tarjeta como prefieras" -->
+                    <!-- Slide: Cupones -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de cupones Bitsa con logotipos de tiendas]" class="w-full h-full object-contain max-w-xs" src="https://images.ctfassets.net/wqi8u1luxsv0/5XmMqMeAhV2YaQCyEu6FyL/e2b233b061135796ed833001b7416beb/Crypto_hero_static.svg"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Cupones</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Obten tus codigos y gana tokens worldcoin si aun no has sido verificado por un orb desde nuestra Web App.
+                        </p>
+                    </div>
+                    <!-- Slide: Criptomonedas -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de iconos de criptomonedas como Bitcoin, Ethereum, Tron y Litecoin]" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/Criptomonedas-r3pu02e09qriw0f9pyqx2rtyhwsri4es6sdgff2ebk.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Criptomonedas</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Intercambia en pocos segundos tus criptos por pesos chilenos, dolares, euros y gástalos pagando online o en comercios físicos.
+                        </p>
+                        <a class="text-rapicambios-accent-green font-semibold mt-4 hover:underline text-base transition duration-300 flex items-center interactive-link" href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">
+                            Quiero saber más <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    <!-- Slide: Tarjeta o transferencia -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de tarjetas de crédito y un icono de banco]" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/IBAN1-q4rlv1lbowr9bwjfs9m4wwh3x3f2wq6os36t1if2f4.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Tarjeta o transferencia</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Recarga pesos chilenos, dolares, euros desde otra tarjeta o a través de una transferencia bancaria a tu propio IBAN personal de Rapicambios 
+                        </p>
+                    </div>
+                    <!-- Slide: Con tu wallet -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de smartphone con logotipos de Google Pay y Apple Pay]" class="w-full h-full object-contain max-w-xs" src="./assets/img/logo/dolarsimbol.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Una oferta tan buena que tendrás que probarnos</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Ahorra dinero enviando, gastando y recibiendo pagos en diferentes divisas. Todo lo que necesitas, en Rapicambios, donde lo necesites..
+                        </p>
+                    </div>
+                    <!-- Slide: Otros métodos de recarga -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <!-- Placeholder de imagen para "Otros" métodos de recarga -->
+                            <img alt="[Imagen de un icono de métodos de recarga adicionales]" class="w-full h-full object-contain max-w-xs" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-coins@2x.webp"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Otros métodos</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Descubre más formas de recargar tu tarjeta prepagada en Rapicambios. en tu primera transferencia personal. Se aplican términos y condiciones.
+                        </p>
+                    </div>
+                    <!-- Slides from "Disfruta de todas sus ventajas" -->
+                    <!-- Slide: Hasta un 15% de cashback -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de logotipos de tiendas como Spotify, Netflix, Amazon, etc.]" class="w-full h-full object-contain" src="https://cdn.prod.website-files.com/6604526310f4c7f24d8e3435/6741f920be6d1746e18d8762_Group%2048097871.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Hasta un 2% de cashback en tus tiendas favoritas</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Obtén recompensas por cada compra que realices con tu tarjeta prepago adquirida en Rapicambios.
+                        </p>
+                    </div>
+                    <!-- Slide: Recibe y envía dinero -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de personas y un mapa mundial]" class="w-full h-full object-contain" src="https://bitsacard.com/wp-content/uploads/2023/04/IBAN2.svg"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Recibe y envía dinero</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Envía dinero a tus amigos o familiares de forma sencilla e instantánea, estés donde estés, con tu cuenta bancaria.
+                        </p>
+                    </div>
+                    <!-- Slide: Hasta 8 tarjetas con su propio saldo -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de varias tarjetas Bitsa con saldos]" class="w-full h-full object-contain" src="https://global66.com/assets/home/cuenta-global.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Convierte a tu moneda favorita</h3>
+                        <p class="text-paragraph-normal leading-relaxed">
+                            Puedes convertir tu dinero a +8 monedas, como el Dólar o el Euro, para ahorrar, enviar o comprar con tarjetas prepagadas.
+                        </p>
+                    </div>
+                    <!-- Slide: Paga con tu móvil o smartwatch -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de teléfono móvil y smartwatch con iconos de pago]" class="w-full h-full object-contain" src="./assets/img/logo/dolarsimbol.png"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Dinero Magico</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Desarrollamos la mejor manera de mover y gestionar el dinero del mundo. Comisiones mínimas. Máxima facilidad. Máxima velocidad.
+                        </p>
+                    </div>
+                    <!-- Slide: Cuidamos de tu privacidad -->
+                    <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
+                        <div class="mb-6 w-full h-auto flex items-center justify-center">
+                            <img alt="[Imagen de un icono de escudo de privacidad con tarjetas apiladas]" class="w-full h-full object-contain" src="https://wise.com/web-art/assets/illustrations/lock-large@2x.webp"/>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Cuidamos de tu privacidad</h3>
+                        <p class="text-base leading-relaxed opacity-90">
+                            Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantener su dinero seguro.
+                        </p>
+                        <p>Guardamos su dinero en instituciones financieras establecidas</p>
+                    </div>
+                </div>
+                <!-- Paginación -->
+                <div class="swiper-pagination"></div>
+                <!-- Navegación -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </section>
+<!-- Section: Por qué somos los mejores? (Nueva sección) -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <div class="bg-card-light rounded-3xl p-8 sm:p-12 shadow-xl text-center interactive-card">
             <h2 class="font-extrabold text-3xl mb-4 text-heading-primary">
@@ -1478,9 +1839,9 @@
             </a>
         </div>
     </section>
-
-    <!-- Section: Recarga tu tarjeta como prefieras -->
-    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+    <!-- Original Sections - now desktop-only -->
+    <!-- Section: Recarga tu tarjeta como prefieras (Desktop Only) -->
+    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 desktop-only">
         <h2 class="text-center font-extrabold text-3xl mb-12 text-heading-primary">
             Recarga tu tarjeta como prefieras
         </h2>
@@ -1541,81 +1902,45 @@
             </div>
         </div>
     </section>
-
-    <!-- Section: Tu cuenta en 5 minutos -->
-    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
-        <div class="flex flex-col sm:flex-row items-center gap-12">
-            <div class="flex justify-center sm:w-1/2 order-2 sm:order-1">
-                <img alt="[Imagen de una mujer trabajando en un portátil en un escritorio]" class="w-64 sm:w-80 rounded-xl shadow-2xl" height="621" src="https://bitsacard.com/wp-content/uploads/2022/09/Bitsa-code.svg" width="526"/>
-            </div>
-            <div class="sm:w-1/2 max-w-md text-center sm:text-left order-1 sm:order-2">
-                <span class="text-sm text-rapicambios-accent-green font-extrabold uppercase mb-3 inline-block">Rápido y fácil</span>
-                <h2 class="font-extrabold text-3xl mb-6 text-heading-primary">Tu cuenta en 5 minutos</h2>
-                <ul class="list-none text-base mb-8 space-y-3 text-paragraph-normal">
-                    <li class="flex items-start">
-                        <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3 flex-shrink-0 shadow-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="54" viewBox="0 0 55 54" fill="none" class="w-5 h-5">
-                                <circle cx="27.5" cy="27" r="27" fill="var(--color-white-text)"></circle>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M29.1323 28.409L29.1323 16.7866L29.1366 16.7882C29.1369 16.5706 29.0943 16.355 29.011 16.154C28.9276 15.953 28.8053 15.7705 28.6512 15.6169C28.4970 15.4634 28.3138 15.3418 28.1125 15.2593C27.9112 15.1768 27.6959 15.1346 27.4783 15.1358C27.0407 15.1358 26.6207 15.3097 26.3113 15.6191C26.0019 15.9285 25.8285 16.3480 25.8285 16.7855L25.8285 28.3693L23.1885 25.7824C22.8745 25.4789 22.4550 25.3093 22.0183 25.3093C21.5816 25.3093 21.1621 25.4789 20.8481 25.7824C20.6950 25.9312 20.5735 26.1094 20.4904 26.3060C20.4074 26.5027 20.3648 26.7139 20.3648 26.9274C20.3648 27.1408 20.4074 27.3521 20.4904 27.5487C20.5735 27.7454 20.6950 27.9235 20.8481 28.0723L26.3033 33.4152C26.4611 33.5697 26.6485 33.6913 26.8537 33.7729C27.0590 33.8545 27.2784 33.8944 27.4992 33.8905C27.7204 33.8947 27.9402 33.8550 28.1458 33.7734C28.3514 33.6919 28.5387 33.5699 28.6968 33.4152L34.1509 28.0745C34.3040 27.9255 34.4255 27.7476 34.5086 27.5509C34.5917 27.3541 34.6348 27.1425 34.6348 26.9290C34.6348 26.7154 34.5917 26.5038 34.5086 26.3071C34.4255 26.1103 34.3040 25.9324 34.1509 25.7835C33.8374 25.4799 33.4182 25.3104 32.9818 25.3104C32.5454 25.3104 32.1261 25.4789 31.8127 25.7835L29.1323 28.409ZM20 35.6489C19.1716 35.6489 18.5 36.3204 18.5 37.1489C18.5 37.9773 19.1716 38.6489 20 38.6489H35C35.8284 38.6489 36.5 37.9773 36.5 37.1489C36.5 36.3204 35.8284 35.6489 35 35.6489H20Z" fill="var(--color-icon-fill-dark)"></path>
-                            </svg>
-                        </span>
-                        <span class="text-paragraph-normal">Contáctanos por <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="underline hover:text-rapicambios-accent-green interactive-link">WhatsApp</a> para comenzar.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3 flex-shrink-0 shadow-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="54" viewBox="0 0 55 54" fill="none" class="w-5 h-5">
-                                <circle cx="27.5" cy="27" r="27" fill="var(--color-white-text)"></circle>
-                                <path d="M34.5 24.6357H20.5C18.567 24.6357 17 26.2027 17 28.1357V35.1357C17 37.0687 18.567 38.6357 34.5 38.6357H34.5C36.433 38.6357 38 37.0687 38 35.1357V28.1357C38 26.2027 36.433 24.6357 34.5 24.6357Z" stroke="var(--color-icon-fill-dark)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <mask id="path-3-outside-1_1_4877" maskUnits="userSpaceOnUse" x="19.5" y="13.1357" width="16" height="13" fill="black"><rect fill="var(--color-white-text)" x="19.5" y="13.1357" width="16" height="13"></rect><path d="M22.5 23.1357V21.1357C22.5 19.8097 23.0268 18.5379 23.9645 17.6002C24.9021 16.6625 26.1739 16.1357 27.5 16.1357C28.8261 16.1357 30.0979 16.6625 31.0355 17.6002C31.9732 18.5379 32.5 19.8097 32.5 21.1357V23.1357"></path></mask><path d="M19.5 23.1357C19.5 24.7926 20.8431 26.1357 22.5 26.1357C24.1569 26.1357 25.5 24.7926 25.5 23.1357H19.5ZM22.5 21.1357H19.5H22.5ZM27.5 16.1357V13.1357V16.1357ZM29.5 23.1357C29.5 24.7926 30.8431 26.1357 32.5 26.1357C34.1569 26.1357 35.5 24.7926 35.5 23.1357H29.5ZM25.5 23.1357V21.1357H19.5V23.1357H25.5ZM25.5 21.1357C25.5 20.6053 25.7107 20.0966 26.0858 19.7215L21.8431 15.4789C20.3429 16.9792 19.5 19.0140 19.5 21.1357H25.5ZM26.0858 19.7215C26.4609 19.3465 26.9696 19.1357 27.5 19.1357V13.1357C25.3783 13.1357 23.3434 13.9786 21.8431 15.4789L26.0858 19.7215ZM27.5 19.1357C28.0304 19.1357 28.5391 19.3465 28.9142 19.7215L33.1569 15.4789C31.6566 13.9786 29.6217 13.1357 27.5 13.1357V19.1357ZM28.9142 19.7215C29.2893 20.0966 29.5 20.6053 29.5 21.1357H35.5C35.5 19.0140 34.6571 16.9792 33.1569 15.4789L28.9142 19.7215ZM29.5 21.1357V23.1357H35.5V21.1357H29.5Z" fill="var(--color-icon-fill-dark)" mask="url(#path-3-outside-1_1_4877)"></path>
-                            </svg>
-                        </span>
-                        <span class="text-paragraph-normal">Listo, ya tienes tu primera cuenta <strong class="text-rapicambios-accent-green">gratis</strong> lista para operar.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3 flex-shrink-0 shadow-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="54" viewBox="0 0 55 54" fill="none" class="w-5 h-5">
-                                <circle cx="27.5" cy="27" r="27" fill="var(--color-white-text)"></circle>
-                                <path d="M39.9 41.1359H14.7C13.5861 41.1359 12.5178 40.6934 11.7302 39.9058C10.9425 39.1181 10.5 38.0498 10.5 36.9359V21.5359C10.5 20.4220 10.9425 19.3537 11.7302 18.5661C12.5178 17.7784 13.5861 17.3359 14.7 17.3359H24.5V20.1359H14.7C14.3287 20.1359 13.9726 20.2834 13.7101 20.5460C13.4475 20.8085 13.3 21.1646 13.3 21.5359V36.9359C13.3 37.3072 13.4475 37.6633 13.7101 37.9259C13.9726 38.1884 14.3287 38.3359 14.7 38.3359H39.9C40.2713 38.3359 40.6274 38.1884 40.8899 37.9259C41.1525 37.6633 41.3 37.3072 41.3 36.9359V21.5359C41.3 21.1646 41.1525 20.8085 40.8899 20.5460C40.6274 20.2834 40.2713 20.1359 39.9 20.1359H30.1V17.3359H39.9C41.0139 17.3359 42.0822 17.7784 42.8699 18.5661C43.6575 19.3537 44.1 20.4220 44.1 21.5359V36.9359C44.1 38.0498 43.6575 39.1181 42.8699 39.9058C42.0822 40.6934 41.0139 41.1359 39.9 41.1359ZM35 33.8349H34.8012C34.4564 33.8349 34.1258 33.6980 33.8820 33.4542C33.6383 33.2104 33.5013 32.8798 33.5013 32.5350C33.5013 32.1903 33.6383 31.8596 33.8820 31.6159C34.1258 31.3721 34.4564 31.2351 34.8012 31.2351H35C35.3448 31.2351 35.6754 31.3721 35.9192 31.6159C36.1629 31.8596 36.2999 32.1903 36.2999 32.5350C36.2999 32.8798 36.1629 33.2104 35.9192 33.4542C35.6754 33.6980 35.3448 33.8349 35 33.8349ZM30.8 33.8349H27.7998C27.4550 33.8349 27.1244 33.6980 26.8806 33.4542C26.6369 33.2104 26.4999 32.8798 26.4999 32.5350C26.4999 32.1903 26.6369 31.8596 26.8806 31.6159C27.1244 31.3721 27.4550 31.2351 27.7998 31.2351H30.8C31.1448 31.2351 31.4754 31.3721 31.7192 31.6159C31.9629 31.8596 32.0999 32.1903 32.0999 32.5350C32.0999 32.8798 31.9629 33.2104 31.7192 33.4542C31.4754 33.6980 31.1448 33.8349 30.8 33.8349ZM20.3 32.7359C19.7462 32.7359 19.2049 32.5717 18.7444 32.2641C18.2839 31.9564 17.9251 31.5191 17.7131 31.0075C17.5012 30.4958 17.4458 29.9328 17.5538 29.3897C17.6618 28.8465 17.9285 28.3476 18.3201 27.9560C18.7117 27.5645 19.2106 27.2978 19.7537 27.1897C20.2969 27.0817 20.8599 27.1371 21.3715 27.3491C21.8831 27.5610 22.3204 27.9199 22.6281 28.3803C22.9358 28.8408 23.1 29.3821 23.1 29.9359C23.1 30.6785 22.8050 31.3907 22.2799 31.9158C21.7548 32.4409 21.0426 32.7359 20.3 32.7359ZM35 29.8365H27.7998C27.4549 29.8365 27.1240 29.6995 26.8801 29.4556C26.6362 29.2117 26.4992 28.8809 26.4992 28.5359C26.4992 28.1910 26.6362 27.8602 26.8801 27.6163C27.1240 27.3724 27.4549 27.2353 27.7998 27.2353H35C35.3449 27.2353 35.6758 27.3724 35.9197 27.6163C36.1636 27.8602 36.3006 29.2117 36.3006 28.5359C36.3006 28.8809 36.1636 29.2117 35.9197 29.4556C35.6758 29.6995 35.3449 29.8365 35 29.8365ZM29.4 21.5359H25.2C25.0143 21.5359 24.8363 21.4622 24.7050 21.3309C24.5737 21.1996 24.5 21.0216 24.5 20.8359V20.1359H30.1V20.8359C30.1 21.0216 30.0263 21.1996 29.8950 21.3309C29.7637 21.4622 29.5857 21.5359 29.4 21.5359Z" fill="var(--color-icon-fill-dark)" mask="url(#path-3-outside-1_1_4877)"></path>
-                            </svg>
-                        </span>
-                        <span class="text-paragraph-normal">Listo, ya tienes tu primera cuenta <strong class="text-rapicambios-accent-green">gratis</strong> lista para operar.</span>
-                    </li>
-                </ul>
-                <form class="flex flex-col sm:flex-row gap-4">
-                    <input class="rounded-full px-6 py-4 border border-gray-300 focus:border-rapicambios-accent-green focus:ring-2 focus:ring-rapicambios-accent-green text-black flex-1 shadow-md" placeholder="Tu email" type="email"/>
-                    <!-- Este botón ahora usa el degradado naranja -->
-                    <button class="bg-gradient-rapicambios-button font-semibold rounded-md px-8 py-4 shadow-lg w-full sm:w-auto" type="submit" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
-                            Recibir invitación
-                    </button>
-                </form>
-                <div class="text-xs text-gray-400 mt-4 text-center sm:text-left">
-                    La empresa responsable del tratamiento de tus datos es Fastwldtradex. Pedimos tu email para la gestión de esta suscripción y enviarte comunicaciones comerciales. No comunicaremos ni cederemos dicha información a terceros. Podrás ejercer tus derechos y oponerte al tratamiento de tus datos mediante email a <a class="underline hover:text-rapicambios-accent-green interactive-link" href="mailto:contactorapicambios@gmail.com">contactorapicambios@gmail.com</a>.
+<!-- Section: Tu cuenta en 5 minutos (con imagen y formulario) -->
+    <section class="my-10 desktop-only">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10">
+            <div class="account-5min-container flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2 flex justify-center">
+                    <img src="https://bitsacard.com/wp-content/uploads/2022/09/Bitsa-code.svg" alt="[Imagen de persona sentada frente a un portátil con la interfaz de la aplicación]" class="max-w-xs sm:max-w-sm rounded-xl shadow-lg">
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section: Seguridad -->
-    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
-        <!-- Revertir esta sección para usar el degradado verde de visa-worldwide -->
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-visa-worldwide interactive-card">
-            <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-black/70 to-black/40 -z-10"></div>
-            <div class="p-12 sm:p-20 flex flex-col sm:flex-row items-center gap-10">
-                <div class="sm:w-1/2 text-white-on-dark max-w-lg text-center sm:text-left">
-                    <h2 class="font-extrabold text-3xl mb-4">La seguridad es nuestra prioridad</h2>
-                    <p class="text-base leading-relaxed opacity-90">
-                        Utilizamos tecnologías de última generación para salvaguardar todos tus datos. Tus fondos están seguros con Fastwldtradex.
+                <div class="lg:w-1/2 text-center lg:text-left">
+                    <span class="text-gray-500 text-sm font-semibold mb-2 block">RÁPIDO Y FÁCIL</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-heading-blue mb-6">Tu cuenta en 5 minutos</h2>
+                    <ul class="text-left space-y-4 text-paragraph-normal mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1 flex-shrink-0"></i>
+                            Contáctanos por WhatsApp para comenzar.
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1 flex-shrink-0"></i>
+                            Envía tus activos y recibe dinero de forma segura.
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1 flex-shrink-0"></i>
+                            ¡Listo, ya tienes tu primera cuenta <span class="font-bold">gratis</span> lista para operar!
+                        </li>
+                    </ul>
+                    <form class="flex flex-col sm:flex-row gap-4">
+                        <input type="email" placeholder="Tu email" class="form-input" />
+                        <button type="submit" class="bg-gradient-rapicambios-button font-semibold rounded-md px-8 py-4 shadow-lg w-full sm:w-auto">
+                            Recibir invitación
+                        </button>
+                    </form>
+                    <p class="text-xs text-gray-400 mt-4 text-center lg:text-left">
+                        La empresa responsable del tratamiento de tus datos es Fastwldtradex. Pedimos tu email para la gestión de esta suscripción y enviarte comunicaciones comerciales. No comunicaremos ni cederemos dicha información a terceros. Podrás ejercer tus derechos y oponerte al tratamiento de tus datos mediante email a <a class="underline hover:text-rapicambios-accent-green interactive-link" href="mailto:contactorapicambios@gmail.com">contactorapicambios@gmail.com</a>.
                     </p>
                 </div>
-                <div class="sm:w-1/2 flex justify-center">
-                    <img alt="[Imagen de un icono de escudo brillante con líneas digitales que representan seguridad]" class="w-48 h-48 sm:w-60 sm:h-60" height="973" src="https://bitsacard.com/wp-content/uploads/2022/10/security-bitsa.svg" width="714"/>
-                </div>
             </div>
         </div>
     </section>
-  
-    <!-- Section: Disfruta de todas sus ventajas -->
-    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+    <!-- Section: Disfruta de todas sus ventajas (Desktop Only) -->
+    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 desktop-only">
         <h2 class="text-center font-extrabold text-3xl mb-4 text-heading-primary">
             Disfruta de todas sus ventajas
         </h2>
@@ -1674,6 +1999,8 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
             </div>
         </div>
     </section>
+
+    
 
     <!-- Section: Tu VISA en cualquier parte del mundo (con degradado) -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-visa-worldwide interactive-card">
@@ -1946,8 +2273,8 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
                             nextEl: '.swiper-button-next',
                             prevEl: '.swiper-button-prev',
                         },
-                        slidesPerView: 1.1, // Show 1.1 slides to indicate more content
-                        spaceBetween: 15, // Adjusted spacing
+                        slidesPerView: 1.2, // Show 1.1 slides to indicate more content
+                        spaceBetween: 20, // Adjusted spacing
                         centeredSlides: true, // Center the active slide
                     });
                 }
@@ -1955,8 +2282,46 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
 
             initInfoCardsSwiper(); // Initial call
 
-            // Re-initialize Swiper on resize if needed
-            window.addEventListener('resize', initInfoCardsSwiper);
+            // NEW: Initialize Swiper.js for the combined cards slider (mobile only)
+            let combinedCardsSwiper;
+            const combinedSwiperContainer = document.querySelector('.swiper-container-combined-cards');
+
+            function initCombinedCardsSwiper() {
+                if (combinedCardsSwiper) {
+                    combinedCardsSwiper.destroy(true, true);
+                    combinedCardsSwiper = null;
+                }
+
+                if (window.innerWidth < 1024 && combinedSwiperContainer) {
+                    combinedCardsSwiper = new Swiper(combinedSwiperContainer, {
+                        loop: true,
+                        autoplay: {
+                            delay: 5000, // Slightly different delay
+                            disableOnInteraction: false,
+                        },
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        slidesPerView: 1.2, // Show 1.1 slides to indicate more content
+                        spaceBetween: 20, // Adjusted spacing
+                        centeredSlides: true,
+                    });
+                }
+            }
+
+            initCombinedCardsSwiper(); // Initial call for the new Swiper
+
+            // Re-initialize Swipers on resize if needed
+            window.addEventListener('resize', () => {
+                initInfoCardsSwiper(); // Re-init first Swiper
+                initCombinedCardsSwiper(); // Re-init second Swiper
+            });
+
 
             // Efecto de brillo en las cards del slider (si están visibles)
             document.querySelectorAll('.card-glow').forEach(card => {
@@ -1975,7 +2340,8 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
             // Filtrar para evitar elementos dentro del Swiper ya que el Swiper controla su visibilidad
             const filteredElements = Array.from(elementsToAnimate).filter(element => {
                 // Ensure it's not the swiper container itself or a child of it
-                return !element.classList.contains('swiper-container-info-cards') && !element.closest('.swiper-container-info-cards');
+                return !element.classList.contains('swiper-container-info-cards') && !element.closest('.swiper-container-info-cards') &&
+                       !element.classList.contains('swiper-container-combined-cards') && !element.closest('.swiper-container-combined-cards'); // Added new Swiper
             });
 
             const observerOptions = {
@@ -2042,7 +2408,7 @@ Nuestros equipos dedicados contra el fraude y la seguridad trabajan para mantene
             // Más interactividad para tarjetas generales (que no son "card-glow" o las de productos populares)
             document.querySelectorAll('.interactive-card').forEach(card => {
                 // Evitar aplicar el efecto a cards que ya tienen un hover especial o están dentro del Swiper
-                if (!card.classList.contains('card-glow') && !card.closest('.swiper-container-info-cards')) {
+                if (!card.classList.contains('card-glow') && !card.closest('.swiper-container-info-cards') && !card.closest('.swiper-container-combined-cards')) { // Added new Swiper
                     card.addEventListener('mouseenter', () => {
                         card.style.transform = 'translateY(-8px) scale(1.03)';
                         card.style.boxShadow = '0 18px 25px -3px rgba(0, 0, 0, 0.2), 0 8px 10px -2px rgba(0, 0, 0, 0.1)';
