@@ -617,6 +617,11 @@
             color: var(--color-paragraph-gray); /* Por defecto */
             margin-bottom: 1rem; /* Menos margen */
             line-height: 1.4; /* Ajusta la altura de línea */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
         }
 
         /* Asegurar color de párrafo en slides de fondo oscuro */
@@ -942,9 +947,9 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
-        /* Estilos para ocultar/mostrar secciones (carrito) */
+        /* Estilos para ocultar/mostrar secciones (carrito y all-products-section) */
         .hidden-section {
-            display: none;
+            display: none !important; /* Use !important to ensure it overrides other display properties */
         }
         /* Animaciones para el carrito */
         .cart-sidebar {
@@ -960,31 +965,72 @@
             transition: opacity 0.3s ease-in-out;
         }
 
-        /* Styles for the new All Products Section */
+        /* Styles for the new All Products Section (Updated for better mobile UX) */
         .all-products-section {
             min-height: calc(100vh - 100px); /* Adjust based on header/footer height */
             padding-top: 2.5rem; /* pt-10 */
             padding-bottom: 2.5rem; /* pb-10 */
+            /* Removed flex-direction and align-items here, now handled by the inner div */
         }
         .all-products-section .sidebar {
             background-color: white;
             border-radius: 1rem;
             padding: 1.5rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%; /* Full width on mobile */
+            margin-bottom: 1.5rem; /* Space below sidebar on mobile */
+            flex-shrink: 0; /* Prevent sidebar from shrinking */
+            box-sizing: border-box; /* Include padding in width */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .all-products-section .sidebar {
+                width: 25%; /* Use percentage for better responsiveness */
+                margin-bottom: 0; /* No bottom margin on desktop */
+                margin-right: 1.5rem; /* Add right margin for desktop */
+            }
         }
         .all-products-section .product-grid-container {
             min-height: 500px; /* Ensure minimum height for the product grid */
+            width: 100%; /* Full width on mobile */
+            flex-grow: 1; /* Allow grid container to grow */
+            box-sizing: border-box; /* Include padding in width */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .all-products-section .product-grid-container {
+                width: 75%; /* Use percentage for better responsiveness */
+            }
         }
         .all-products-section .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Responsive grid columns */
-            gap: 1.5rem; /* gap-6 */
+            /* Adjusted for better mobile fit: single column on very small screens, then two columns */
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Smaller min width for very small screens */
+            gap: 0.75rem; /* Smaller gap on mobile */
+        }
+        @media (min-width: 480px) { /* Extra small breakpoint for two columns */
+            .all-products-section .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 1rem;
+            }
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .all-products-section .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Slightly larger on sm */
+                gap: 1.25rem;
+            }
         }
         @media (min-width: 768px) { /* md breakpoint */
             .all-products-section .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Larger cards on desktop */
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Larger cards on desktop */
+                gap: 1.5rem; /* gap-6 */
             }
         }
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .all-products-section .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Even larger on lg */
+            }
+        }
+
+        /* Estilos para las tarjetas de la sección "Todos los Productos" */
         .all-products-section .product-card {
             background-color: #0B1B3F; /* Dark background */
             color: white;
@@ -996,21 +1042,34 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            height: 320px; /* Fixed height for consistency */
+            height: 280px; /* Adjusted fixed height for consistency on mobile */
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-sizing: border-box; /* Include padding in height */
+            width: 100%; /* Ensure it takes full width of its grid column */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .all-products-section .product-card {
+                height: 320px; /* Original height for desktop */
+            }
         }
         .all-products-section .product-card:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 8px 12px rgba(0,0,0,0.2);
         }
         .all-products-section .product-card img {
-            width: 120px; /* Larger image */
-            height: 120px;
+            width: 90px; /* Smaller image on mobile */
+            height: 90px;
             object-fit: contain;
             margin-bottom: 0.75rem;
         }
+        @media (min-width: 768px) { /* md breakpoint */
+            .all-products-section .product-card img {
+                width: 120px; /* Larger image on desktop */
+                height: 120px;
+            }
+        }
         .all-products-section .product-card h3 {
-            font-size: 1.125rem; /* text-lg */
+            font-size: 0.95rem; /* text-base on mobile */
             font-weight: 600; /* font-semibold */
             margin-bottom: 0.5rem;
             line-height: 1.3;
@@ -1020,8 +1079,13 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
         }
+        @media (min-width: 768px) { /* md breakpoint */
+            .all-products-section .product-card h3 {
+                font-size: 1.125rem; /* text-lg on desktop */
+            }
+        }
         .all-products-section .product-card p {
-            font-size: 0.875rem; /* text-sm */
+            font-size: 0.75rem; /* Smaller text on mobile */
             color: #d1d5db;
             line-height: 1.4;
             overflow: hidden;
@@ -1031,11 +1095,21 @@
             -webkit-box-orient: vertical;
             flex-grow: 1;
         }
+        @media (min-width: 768px) { /* md breakpoint */
+            .all-products-section .product-card p {
+                font-size: 0.875rem;
+            }
+        }
         .all-products-section .product-card .price {
             font-weight: bold;
-            font-size: 1.25rem; /* text-xl */
+            font-size: 1rem; /* text-lg on mobile */
             margin-top: 0.75rem;
             color: var(--color-primary-green);
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .all-products-section .product-card .price {
+                font-size: 1.25rem;
+            }
         }
         .all-products-section .category-item {
             cursor: pointer;
@@ -1060,7 +1134,7 @@
         <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-6 flex items-center justify-between relative">
             <!-- Logo de Rapicambios -->
             <a href="#" class="flex-shrink-0">
-                <img src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" alt="[Logo Rapicambios]" width="97" height="35" class="h-8 sm:h-9 md:h-10">
+                <img src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" alt="Logo de Rapicambios" width="97" height="35" class="h-8 sm:h-9 md:h-10">
             </a>
 
             <!-- Desktop Navigation -->
@@ -1076,7 +1150,7 @@
             <div class="ml-auto hidden lg:flex items-center space-x-4">
                 <div class="relative group">
                     <button aria-label="Cambiar idioma" class="text-white-on-dark text-sm font-semibold hover:text-rapicambios-accent-green transition duration-300 flex items-center">
-                        <img src="https://bitsacard.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/es.png" alt="[Bandera de España]" class="w-4 h-auto mr-2"> ES <i class="fas fa-caret-down ml-1 text-xs"></i>
+                        <img src="https://bitsacard.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/es.png" alt="Bandera de España" class="w-4 h-auto mr-2"> ES <i class="fas fa-caret-down ml-1 text-xs"></i>
                     </button>
                 </div>
                 <!-- Botón de acceso a WhatsApp -->
@@ -1115,7 +1189,7 @@
                 <div class="border-t border-gray-700 w-full my-2"></div>
                 <div class="relative group w-full text-center">
                     <button aria-label="Cambiar idioma" class="text-white-on-dark text-sm font-semibold hover:text-rapicambios-accent-green transition duration-300 flex items-center justify-center w-full py-2">
-                        <img src="https://bitsacard.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/es.png" alt="[Bandera de España]" class="w-4 h-auto mr-2"> ES <i class="fas fa-caret-down ml-1 text-xs"></i>
+                        <img src="https://bitsacard.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/es.png" alt="Bandera de España" class="w-4 h-auto mr-2"> ES <i class="fas fa-caret-down ml-1 text-xs"></i>
                     </button>
                 </div>
             </nav>
@@ -1148,7 +1222,7 @@
 
                 <!-- Bitcoin GIF (Mobile Only - Hidden on desktop) -->
                 <div class="bitcoin-gif-container mobile-only">
-                    <img src="https://rapicambios.github.io/public/assets/img/logo/colors-bitcoin.gif" alt="[GIF de Bitcoin]" />
+                    <img src="https://rapicambios.github.io/public/assets/img/logo/colors-bitcoin.gif" alt="GIF de Bitcoin girando" />
                 </div>
 
                 <!-- Botones principales (alineados a la izquierda en desktop) -->
@@ -1169,7 +1243,7 @@
             <div class="desktop-only lg:w-1/2 flex justify-center">
                 <div class="worldcoin-widget-desktop">
                     <div class="worldcoin-widget-header">
-                        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png" alt="[Logo de Worldcoin]" class="w-10 h-10 mr-3">
+                        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png" alt="Logo de Worldcoin" class="w-10 h-10 mr-3">
                         <h3 class="text-2xl font-bold text-heading-blue">Worldcoin</h3>
                     </div>
                     <div class="worldcoin-price">
@@ -1201,7 +1275,7 @@
                     <!-- Slide: Worldcoin Cotizador (Añadido al carrusel móvil) -->
                     <div class="swiper-slide worldcoin-widget-mobile-card card-glow interactive-card" data-product-id="worldcoin">
                         <div class="worldcoin-widget-header">
-                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png" alt="[Logo de Worldcoin]" class="w-10 h-10 mr-3">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png" alt="Logo de Worldcoin" class="w-10 h-10 mr-3">
                             <h3 class="text-2xl font-bold text-heading-blue">Worldcoin</h3>
                         </div>
                         <div class="worldcoin-price">
@@ -1218,42 +1292,42 @@
                     </div>
                     <!-- Slide 1: Mastercard Gift Card -->
                     <div class="swiper-slide card-glow interactive-card" data-product-id="mastercard-gift-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/My-Prepaid-Center-Mastercard.webp" alt="[Imagen de una Mastercard My Prepaid Center]" class="mb-4 card-image">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/My-Prepaid-Center-Mastercard.webp" alt="Tarjeta de regalo Mastercard My Prepaid Center" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Mastercard Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Hasta -30% de descuento en tu compra.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="mastercard-gift-card">Añadir al Carrito</button>
                     </div>
                     <!-- Slide 2: OnlyFans Gift Card -->
                     <div class="swiper-slide card-glow interactive-card" data-product-id="onlyfans-gift-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp" alt="[Imagen de una Gift Card OnlyFans por Rewarble]" class="mb-4 card-image">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp" alt="Tarjeta de regalo OnlyFans por Rewarble" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">OnlyFans Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Ahorra hasta un 9% en tu suscripción.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="onlyfans-gift-card">Añadir al Carrito</button>
                     </div>
                     <!-- Slide 3: Google Play Gift Card -->
                     <div class="swiper-slide card-glow interactive-card" data-product-id="google-play-gift-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Google-Play.webp" alt="[Imagen de una Gift Card de Google Play]" class="mb-4 card-image">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Google-Play.webp" alt="Tarjeta de regalo Google Play" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Google Play Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Consigue hasta un 9.6% de descuento.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="google-play-gift-card">Añadir al Carrito</button>
                     </div>
                     <!-- Slide 4: Uber Eats Gift Card -->
                     <div class="swiper-slide card-glow interactive-card" data-product-id="uber-eats-gift-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp" alt="[Imagen de una Gift Card de Uber Eats]" class="mb-4 card-image">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp" alt="Tarjeta de regalo Uber Eats" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Uber Eats Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Obtén hasta un 2% de ahorro en tus pedidos.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="uber-eats-gift-card">Añadir al Carrito</button>
                     </div>
                     <!-- Slide 5: Mastercard prepagada Gift Card -->
                     <div class="swiper-slide card-glow interactive-card" data-product-id="mastercard-prepagada-gift-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mastercard-by-Rewarble.webp" alt="[Imagen de una Mastercard Rewarble prepagada]" class="mb-4 card-image">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mastercard-by-Rewarble.webp" alt="Tarjeta prepagada Mastercard Rewarble" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Mastercard prepagada</h3>
                         <p class="text-paragraph-normal mb-4">Hasta un 3% de descuento en tarjetas.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="mastercard-prepagada-gift-card">Añadir al Carrito</button>
                     </div>
                      <!-- Slide 6: Vanilla Gift Gift Card -->
                      <div class="swiper-slide card-glow interactive-card" data-product-id="vanilla-gift-card">
-                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Vanilla-Gift.webp" alt="[Imagen de una Gift Card Vanilla Gift]" class="mb-4 card-image">
+                        <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Vanilla-Gift.webp" alt="Tarjeta de regalo Vanilla Gift" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Vanilla Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Hasta un 9.6% de ahorro en Vanilla Gift.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="vanilla-gift-card">Añadir al Carrito</button>
@@ -1315,7 +1389,7 @@
                                             <div class="relative w-auto rounded-lg group-hover/card:shadow-xl duration-300">
                                                 <div data-radix-aspect-ratio-wrapper="" style="position: relative; width: 100%; padding-bottom: 66.6667%;">
                                                     <div style="position: absolute; inset: 0px;">
-                                                        <img alt="[Imagen de una Gift Card de Facebook Ads por Rewarble]" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="(max-width: 460px) 50vw, (max-width: 640px) 33vw, 25vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Facebook-Ads-by-Rewarble.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+                                                        <img alt="Imagen de una Gift Card de Facebook Ads por Rewarble" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="(max-width: 460px) 50vw, (max-width: 640px) 33vw, 25vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Facebook-Ads-by-Rewarble.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                                                     </div>
                                                 </div>
                                                 <div class="inline-flex justify-center items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 bg-red-900 border-red-900 text-white min-w-8 h-8 px-3 text-sm gap-1.5 w-fit absolute ring-1.5 ring-white -top-2 -left-2">Ahorra 0,36&nbsp;US$</div>
@@ -1343,7 +1417,7 @@
                                             <div class="w-20 sm:w-24 md:w-32">
                                                 <div data-radix-aspect-ratio-wrapper="" style="position: relative; width: 100%; padding-bottom: 66.6667%;">
                                                     <div style="position: absolute; inset: 0px;">
-                                                        <img alt="[Imagen de una Mastercard My Prepaid Center]" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/My-Prepaid-Center-Mastercard.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+                                                        <img alt="Imagen de una Mastercard My Prepaid Center" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/My-Prepaid-Center-Mastercard.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1359,7 +1433,7 @@
                                             <div class="w-20 sm:w-24 md:w-32">
                                                 <div data-radix-aspect-ratio-wrapper="" style="position: relative; width: 100%; padding-bottom: 66.6667%;">
                                                     <div style="position: absolute; inset: 0px;">
-                                                        <img alt="[Imagen de una Gift Card OnlyFans por Rewarble]" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+                                                        <img alt="Imagen de una Gift Card OnlyFans por Rewarble" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1375,7 +1449,7 @@
                                             <div class="w-20 sm:w-24 md:w-32">
                                                 <div data-radix-aspect-ratio-wrapper="" style="position: relative; width: 100%; padding-bottom: 66.6667%;">
                                                     <div style="position: absolute; inset: 0px;">
-                                                        <img alt="[Imagen de una Gift Card de Google Play]" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Google-Play.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+                                                        <img alt="Imagen de una Gift Card de Google Play" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Google-Play.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1391,7 +1465,7 @@
                                             <div class="w-20 sm:w-24 md:w-32">
                                                 <div data-radix-aspect-ratio-wrapper="" style="position: relative; width: 100%; padding-bottom: 66.6667%;">
                                                     <div style="position: absolute; inset: 0px;">
-                                                        <img alt="[Imagen de una Gift Card de Uber Eats]" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+                                                        <img alt="Imagen de una Gift Card de Uber Eats" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1407,7 +1481,7 @@
                                             <div class="w-20 sm:w-24 md:w-32">
                                                 <div data-radix-aspect-ratio-wrapper="" style="position: relative; width: 100%; padding-bottom: 66.6667%;">
                                                     <div style="position: absolute; inset: 0px;">
-                                                        <img alt="[Imagen de una Mastercard Rewarble prepagada]" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mastercard-by-Rewarble.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+                                                        <img alt="Imagen de una Mastercard Rewarble prepagada" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mastercard-by-Rewarble.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1423,7 +1497,7 @@
                                             <div class="w-20 sm:w-24 md:w-32">
                                                 <div data-radix-aspect-ratio-wrapper="" style="position: relative; width: 100%; padding-bottom: 66.6667%;">
                                                     <div style="position: absolute; inset: 0px;">
-                                                        <img alt="[Imagen de una Gift Card Vanilla Gift]" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Vanilla-Gift.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+                                                        <img alt="Imagen de una Gift Card Vanilla Gift" draggable="false" loading="lazy" decoding="async" data-nimg="fill" class="rounded-lg bg-white" sizes="100vw" srcset="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Vanilla-Gift.webp" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1462,7 +1536,7 @@
                     </a>
                 </div>
                 <!-- Image of a security shield representing cryptocurrency buying and selling -->
-                <img alt="[Imagen de un escudo de seguridad que representa la compra y venta de criptomonedas]" class="w-56 sm:w-64 rounded-2xl shadow-2xl order-1 sm:order-2" height="574" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-check-shield@2x.webp" width="580"/>
+                <img alt="Imagen de un escudo de seguridad que representa la compra y venta de criptomonedas" class="w-56 sm:w-64 rounded-2xl shadow-2xl order-1 sm:order-2" height="574" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-check-shield@2x.webp" width="580"/>
             </div>
         </div>
 <!-- Section: Por qué somos los mejores? (Nueva sección) -->
@@ -1523,22 +1597,22 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <!-- Venezuela -->
             <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
-                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="[Bandera de Venezuela]" class="w-20 h-auto mb-4 rounded shadow">
+                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="Bandera de Venezuela" class="w-20 h-auto mb-4 rounded shadow">
                 <p class="font-semibold text-lg text-heading-primary">Venezuela</p>
             </div>
             <!-- Chile -->
             <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
-                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-chile-100.png" alt="[Bandera de Chile]" class="w-20 h-auto mb-4 rounded shadow">
+                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-chile-100.png" alt="Bandera de Chile" class="w-20 h-auto mb-4 rounded shadow">
                 <p class="font-semibold text-lg text-heading-primary">Chile</p>
             </div>
             <!-- Peru -->
             <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
-                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-peru-100.png" alt="[Bandera de Perú]" class="w-20 h-auto mb-4 rounded shadow">
+                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-peru-100.png" alt="Bandera de Perú" class="w-20 h-auto mb-4 rounded shadow">
                 <p class="font-semibold text-lg text-heading-primary">Peru</p>
             </div>
             <!-- Bolivia -->
             <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
-                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-bolivia-100.png" alt="[Bandera de Bolivia]" class="w-20 h-auto mb-4 rounded shadow">
+                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-bolivia-100.png" alt="Bandera de Bolivia" class="w-20 h-auto mb-4 rounded shadow">
                 <p class="font-semibold text-lg text-heading-primary">Bolivia</p>
             </div>
         </div>
@@ -1559,16 +1633,16 @@
         <div class="flex flex-wrap justify-center gap-12 max-w-5xl mx-auto text-center text-base">
             <div class="flex flex-col items-center max-w-[180px] interactive-card">
                 <div class="w-28 h-28 rounded-full bg-white flex items-center justify-center mb-4 shadow-md">
-                   <img src="https://bit2me.com/assets/img/products/pay/advantages/cryptos.svg" alt="[Imagen de iconos de criptomonedas]" />
+                    <img src="https://bit2me.com/assets/img/products/pay/advantages/cryptos.svg" alt="Icono de criptomonedas" />
                 </div>
                 <h3 class="font-bold text-lg mb-2 text-heading-primary">Criptomonedas y moneda fiduciaria</h3>
                 <p class="text-paragraph-normal leading-relaxed">
-                   Envía euros, bitcoins o la criptomoneda que elijas.
+                    Envía euros, bitcoins o la criptomoneda que elijas.
                 </p>
             </div>
             <div class="flex flex-col items-center max-w-[180px] interactive-card">
                 <div class="w-28 h-28 rounded-full bg-white flex items-center justify-center mb-4 shadow-md">
-                    <img src="https://bit2me.com/assets/img/products/pay/advantages/global.svg" alt="[Imagen de un globo terráqueo]" />
+                    <img src="https://bit2me.com/assets/img/products/pay/advantages/global.svg" alt="Icono de un globo terráqueo" />
                 </div>
                 <h3 class="font-bold text-lg mb-2 text-heading-primary">Global</h3>
                 <p class="text-paragraph-normal leading-relaxed">
@@ -1577,7 +1651,7 @@
             </div>
             <div class="flex flex-col items-center max-w-[180px] interactive-card">
                 <div class="w-28 h-28 rounded-full bg-white flex items-center justify-center mb-4 shadow-md">
-                <img src="https://bit2me.com/assets/img/products/pay/advantages/social.svg" alt="[Imagen de personas socializando]" />
+                <img src="https://bit2me.com/assets/img/products/pay/advantages/social.svg" alt="Icono de personas socializando" />
                 </div>
                 <h3 class="font-bold text-xl mb-3">Sin registro previo</h3>
                 <p class="text-paragraph-normal leading-relaxed">
@@ -1586,7 +1660,7 @@
             </div>
             <div class="flex flex-col items-center max-w-[180px] interactive-card">
                 <div class="w-28 h-28 rounded-full bg-white flex items-center justify-center mb-4 shadow-md">
-                    <img src="https://bit2me.com/assets/img/products/pay/advantages/instant.svg" alt="[Imagen de un reloj con flechas]" />
+                    <img src="https://bit2me.com/assets/img/products/pay/advantages/instant.svg" alt="Icono de un reloj con flechas" />
                 </div>
                 <h3 class="font-bold text-xl mb-3">Instante</h3>
                 <p class="text-paragraph-normal leading-relaxed">
@@ -1607,7 +1681,7 @@
                     <!-- Slide: Cupones -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de cupones Bitsa con logotipos de tiendas]" class="w-full h-full object-contain max-w-xs" src="https://images.ctfassets.net/wqi8u1luxsv0/5XmMqMeAhV2YaQCyEu6FyL/e2b233b061135796ed833001b7416beb/Crypto_hero_static.svg"/>
+                            <img alt="Cupones Bitsa con logos de tiendas" class="w-full h-full object-contain max-w-xs" src="https://images.ctfassets.net/wqi8u1luxsv0/5XmMqMeAhV2YaQCyEu6FyL/e2b233b061135796ed833001b7416beb/Crypto_hero_static.svg"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Cupones</h3>
                         <p class="text-base leading-relaxed opacity-90">
@@ -1617,7 +1691,7 @@
                     <!-- Slide: Criptomonedas -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de iconos de criptomonedas como Bitcoin, Ethereum, Tron y Litecoin]" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/Criptomonedas-r3pu02e09qriw0f9pyqx2rtyhwsri4es6sdgff2ebk.png"/>
+                            <img alt="Iconos de criptomonedas como Bitcoin, Ethereum, Tron y Litecoin" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/Criptomonedas-r3pu02e09qriw0f9pyqx2rtyhwsri4es6sdgff2ebk.png"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Criptomonedas</h3>
                         <p class="text-base leading-relaxed opacity-90">
@@ -1630,7 +1704,7 @@
                     <!-- Slide: Tarjeta o transferencia -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de tarjetas de crédito y un icono de banco]" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/IBAN1-q4rlv1lbowr9bwjfs9m4wwh3x3f2wq6os36t1if2f4.png"/>
+                            <img alt="Tarjetas de crédito y un icono de banco" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/IBAN1-q4rlv1lbowr9bwjfs9m4wwh3x3f2wq6os36t1if2f4.png"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Tarjeta o transferencia</h3>
                         <p class="text-base leading-relaxed opacity-90">
@@ -1640,7 +1714,7 @@
                     <!-- Slide: Con tu wallet -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de smartphone con logotipos de Google Pay y Apple Pay]" class="w-full h-full object-contain max-w-xs" src="./assets/img/logo/dolarsimbol.png"/>
+                            <img alt="Smartphone con logotipos de Google Pay y Apple Pay" class="w-full h-full object-contain max-w-xs" src="./assets/img/logo/dolarsimbol.png"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Una oferta tan buena que tendrás que probarnos</h3>
                         <p class="text-base leading-relaxed opacity-90">
@@ -1651,7 +1725,7 @@
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
                             <!-- Placeholder de imagen para "Otros" métodos de recarga -->
-                            <img alt="[Imagen de un icono de métodos de recarga adicionales]" class="w-full h-full object-contain max-w-xs" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-coins@2x.webp"/>
+                            <img alt="Icono para métodos de recarga adicionales" class="w-full h-full object-contain max-w-xs" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-coins@2x.webp"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Otros métodos</h3>
                         <p class="text-base leading-relaxed opacity-90">
@@ -1662,7 +1736,7 @@
                     <!-- Slide: Hasta un 15% de cashback -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de logotipos de tiendas como Spotify, Netflix, Amazon, etc.]" class="w-full h-full object-contain" src="https://cdn.prod.website-files.com/6604526310f4c7f24d8e3435/6741f920be6d1746e18d8762_Group%2048097871.png"/>
+                            <img alt="Logos de tiendas como Spotify, Netflix, Amazon, etc." class="w-full h-full object-contain" src="https://cdn.prod.website-files.com/6604526310f4c7f24d8e3435/6741f920be6d1746e18d8762_Group%2048097871.png"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Hasta un 2% de cashback en tus tiendas favoritas</h3>
                         <p class="text-base leading-relaxed opacity-90">
@@ -1672,7 +1746,7 @@
                     <!-- Slide: Recibe y envía dinero -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de personas y un mapa mundial]" class="w-full h-full object-contain" src="https://bitsacard.com/wp-content/uploads/2023/04/IBAN2.svg"/>
+                            <img alt="Personas y un mapa del mundo" class="w-full h-full object-contain" src="https://bitsacard.com/wp-content/uploads/2023/04/IBAN2.svg"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Recibe y envía dinero</h3>
                         <p class="text-base leading-relaxed opacity-90">
@@ -1682,7 +1756,7 @@
                     <!-- Slide: Hasta 8 tarjetas con su propio saldo -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de varias tarjetas Bitsa con saldos]" class="w-full h-full object-contain" src="https://global66.com/assets/home/cuenta-global.png"/>
+                            <img alt="Varias tarjetas Bitsa con saldos" class="w-full h-full object-contain" src="https://global66.com/assets/home/cuenta-global.png"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Convierte a tu moneda favorita</h3>
                         <p class="text-paragraph-normal leading-relaxed">
@@ -1692,7 +1766,7 @@
                     <!-- Slide: Paga con tu móvil o smartwatch -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de teléfono móvil y smartwatch con iconos de pago]" class="w-full h-full object-contain" src="./assets/img/logo/dolarsimbol.png"/>
+                            <img alt="Teléfono móvil y smartwatch con iconos de pago" class="w-full h-full object-contain" src="./assets/img/logo/dolarsimbol.png"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Dinero Magico</h3>
                         <p class="text-base leading-relaxed opacity-90">
@@ -1702,7 +1776,7 @@
                     <!-- Slide: Cuidamos de tu privacidad -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <img alt="[Imagen de un icono de escudo de privacidad con tarjetas apiladas]" class="w-full h-full object-contain" src="https://wise.com/web-art/assets/illustrations/lock-large@2x.webp"/>
+                            <img alt="Icono de escudo de privacidad con tarjetas apiladas" class="w-full h-full object-contain" src="https://wise.com/web-art/assets/illustrations/lock-large@2x.webp"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Cuidamos de tu privacidad</h3>
                         <p class="text-base leading-relaxed opacity-90">
@@ -1723,7 +1797,7 @@
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <div class="flex flex-col md:flex-row items-center justify-between mb-8">
             <h2 class="text-2xl sm:text-3xl font-extrabold text-heading-primary text-center md:text-left mb-4 md:mb-0">
-                <img class="inline-block w-6 h-auto mr-2" loading="lazy" alt="[Icono de bandera de Estados Unidos]" src="https://cdn.coinsbee.com/version2/dist/assets/img/flags/US.png?v=2">
+                <img class="inline-block w-6 h-auto mr-2" loading="lazy" alt="Icono de bandera de Estados Unidos" src="https://cdn.coinsbee.com/version2/dist/assets/img/flags/US.png?v=2">
                 Productos mas Populares en Tu Region
             </h2>
             <a href="javascript:void(0)" id="show-all-products-btn" class="bg-gradient-rapicambios-button font-semibold rounded-md px-5 py-2 shadow-md flex items-center">
@@ -1808,7 +1882,7 @@
                 </a>
             </div>
             <div class="md:w-1/2 flex justify-center">
-                <img src="https://bit2me.com/assets/img/main/home-v2/bit2me-card/card-double-3d.png" alt="[Doble tarjeta VISA de Rapicambios]" class="max-w-sm md:max-w-md floating-element-1">
+                <img src="https://bit2me.com/assets/img/main/home-v2/bit2me-card/card-double-3d.png" alt="Doble tarjeta VISA de Rapicambios" class="max-w-sm md:max-w-md floating-element-1">
             </div>
         </div>
     </section>
@@ -1981,17 +2055,6 @@
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Aviso de riesgos</a></li>
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Condiciones de servicio</a></li>
                     <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Proveedor servicios</a></li>
-                </ul>
-            </div>
-            <div class="flex flex-col text-center sm:text-left footer-links-col">
-                <h3 class="font-extrabold text-lg mb-6"><a href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" target="_blank" rel="nofollow">Ayuda</a></h3>
-                <ul class="space-y-3 text-sm">
-                    <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Pagos</a></li>
-                    <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Cuenta</a></li>
-                    <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Servicios</a></li>
-                    <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Comisiones</a></li>
-                    <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Recargas</a></li>
-                    <li><a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Criptomonedas</a></li>
                 </ul>
                 <div class="flex space-x-4 text-2xl mt-6 footer-social-icons lg:justify-start">
                     <a href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="text-white-on-dark social-icon-hover transition duration-300" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
@@ -2515,7 +2578,7 @@
                         <div class="relative flex justify-center items-center h-32 mb-2">
                             <picture>
                                 <source type="image/webp" srcset="${product.image}">
-                                <img alt="[Tarjeta de regalo de ${product.name}]" class="object-contain" src="${product.image}" height="125" width="198" onerror="this.onerror=null; this.src='https://placehold.co/198x125/cccccc/333333?text=No+Image';">
+                                <img alt="Tarjeta de regalo de ${product.name}" class="object-contain" src="${product.image}" height="125" width="198" onerror="this.onerror=null; this.src='https://placehold.co/198x125/cccccc/333333?text=No+Image';">
                             </picture>
                         </div>
                         <div class="flex flex-col justify-between pt-2 pb-0">
@@ -2541,7 +2604,7 @@
                 slideDiv.dataset.productId = product.id;
 
                 slideDiv.innerHTML = `
-                    <img src="${product.image}" alt="[Logo de ${product.name}]" class="card-image">
+                    <img src="${product.image}" alt="Logo de ${product.name}" class="card-image">
                     <h3 class="font-semibold text-white">${product.name}</h3>
                     <p class="price-range text-gray-300">USD ${product.minVal.toFixed(2)} - ${product.maxVal.toFixed(2)}</p>
                     <button class="add-to-cart-btn bg-button-orange text-base px-6 py-3 rounded-md mt-4" data-product-id="${product.id}">Añadir al Carrito</button>
@@ -2800,7 +2863,7 @@
                         productCard.className = 'product-card interactive-card';
                         productCard.dataset.productId = product.id;
                         productCard.innerHTML = `
-                            <img src="${product.image}" alt="[Imagen de ${product.name}]" onerror="this.onerror=null; this.src='https://placehold.co/120x120/0B1B3F/FFFFFF?text=No+Image';">
+                            <img src="${product.image}" alt="Imagen de ${product.name}" onerror="this.onerror=null; this.src='https://placehold.co/120x120/0B1B3F/FFFFFF?text=No+Image';">
                             <h3>${product.name}</h3>
                             <p>${product.description}</p>
                             <span class="price">$${product.price.toFixed(2)}</span>
