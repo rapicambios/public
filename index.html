@@ -5,13 +5,9 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <title>Rapicambios - Tu Mejor Aliado de Cambio</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-    <!-- Montserrat font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-    <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         /* 1. Definición de Variables CSS */
@@ -187,7 +183,7 @@
             transition: max-height 0.3s ease-out;
             overflow: hidden;
             max-height: 0;
-            background-color: var(--color-dark-blue-header-end); /* Usando variable */
+            background-color: var(--color-white-text); /* Fondo blanco para el nuevo menú */
         }
         .mobile-menu.open {
             max-height: 500px; /* Ajustar según la altura del contenido */
@@ -209,7 +205,7 @@
         @keyframes float3 {
             0% { transform: translate(15px, 5px); }
             50% { transform: translate(0, 0); }
-            100% { transform: translate(15px, 5px); }
+            100% { translate: translate(15px, 5px); }
         }
 
         .floating-element-1 {
@@ -1130,76 +1126,90 @@
 </head>
 <body class="bg-white text-black min-h-screen flex flex-col">
 
-    <!-- Header Section -->
-    <header class="bg-header-gradient shadow-lg">
-        <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-6 flex items-center justify-between relative">
-            <!-- Logo de Rapicambios -->
-            <a href="#" class="flex-shrink-0">
-                <img src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" alt="Logo de Rapicambios" width="97" height="35" class="h-8 sm:h-9 md:h-10">
-            </a>
+    <header class="bg-white shadow-sm sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <button id="mobile-menu-button" aria-label="Toggle mobile menu" class="lg:hidden text-gray-600 hover:text-green-500 focus:outline-none mr-4">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                    <a href="#" class="flex-shrink-0 flex items-center space-x-2">
+                         <img src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" alt="Logo de Rapicambios" class="h-8 sm:h-9">
+                         <span class="font-bold text-xl text-gray-800 hidden sm:inline">Rapicambios</span>
+                    </a>
+                </div>
 
-            <!-- Desktop Navigation -->
-            <nav class="ml-12 hidden lg:flex space-x-8 text-sm font-semibold text-white-on-dark">
-                <a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Criptomonedas</a>
-                <a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Nosotros</a>
-                <a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=5696448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Worldcoin</a>
-                <a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Blog</a>
-                <a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Tarjetas Prepagadas</a>
-            </nav>
+                <div class="hidden lg:flex flex-1 justify-center px-8">
+                    <div class="relative w-full max-w-lg">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input class="w-full bg-gray-100 border border-gray-300 rounded-md py-2.5 pl-12 pr-12 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" type="text" placeholder="Buscar productos...">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <span class="text-gray-400 text-xs font-semibold border border-gray-300 rounded-md px-1.5 py-0.5">⌘K</span>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Desktop Language & Contact Buttons -->
-            <div class="ml-auto hidden lg:flex items-center space-x-4">
-                <div class="relative group">
-                    <button aria-label="Cambiar idioma" class="text-white-on-dark text-sm font-semibold hover:text-rapicambios-accent-green transition duration-300 flex items-center">
-                        <img src="https://bitsacard.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/es.png" alt="Bandera de España" class="w-4 h-auto mr-2"> ES <i class="fas fa-caret-down ml-1 text-xs"></i>
+                <div class="flex items-center space-x-4 sm:space-x-5 text-gray-700 font-semibold text-sm">
+                    <a href="#" class="hidden lg:flex items-center space-x-2 hover:text-green-500">
+                        <i class="fas fa-question-circle text-xl"></i>
+                        <span>Ayuda</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-2 hover:text-green-500">
+                        <i class="fas fa-globe text-xl"></i>
+                        <span>USD</span>
+                    </a>
+                    <a href="#" class="flex items-center hover:text-green-500">
+                        <span>ES</span>
+                    </a>
+                    <button id="open-cart-btn" class="relative hover:text-green-500 focus:outline-none">
+                        <i class="fas fa-shopping-cart text-2xl"></i>
+                        <span id="cart-item-count" class="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
                     </button>
                 </div>
-                <!-- Botón de acceso a WhatsApp -->
-                <a href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" aria-label="Contactar por WhatsApp" class="bg-gradient-rapicambios-button font-semibold rounded-md px-5 py-2 transition duration-300 shadow-md">Contactar</a>
             </div>
 
-            <!-- Mobile Menu Button (Hamburger) -->
-            <div class="lg:hidden flex items-center space-x-4">
-                <!-- Icono de usuario adaptado a WhatsApp -->
-                <a href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" aria-label="Contactar por WhatsApp" class="text-white-on-dark text-xl">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                <button id="open-cart-btn-mobile" class="relative text-white-on-dark focus:outline-none">
-                    <i class="fas fa-shopping-cart text-xl"></i>
-                    <span id="cart-item-count-mobile" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
-                </button>
-                <button id="mobile-menu-button" aria-label="Toggle mobile menu" class="text-white-on-dark focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
+            <div class="lg:hidden pb-4">
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </div>
+                    <input class="w-full bg-gray-100 border border-gray-300 rounded-md py-2.5 pl-10 pr-4 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500" type="text" placeholder="Buscar productos...">
+                </div>
             </div>
-            <!-- Desktop Cart Button -->
-            <button id="open-cart-btn" class="relative bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 hidden lg:flex items-center ml-4">
-                <i class="fas fa-shopping-cart mr-2"></i>Carrito
-                <span id="cart-item-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
-            </button>
         </div>
 
-        <!-- Mobile Navigation (hidden by default) -->
-        <div id="mobile-menu" class="mobile-menu lg:hidden px-6 pb-4">
-            <nav class="flex flex-col items-center space-y-4 text-sm font-semibold text-white-on-dark py-4">
-                <a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Criptomonedas</a>
-                <a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Nosotros</a>
-                <a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Worldcoin</a>
-                <a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Blog</a>
-                <a class="hover:text-rapicambios-accent-green transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20">Tarjetas critpo</a>
-                <div class="border-t border-gray-700 w-full my-2"></div>
-                <div class="relative group w-full text-center">
-                    <button aria-label="Cambiar idioma" class="text-white-on-dark text-sm font-semibold hover:text-rapicambios-accent-green transition duration-300 flex items-center justify-center w-full py-2">
-                        <img src="https://bitsacard.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/es.png" alt="Bandera de España" class="w-4 h-auto mr-2"> ES <i class="fas fa-caret-down ml-1 text-xs"></i>
-                    </button>
-                </div>
+        <nav class="hidden lg:flex justify-center border-t border-gray-200">
+            <div class="flex space-x-8 py-3 text-sm font-semibold text-gray-600">
+                 <a href="#" class="hover:text-green-600 transition duration-300">Tienda</a>
+                 <a class="flex items-center hover:text-green-600 transition duration-300" href="#">Popular <i class="fas fa-chevron-down text-xs ml-1"></i></a>
+                 <a class="flex items-center hover:text-green-600 transition duration-300" href="#">Categorías <i class="fas fa-chevron-down text-xs ml-1"></i></a>
+                 <a class="flex items-center hover:text-green-600 transition duration-300" href="#">Blog <i class="fas fa-chevron-down text-xs ml-1"></i></a>
+                 <a class="flex items-center text-blue-600 hover:text-blue-800 transition duration-300" href="#">
+                     <i class="fab fa-steam-symbol w-5 h-5 mr-1"></i> Steam Summer Sale
+                 </a>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="mobile-menu lg:hidden">
+            <nav class="flex flex-col items-start space-y-3 text-base font-semibold text-gray-700 py-4 px-6">
+                <a class="hover:text-green-500 transition duration-300" href="#">Tienda</a>
+                <a class="hover:text-green-500 transition duration-300" href="#">Popular</a>
+                <a class="hover:text-green-500 transition duration-300" href="#">Categorías</a>
+                <a class="hover:text-green-500 transition duration-300" href="#">Blog</a>
+                <a class="hover:text-green-500 transition duration-300" href="#">Steam Summer Sale</a>
+                <div class="border-t border-gray-200 w-full my-2"></div>
+                <a class="hover:text-green-500 transition duration-300" href="#">Ayuda</a>
+                <a class="hover:text-green-500 transition duration-300" href="https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios">Contacto</a>
             </nav>
         </div>
+    </header>
 
-        <!-- Contenido principal de la sección Hero -->
+   <main id="main-content" class="flex-grow">
+    <div class="bg-header-gradient">
         <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 flex flex-col lg:flex-row items-center justify-between">
             
-            <!-- Contenido principal de texto (visible en ambas, con estilos adaptables) -->
             <div class="lg:w-1/2 text-white-on-dark main-hero-text-container mb-10 lg:mb-0">
                 <div class="flex items-center justify-center lg:justify-start mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="70" height="24" viewBox="0 0 70 24" fill="none" class="mr-2">
@@ -1221,12 +1231,10 @@
                     Envía dinero a tus amigos y familia con nuestro rápido sistema de cambio.
                 </p>
 
-                <!-- Bitcoin GIF (Mobile Only - Hidden on desktop) -->
                 <div class="bitcoin-gif-container mobile-only">
                     <img src="https://rapicambios.github.io/public/assets/img/logo/colors-bitcoin.gif" alt="GIF de Bitcoin girando" />
                 </div>
 
-                <!-- Botones principales (alineados a la izquierda en desktop) -->
                 <div class="hero-buttons-container mb-4 lg:justify-start">
                     <button class="bg-gradient-rapicambios-button font-semibold rounded-md px-8 py-4 shadow-lg w-full sm:w-auto" type="button" onclick="window.location.href='https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                         Vender
@@ -1240,7 +1248,6 @@
                 </div>
             </div>
 
-            <!-- Widget de Precio de Worldcoin (visible solo en desktop, eliminado del slider) -->
             <div class="desktop-only lg:w-1/2 flex justify-center">
                 <div class="worldcoin-widget-desktop">
                     <div class="worldcoin-widget-header">
@@ -1262,18 +1269,13 @@
             </div>
             
         </div>
-    </header>
-
-   <main id="main-content" class="flex-grow">
-    <!-- Slider de Ofertas de la Semana y Productos Populares (Mobile Only) -->
+    </div>
     <section class="my-10 full-width-section mobile-only">
-        <div class="max-w-7xl mx-auto px-0 sm:px-0"> <!-- Removido px-6 sm:px-10 para que el padding del swiper lo maneje -->
-            <h2 class="text-center font-extrabold text-3xl mb-8 text-heading-primary px-6 sm:px-10">
+        <div class="max-w-7xl mx-auto px-0 sm:px-0"> <h2 class="text-center font-extrabold text-3xl mb-8 text-heading-primary px-6 sm:px-10">
                 Ofertas y Productos Populares
             </h2>
             <div class="swiper-container-info-cards w-full text-white-on-dark text-center py-10">
                 <div class="swiper-wrapper">
-                    <!-- Slide: Worldcoin Cotizador (Añadido al carrusel móvil) -->
                     <div class="swiper-slide worldcoin-widget-mobile-card card-glow interactive-card" data-product-id="worldcoin">
                         <div class="worldcoin-widget-header">
                             <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png" alt="Logo de Worldcoin" class="w-10 h-10 mr-3">
@@ -1291,42 +1293,36 @@
                             Comprar Worldcoin
                         </button>
                     </div>
-                    <!-- Slide 1: Mastercard Gift Card -->
                     <div class="swiper-slide card-glow interactive-card" data-product-id="mastercard-gift-card">
                         <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/My-Prepaid-Center-Mastercard.webp" alt="Tarjeta de regalo Mastercard My Prepaid Center" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Mastercard Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Hasta -30% de descuento en tu compra.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="mastercard-gift-card">Añadir al Carrito</button>
                     </div>
-                    <!-- Slide 2: OnlyFans Gift Card -->
                     <div class="swiper-slide card-glow interactive-card" data-product-id="onlyfans-gift-card">
                         <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp" alt="Tarjeta de regalo OnlyFans por Rewarble" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">OnlyFans Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Ahorra hasta un 9% en tu suscripción.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="onlyfans-gift-card">Añadir al Carrito</button>
                     </div>
-                    <!-- Slide 3: Google Play Gift Card -->
                     <div class="swiper-slide card-glow interactive-card" data-product-id="google-play-gift-card">
                         <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Google-Play.webp" alt="Tarjeta de regalo Google Play" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Google Play Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Consigue hasta un 9.6% de descuento.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="google-play-gift-card">Añadir al Carrito</button>
                     </div>
-                    <!-- Slide 4: Uber Eats Gift Card -->
                     <div class="swiper-slide card-glow interactive-card" data-product-id="uber-eats-gift-card">
                         <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp" alt="Tarjeta de regalo Uber Eats" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Uber Eats Gift Card</h3>
                         <p class="text-paragraph-normal mb-4">Obtén hasta un 2% de ahorro en tus pedidos.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="uber-eats-gift-card">Añadir al Carrito</button>
                     </div>
-                    <!-- Slide 5: Mastercard prepagada Gift Card -->
                     <div class="swiper-slide card-glow interactive-card" data-product-id="mastercard-prepagada-gift-card">
                         <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mastercard-by-Rewarble.webp" alt="Tarjeta prepagada Mastercard Rewarble" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Mastercard prepagada</h3>
                         <p class="text-paragraph-normal mb-4">Hasta un 3% de descuento en tarjetas.</p>
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="mastercard-prepagada-gift-card">Añadir al Carrito</button>
                     </div>
-                     <!-- Slide 6: Vanilla Gift Gift Card -->
                      <div class="swiper-slide card-glow interactive-card" data-product-id="vanilla-gift-card">
                         <img src="https://cdn.coinsbee.com/version2/dist/assets/img/brands/Vanilla-Gift.webp" alt="Tarjeta de regalo Vanilla Gift" class="mb-4 card-image">
                         <h3 class="text-2xl font-bold text-heading-blue mb-2">Vanilla Gift Card</h3>
@@ -1334,18 +1330,14 @@
                         <button class="add-to-cart-btn worldcoin-button text-base px-6 py-3 rounded-md" data-product-id="vanilla-gift-card">Añadir al Carrito</button>
                     </div>
                 </div>
-                <!-- Paginación -->
                 <div class="swiper-pagination"></div>
-                <!-- Navegación -->
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
         </div>
     </section>
 
-    <!-- NEW SECTION: Gift Card Marketplace -->
     <section class="my-10 full-width-section">
-        <!-- Section: Buy Gift Cards -->
         <section class="my-10">
             <div class="border-slate-200 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50 border-0 shadow-none bg-green-900 text-white p-8 md:p-10 lg:px-16 lg:py-8 -mx-4 lg:mx-auto rounded-none lg:rounded-xl">
                 <div class="max-w-7xl mx-auto flex flex-col gap-6 md:py-8 lg:py-4">
@@ -1357,10 +1349,8 @@
                 </div>
             </div>
         </section>
-        <!-- Section: Deal of the Day and Weekly Offers (VISIBLE SOLO EN DESKTOP) -->
         <section class="my-10 max-w-7xl mx-auto desktop-only">
             <div class="relative p-[4px] group">
-                <!-- Se reemplaza el color púrpura por verde en el degradado de fondo -->
                 <div class="rounded-[22px] absolute inset-0 z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,var(--color-new-green-start),transparent),radial-gradient(circle_farthest-side_at_100%_0,var(--color-new-green-end),transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)]" style="background-size: 400% 400%; background-position: 99.9978% 50%;"></div>
                 <div class="rounded-[22px] absolute inset-0 z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,var(--color-new-green-start),transparent),radial-gradient(circle_farthest-side_at_100%_0,var(--color-new-green-end),transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)]" style="background-size: 400% 400%; background-position: 99.9978% 50%;"></div>
                 <div class="rounded-[22px] relative z-10 p-4 sm:p-8 bg-white">
@@ -1376,7 +1366,6 @@
                                             <div class="transition duration-200 ease-linear w-full" style="transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);">
                                                 <div class="bg-transparent rounded-lg font-bold w-full p-0 text-xl text-neutral-700">
                                                     <div class="flex justify-center items-center gap-2">
-                                                        <!-- Animated Countdown Timer -->
                                                         <div class="flex justify-center items-center border-transparent w-16 h-16 text-3xl rounded-lg" id="countdown-hours">00</div>
                                                         <span>:</span>
                                                         <div class="flex justify-center items-center border-transparent w-16 h-16 text-3xl rounded-lg" id="countdown-minutes">00</div>
@@ -1396,7 +1385,6 @@
                                                 <div class="inline-flex justify-center items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 bg-red-900 border-red-900 text-white min-w-8 h-8 px-3 text-sm gap-1.5 w-fit absolute ring-1.5 ring-white -top-2 -left-2">Ahorra 0,36&nbsp;US$</div>
                                             </div>
                                         </div>
-                                        <!-- Adjusted buttons layout for desktop and their styling -->
                                         <div class="transition duration-200 ease-linear w-full flex flex-col sm:flex-row sm:justify-start gap-2" style="transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);">
                                             <button type="button" id="deal-of-the-day-add-to-cart-button-34630" class="add-to-cart-btn h-fit flex group items-center justify-center cursor-pointer disabled:cursor-not-allowed [&amp;>svg]:min-w-4 min-h-10 px-4 text-sm rounded-lg gap-2 overflow-hidden w-full sm:w-auto font-semibold deal-button-green" aria-label="Añadir al carrito" data-product-id="eneba-10eur">
                                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 21h-3.926a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304h11.339a2 2 0 0 1 1.977 2.304l-.263 1.708"></path><path d="M16 19h6"></path><path d="M19 16v6"></path><path d="M9 11v-5a3 3 0 0 1 6 0v5"></path></svg>
@@ -1518,7 +1506,6 @@
         </section>
 
         
-    <!-- Section: Tus criptos y pesos chilenos, dolares, euros en la misma web App -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <h2 class="text-center font-extrabold text-3xl mb-12 text-heading-primary">
             Tus criptos y pesos chilenos, dolares, euros en la misma web App
@@ -1536,12 +1523,10 @@
                         Conoce más sobre el Módulo Cripto <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
-                <!-- Image of a security shield representing cryptocurrency buying and selling -->
                 <img alt="Imagen de un escudo de seguridad que representa la compra y venta de criptomonedas" class="w-56 sm:w-64 rounded-2xl shadow-2xl order-1 sm:order-2" height="574" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-check-shield@2x.webp" width="580"/>
             </div>
         </div>
-<!-- Section: Por qué somos los mejores? (Nueva sección) -->
-    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+<section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <div class="bg-card-light rounded-3xl p-8 sm:p-12 shadow-xl text-center interactive-card">
             <h2 class="font-extrabold text-3xl mb-4 text-heading-primary">
                 ¿Por qué somos los mejores?
@@ -1580,14 +1565,12 @@
                     <p class="text-sm text-paragraph-light">Nuevos clientes</p>
                 </div>
             </div>
-            <!-- Este botón ahora usa el degradado naranja -->
             <button class="bg-button-orange text-white-on-dark font-semibold rounded-md px-8 py-4 shadow-lg text-lg" onclick="window.location.href='https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                 ¡Comienza ahora!
             </button>
         </div>
     </section>
 
-    <!-- NEW SECTION: Envía dinero a estos países -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 bg-gradient-visa-worldwide rounded-3xl shadow-xl">
         <h2 class="text-center font-extrabold text-3xl mb-4 text-white-on-dark">
             Envía dinero a estos países
@@ -1596,37 +1579,29 @@
             Envía dinero a tus familiares y amigos o compra la moneda que necesitas de forma fácil y rápida desde donde estés, a más de +70 países de destino con el respaldo y seguridad de Fastwldtradex.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            <!-- Venezuela -->
             <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
                 <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="Bandera de Venezuela" class="w-20 h-auto mb-4 rounded shadow">
                 <p class="font-semibold text-lg text-heading-primary">Venezuela</p>
             </div>
-            <!-- Chile -->
             <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
                 <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-chile-100.png" alt="Bandera de Chile" class="w-20 h-auto mb-4 rounded shadow">
                 <p class="font-semibold text-lg text-heading-primary">Chile</p>
             </div>
-            <!-- Peru -->
             <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
                 <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-peru-100.png" alt="Bandera de Perú" class="w-20 h-auto mb-4 rounded shadow">
                 <p class="font-semibold text-lg text-heading-primary">Peru</p>
             </div>
-            <!-- Bolivia -->
             <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
                 <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-bolivia-100.png" alt="Bandera de Bolivia" class="w-20 h-auto mb-4 rounded shadow">
                 <p class="font-semibold text-lg text-heading-primary">Bolivia</p>
             </div>
         </div>
         <div class="text-center">
-            <!-- Este botón ahora usa el degradado naranja -->
             <button class="bg-gradient-rapicambios-button font-semibold rounded-md px-8 py-4 shadow-lg text-lg" onclick="window.location.href='https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                 Vender
             </button>
         </div>
     </section>
-    <!-- END NEW SECTION -->
-
-    <!-- Section: Descubre un nuevo mundo de posibilidades -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <h2 class="text-center font-extrabold text-3xl mb-12 text-heading-primary">
             Descubre un nuevo mundo de posibilidades
@@ -1671,15 +1646,12 @@
   
         </div>
     </section>
-        <!-- NEW Swiper Container for Mobile Only -->
         <div class="mobile-only mt-10">
             <h3 class="text-center font-extrabold text-2xl mb-8 text-heading-primary px-6 sm:px-10">
                 Otras Ventajas y Métodos de Recarga
             </h3>
             <div class="swiper-container-combined-cards w-full text-center py-10">
                 <div class="swiper-wrapper">
-                    <!-- Slides from "Recarga tu tarjeta como prefieras" -->
-                    <!-- Slide: Cupones -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
                             <img alt="Cupones Bitsa con logos de tiendas" class="w-full h-full object-contain max-w-xs" src="https://images.ctfassets.net/wqi8u1luxsv0/5XmMqMeAhV2YaQCyEu6FyL/e2b233b061135796ed833001b7416beb/Crypto_hero_static.svg"/>
@@ -1689,7 +1661,6 @@
                             Obten tus codigos y gana tokens worldcoin si aun no has sido verificado por un orb desde nuestra Web App.
                         </p>
                     </div>
-                    <!-- Slide: Criptomonedas -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
                             <img alt="Iconos de criptomonedas como Bitcoin, Ethereum, Tron y Litecoin" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/Criptomonedas-r3pu02e09qriw0f9pyqx2rtyhwsri4es6sdgff2ebk.png"/>
@@ -1702,7 +1673,6 @@
                             Quiero saber más <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
-                    <!-- Slide: Tarjeta o transferencia -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
                             <img alt="Tarjetas de crédito y un icono de banco" class="w-full h-full object-contain max-w-xs" src="https://bitsacard.com/wp-content/uploads/elementor/thumbs/IBAN1-q4rlv1lbowr9bwjfs9m4wwh3x3f2wq6os36t1if2f4.png"/>
@@ -1712,7 +1682,6 @@
                             Recarga pesos chilenos, dolares, euros desde otra tarjeta o a través de una transferencia bancaria a tu propio IBAN personal de Rapicambios 
                         </p>
                     </div>
-                    <!-- Slide: Con tu wallet -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
                             <img alt="Smartphone con logotipos de Google Pay y Apple Pay" class="w-full h-full object-contain max-w-xs" src="./assets/img/logo/dolarsimbol.png"/>
@@ -1722,10 +1691,8 @@
                             Ahorra dinero enviando, gastando y recibiendo pagos en diferentes divisas. Todo lo que necesitas, en Rapicambios, donde lo necesites..
                         </p>
                     </div>
-                    <!-- Slide: Otros métodos de recarga -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
-                            <!-- Placeholder de imagen para "Otros" métodos de recarga -->
                             <img alt="Icono para métodos de recarga adicionales" class="w-full h-full object-contain max-w-xs" src="https://bit2me.com/assets/img/main/b2b/use-cases/business-icon-coins@2x.webp"/>
                         </div>
                         <h3 class="font-bold text-xl mb-3">Otros métodos</h3>
@@ -1733,7 +1700,6 @@
                             Descubre más formas de recargar tu tarjeta prepagada en Rapicambios. en tu primera transferencia personal. Se aplican términos y condiciones.
                         </p>
                     </div>
-                    <!-- Slide: Hasta un 15% de cashback -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
                             <img alt="Logos de tiendas como Spotify, Netflix, Amazon, etc." class="w-full h-full object-contain" src="https://cdn.prod.website-files.com/6604526310f4c7f24d8e3435/6741f920be6d1746e18d8762_Group%2048097871.png"/>
@@ -1743,7 +1709,6 @@
                             Obtén recompensas por cada compra que realices con tu tarjeta prepago adquirida en Rapicambios.
                         </p>
                     </div>
-                    <!-- Slide: Recibe y envía dinero -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
                             <img alt="Personas y un mapa del mundo" class="w-full h-full object-contain" src="https://bitsacard.com/wp-content/uploads/2023/04/IBAN2.svg"/>
@@ -1753,7 +1718,6 @@
                             Envía dinero a tus amigos o familiares de forma sencilla e instantánea, estés donde estés, con tu cuenta bancaria.
                         </p>
                     </div>
-                    <!-- Slide: Hasta 8 tarjetas con su propio saldo -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
                             <img alt="Varias tarjetas Bitsa con saldos" class="w-full h-full object-contain" src="https://global66.com/assets/home/cuenta-global.png"/>
@@ -1763,7 +1727,6 @@
                             Puedes convertir tu dinero a +8 monedas, como el Dólar o el Euro, para ahorrar, enviar o comprar con tarjetas prepagadas.
                         </p>
                     </div>
-                    <!-- Slide: Paga con tu móvil o smartwatch -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
                             <img alt="Teléfono móvil y smartwatch con iconos de pago" class="w-full h-full object-contain" src="./assets/img/logo/dolarsimbol.png"/>
@@ -1773,7 +1736,6 @@
                             Desarrollamos la mejor manera de mover y gestionar el dinero del mundo. Comisiones mínimas. Máxima facilidad. Máxima velocidad.
                         </p>
                     </div>
-                    <!-- Slide: Cuidamos de tu privacidad -->
                     <div class="swiper-slide bg-section-dark-blue rounded-3xl p-8 flex flex-col items-center text-center text-white-on-dark shadow-xl interactive-card">
                         <div class="mb-6 w-full h-auto flex items-center justify-center">
                             <img alt="Icono de escudo de privacidad con tarjetas apiladas" class="w-full h-full object-contain" src="https://wise.com/web-art/assets/illustrations/lock-large@2x.webp"/>
@@ -1785,16 +1747,13 @@
                         <p>Guardamos su dinero en instituciones financieras establecidas</p>
                     </div>
                 </div>
-                <!-- Paginación -->
                 <div class="swiper-pagination"></div>
-                <!-- Navegación -->
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
         </div>
     </section>
-<!-- NEW SECTION: Most Popular Products -->
-    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+<section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
         <div class="flex flex-col md:flex-row items-center justify-between mb-8">
             <h2 class="text-2xl sm:text-3xl font-extrabold text-heading-primary text-center md:text-left mb-4 md:mb-0">
                 <img class="inline-block w-6 h-auto mr-2" loading="lazy" alt="Icono de bandera de Estados Unidos" src="https://cdn.coinsbee.com/version2/dist/assets/img/flags/US.png?v=2">
@@ -1805,25 +1764,22 @@
             </a>
         </div>
 
-        <!-- Desktop Grid for Popular Products -->
-        <div class="desktop-only flex justify-center"> <!-- Added flex justify-center to center the grid -->
-            <div id="popular-products-grid-desktop" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                <!-- Product cards will be rendered here by JS -->
-            </div>
+        <div class="desktop-only flex justify-center"> <div id="popular-products-grid-desktop" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                </div>
         </div>
 
-        <!-- Mobile Carousel for Popular Products -->
         <div id="popular-products-carousel-mobile" class="swiper-container-popular-products w-full text-center py-10 mobile-only">
             <div class="swiper-wrapper" id="popular-products-swiper-wrapper">
-                <!-- Product cards will be rendered here by JS -->
-            </div>
-            <!-- Paginación -->
+                </div>
             <div class="swiper-pagination"></div>
-            <!-- Navegación -->
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
         </div>
     </section>
+
+ <!--  -->
+    
+    
 <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 opacity-0 translate-y-4 fade-in-up" style="transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
         <!-- Revertir esta sección para usar el degradado verde de visa-worldwide -->
         <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-visa-worldwide interactive-card" style="transform: translateY(0px) scale(1); box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;">
@@ -1840,8 +1796,9 @@
                 </div>
             </div>
         </div>
-    </section>
-    
+&nbsp;&nbsp;&nbsp;&nbsp;</section>
+    <!--  -->
+<!--  -->
 <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 opacity-0 translate-y-4 fade-in-up" style="transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
         <div class="flex flex-col sm:flex-row items-center gap-12">
             <div class="flex justify-center sm:w-1/2 order-2 sm:order-1">
@@ -1893,7 +1850,7 @@
             </div>
         </div>
     </section>
-    <!-- NEW "Tu VISA en cualquier parte del mundo" section (replaces old "Seccion VISA") -->
+    <!--  -->
     <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 my-10 relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-visa-worldwide interactive-card opacity-0 translate-y-4 fade-in-up" style="transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; transform: translateY(0px) scale(1); box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
         <div class="relative max-w-6xl mx-auto flex flex-col sm:flex-row items-center gap-10 text-white-on-dark p-8 sm:p-12">
             <div class="sm:w-1/2 max-w-lg text-center sm:text-left">
@@ -1907,11 +1864,8 @@
             </div>
         </div>
     </section>
-    <!-- END NEW "Tu VISA" section -->
+    </main>
 
-   </main>
-
-    <!-- NEW: All Products Section (Initially Hidden) -->
     <section id="all-products-section" class="hidden-section all-products-section max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         <div class="flex justify-between items-center mb-8">
             <h2 class="text-3xl font-extrabold text-heading-primary">Todos Nuestros Productos</h2>
@@ -1921,7 +1875,6 @@
         </div>
 
         <div class="flex flex-col md:flex-row gap-8">
-            <!-- Sidebar de Filtros -->
             <aside class="md:w-1/4 sidebar">
                 <h3 class="text-xl font-bold text-heading-primary mb-4">Filtros</h3>
                 
@@ -1932,36 +1885,30 @@
                         <option value="US">Estados Unidos</option>
                         <option value="EU">Europa</option>
                         <option value="LATAM">Latinoamérica</option>
-                        <!-- Add more regions as needed -->
-                    </select>
+                        </select>
                 </div>
 
                 <div>
                     <h4 class="text-gray-700 font-semibold mb-3">Categorías</h4>
                     <ul id="category-filters" class="space-y-2 text-gray-600">
-                        <!-- Categories will be dynamically loaded here -->
-                    </ul>
+                        </ul>
                 </div>
             </aside>
 
-            <!-- Cuadrícula de Productos -->
             <div class="md:w-3/4 product-grid-container">
                 <div id="all-products-grid" class="product-grid">
-                    <!-- Product cards will be rendered here by JS -->
-                </div>
+                    </div>
                 <p id="no-products-message" class="text-center text-gray-500 mt-10 hidden">No se encontraron productos para esta categoría.</p>
             </div>
         </div>
     </section>
 
-    <!-- Sidebar del Carrito -->
     <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-full md:w-96 bg-white shadow-xl flex flex-col z-50 cart-sidebar">
         <div class="flex justify-between items-center p-4 border-b border-gray-200 bg-gradient-rapicambios-button text-white rounded-t-lg">
             <h3 class="text-xl font-bold">Tu Carrito</h3>
             <button id="close-cart-btn" class="text-white hover:text-gray-200 text-2xl">&times;</button>
         </div>
         <div id="cart-items" class="flex-grow overflow-y-auto p-4 space-y-4">
-            <!-- Items del carrito se renderizarán aquí -->
             <p class="text-gray-500 text-center" id="empty-cart-message">El carrito está vacío.</p>
         </div>
         <div class="p-4 border-t border-gray-200">
@@ -1977,27 +1924,22 @@
         </div>
     </div>
 
-    <!-- Overlay para el carrito -->
     <div id="cart-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none z-40 transition-opacity duration-300"></div>
 
-    <!-- Mini-Checkout Section (oculta inicialmente) -->
     <section id="checkout-section" class="hidden-section fixed inset-0 bg-gray-100 p-8 z-50 overflow-y-auto">
         <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-xl p-8">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Finalizar Compra</h2>
 
-            <!-- Resumen del Pedido en Checkout -->
             <div class="mb-8 border-b pb-4 border-gray-200">
                 <h3 class="text-2xl font-semibold mb-4">Resumen de Tu Pedido</h3>
                 <div id="checkout-summary-items" class="space-y-3 mb-6">
-                    <!-- Los items del carrito se cargarán aquí -->
-                </div>
+                    </div>
                 <div class="text-xl font-bold flex justify-between">
                     <span>Total a Pagar:</span>
                     <span id="checkout-total-summary">$0.00</span>
                 </div>
             </div>
 
-            <!-- Formulario de Información de Envío -->
             <h3 class="text-2xl font-semibold mb-4">Información de Envío</h3>
             <form id="checkout-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div>
@@ -2022,7 +1964,6 @@
                 </div>
             </form>
 
-            <!-- Métodos de Pago (simplificado) -->
             <h3 class="text-2xl font-semibold mb-4">Método de Pago</h3>
             <div class="mb-8">
                 <div class="flex items-center mb-4">
@@ -2042,7 +1983,6 @@
         </div>
     </section>
 
-    <!-- Modal de Confirmación de Pedido -->
     <div id="order-confirmation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[100]">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full text-center">
             <i class="fas fa-check-circle text-green-500 text-6xl mb-4"></i>
@@ -2052,7 +1992,6 @@
         </div>
     </div>
 
-    <!-- NEW SECTION: Venta de tarjetas cripto prepagadas (Bitcoin GIF section) -->
     <section class="bg-section-dark-blue py-20 shadow-inner full-width-section opacity-0 translate-y-4 fade-in-up" style="transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
         <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col lg:flex-row items-center gap-12">
             <div class="lg:w-1/2 text-white-on-dark max-w-md text-center lg:text-left mb-10 lg:mb-0">
@@ -2063,7 +2002,6 @@
                 </p>
                 <form class="flex flex-col sm:flex-row gap-4">
                     <input class="rounded-full px-6 py-4 text-black flex-1 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-rapicambios-accent-green shadow-md" placeholder="Tu email" type="email">
-                    <!-- Este botón ahora usa el degradado naranja -->
                     <button class="bg-gradient-rapicambios-button font-semibold rounded-md px-8 py-4 shadow-lg w-full sm:w-auto" type="submit" onclick="window.location.href='https://api.whatsapp.com/send/?phone=56958648299&amp;text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                         Recibir invitación
                     </button>
@@ -2077,9 +2015,6 @@
             </div>
         </div>
     </section>
-    <!-- END NEW SECTION: Venta de tarjetas cripto prepagadas -->
-
-    <!-- Footer -->
    <footer class="bg-footer-dark text-white-on-dark py-16 full-width-section">
         <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             <div class="footer-links-col">
@@ -2132,7 +2067,6 @@
         </div>
     </footer>
 
-    <!-- Swiper.js JavaScript -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         // JavaScript para alternar el menú móvil
@@ -2535,12 +2469,10 @@
             // Referencias del DOM
             const cartSidebar = document.getElementById('cart-sidebar');
             const openCartBtn = document.getElementById('open-cart-btn'); // Desktop cart button
-            const openCartBtnMobile = document.getElementById('open-cart-btn-mobile'); // Mobile cart button
             const closeCartBtn = document.getElementById('close-cart-btn');
             const cartOverlay = document.getElementById('cart-overlay');
             const cartItemsContainer = document.getElementById('cart-items');
             const cartItemCount = document.getElementById('cart-item-count'); // Desktop cart count
-            const cartItemCountMobile = document.getElementById('cart-item-count-mobile'); // Mobile cart count
             const cartSubtotalSpan = document.getElementById('cart-subtotal');
             const cartTotalSpan = document.getElementById('cart-total');
             const emptyCartMessage = document.getElementById('empty-cart-message');
@@ -2802,20 +2734,12 @@
             const updateCartItemCount = () => {
                 const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
                 if (cartItemCount) cartItemCount.textContent = totalItems;
-                if (cartItemCountMobile) cartItemCountMobile.textContent = totalItems;
 
                 if (cartItemCount) { // Check for desktop count
                     if (totalItems === 0) {
                         cartItemCount.classList.add('hidden');
                     } else {
                         cartItemCount.classList.remove('hidden');
-                    }
-                }
-                if (cartItemCountMobile) { // Check for mobile count
-                    if (totalItems === 0) {
-                        cartItemCountMobile.classList.add('hidden');
-                    } else {
-                        cartItemCountMobile.classList.remove('hidden');
                     }
                 }
             };
@@ -2969,15 +2893,11 @@
 
             // --- Manejadores de Eventos ---
 
-            // Abrir y cerrar carrito (Desktop)
-            if (openCartBtn) { // Check if desktop button exists
+            // Abrir y cerrar carrito (Desktop y Mobile)
+            if (openCartBtn) { 
                 openCartBtn.addEventListener('click', openCartSidebar);
             }
-            // Abrir carrito (Mobile)
-            if (openCartBtnMobile) { // Check if mobile button exists
-                openCartBtnMobile.addEventListener('click', openCartSidebar);
-            }
-
+           
             closeCartBtn.addEventListener('click', closeCartSidebar);
             cartOverlay.addEventListener('click', closeCartSidebar);
 
