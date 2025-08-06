@@ -377,11 +377,10 @@
 
 
     .soytechno-header {
-        background-color: #019df4; /* Azul de PideloAhora */
+        background-color: #00193F; /* Azul oscuro de SoyTechno */
         color: white;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        padding: 0.75rem 1rem;
-        /* Default flex for mobile, adjusted for desktop */
+        padding: 0.75rem 0; /* Ajustado padding para que mobile-header-content maneje el horizontal */
     }
 
     .soytechno-logo {
@@ -391,11 +390,17 @@
 
     /* Estilos para la barra de búsqueda en móvil */
     .mobile-search-container {
+        display: flex; /* Ahora es un flex container */
+        align-items: center; /* Centra verticalmente los elementos */
         position: relative;
         width: 100%;
-        /* Eliminamos el padding horizontal aquí ya que lo agregamos al mobile-header-content */
         margin-top: 0.5rem; /* Espacio desde la fila superior */
         margin-bottom: 0.75rem; /* Espacio debajo de la barra de búsqueda */
+    }
+
+    .mobile-search-container .search-input-wrapper {
+        position: relative;
+        flex-grow: 1; /* Permite que el input tome el espacio disponible */
     }
 
     .mobile-search-container input {
@@ -408,13 +413,31 @@
         color: #1a1a1a; /* Texto oscuro en el input */
     }
 
-    .mobile-search-container i {
+    .mobile-search-container .search-icon-inside {
         position: absolute;
         left: 0.75rem;
         top: 50%;
         transform: translateY(-50%);
         color: #9ca3af; /* text-gray-400 */
     }
+
+    .mobile-search-container .search-button-mobile {
+        flex-shrink: 0; /* Evita que el botón se encoja */
+        width: 2.5rem; /* Ancho fijo */
+        height: 2.5rem; /* Alto fijo */
+        border-radius: 9999px; /* Totalmente redondeado */
+        background-color: #3b82f6; /* Azul de botón */
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0.5rem; /* Espacio a la izquierda del botón */
+        transition: background-color 0.2s ease-in-out;
+    }
+    .mobile-search-container .search-button-mobile:hover {
+        background-color: #2563eb; /* Azul más oscuro al pasar el ratón */
+    }
+
 
     /* Ocultar elementos específicos en mobile y desktop según SoyTechno */
     @media (max-width: 767px) { /* Mobile */
@@ -436,14 +459,8 @@
             width: 100%; /* Make top row full width within its container */
             margin-bottom: 0.75rem; /* Space between top row and search bar */
         }
-        .soytechno-header .mobile-search-container {
-            display: block !important; /* Show mobile search bar */
-            width: 100%; /* Make search bar full width */
-            margin-top: 0.5rem; /* Space from top row */
-        }
-        /* Hide the search button next to the input on mobile */
-        .soytechno-header .mobile-search-container .search-button-mobile {
-            display: none !important;
+        .mobile-search-container {
+            display: flex !important; /* Asegurar que sea flex en móvil */
         }
         .categories-nav-bar { /* Ensure it's hidden on mobile */
             display: none !important;
@@ -747,9 +764,9 @@
     </div>
    </div>
    <!-- Contenido del encabezado para Móvil/Tablet -->
-   <div class="mobile-header-content md:hidden w-full">
+   <div class="mobile-header-content md:hidden w-full px-4">
     <!-- Fila superior: Usuario, Logo, Menú -->
-    <div class="mobile-header-top-row px-4">
+    <div class="mobile-header-top-row flex justify-between items-center w-full mb-3">
      <button aria-label="Cuenta de usuario" class="text-white text-lg">
       <i class="fas fa-user">
       </i>
@@ -763,11 +780,16 @@
      </button>
     </div>
     <!-- Barra de búsqueda para Móvil - Visible directamente en el header -->
-    <div class="mobile-search-container relative w-full px-4 mt-2 mb-3">
-     <input class="w-full border-gray-300 rounded-full py-2 pl-10 pr-4 text-gray-900 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Search for products" type="text"/>
-     <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-     </i>
-     <!-- El botón de búsqueda azul ha sido eliminado para evitar la doble lupa en móvil -->
+    <div class="mobile-search-container w-full mt-2 mb-3">
+     <div class="search-input-wrapper">
+       <input class="w-full border-gray-300 rounded-full py-2 pl-10 pr-4 text-gray-900 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Search for products" type="text"/>
+       <i class="fas fa-search search-icon-inside">
+       </i>
+     </div>
+     <button class="search-button-mobile">
+      <i class="fas fa-search">
+      </i>
+     </button>
     </div>
    </div>
   </header>
@@ -1860,7 +1882,16 @@
        </button>
        <button class="work-zone-filter-button">
         <svg fill="none" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
-         <path d="M15.0911 2.9292H0.908868C0.408664 2.9292 0 3.33459 0 3.83807V12.1617C0 12.6619 0.405394 13.0706 0.908868 13.0706H15.0911C15.5913 13.0706 16 12.6652 16 12.1617V3.83807C15.9967 3.33459 15.5913 2.9292 15.0911 2.9292ZM10.0008 4.83848C10.0008 4.71424 10.1022 4.61289 10.2264 4.61289H11.1516C11.2758 4.61289 11.3772 4.71424 11.3772 4.83848V5.74734C11.3772 5.87158 11.2758 5.97293 11.1516 5.97293H10.2264C10.1022 5.97293 10.0008 5.87158 10.0008 5.74734V4.83848ZM8.87618 7.3068H9.80139C9.92562 7.3068 10.027 7.40815 10.027 7.53239V8.44125C10.027 8.56549 9.92562 8.66684 9.80139 8.66684H8.87618C8.75194 8.66684 8.65059 8.56549 8.65059 8.44125V7.53239C8.65059 7.40815 8.75194 7.3068 8.87618 7.3068ZM7.31345 4.83848C7.31345 4.71424 7.41479 4.61289 7.53903 4.61289H8.46424C8.58848 4.61289 8.68982 4.71424 8.68982 4.83848V5.74734C8.68982 5.87158 8.58848 5.97293 8.46424 5.97293H7.53903C7.41479 5.97293 7.31345 5.87158 7.31345 5.74734V4.83848ZM6.18553 7.3068H7.11075C7.23498 7.3068 7.33633 7.40815 7.33633 7.53239V8.44125C7.33633 8.56549 7.23498 8.66684 7.11075 8.66684H6.18553C6.0613 8.66684 5.95995 8.56549 5.95995 8.44125V7.53239C5.95995 7.40815 6.0613 7.3068 6.18553 7.3068ZM4.6228 4.83848C4.6228 4.71424 4.72415 4.61289 4.84839 4.61289H5.7736C5.89783 4.61289 5.99918 4.71424 5.99918 4.83848V5.74734C5.99918 5.87158 5.89783 5.97293 5.7736 5.97293H4.84839C4.72415 5.97293 4.6228 5.87158 4.6228 5.74734V4.83848ZM1.91908 4.83848C1.91908 4.71424 2.02043 4.61289 2.14467 4.61289H3.06988C3.19412 4.61289 3.29546 4.71424 3.29546 4.83848V5.74734C3.29546 5.87158 3.19412 5.97293 3.06988 5.97293H2.14467C2.02043 5.97293 1.91908 5.87158 1.91908 5.74734V4.83848ZM3.29546 11.1613C3.29546 11.2856 3.19412 11.3869 3.06988 11.3869H2.14467C2.02043 11.3869 1.91908 11.2856 1.91908 11.1613V10.2525C1.91908 10.1282 2.02043 10.0269 2.14467 10.0269H3.06988C3.19412 10.0269 3.29546 10.1282 3.29546 10.2525V11.1613ZM4.40703 8.66684H3.48181C3.35758 8.66684 3.25623 8.56549 3.25623 8.44125V7.53239C3.25623 7.40815 3.35758 7.3068 3.48181 7.3068H4.40703C4.53126 7.3068 4.63261 7.40815 4.63261 7.53239V8.44125C4.63261 8.56549 4.53126 8.66684 4.40703 8.66684ZM11.3772 11.1613C11.3772 11.2856 11.2758 11.3869 11.1516 11.3869H10.8737H10.2297H8.46751H7.5423H4.85166C4.72742 11.3869 4.62607 11.2856 4.62607 11.1613V10.2525C4.62607 10.1282 4.72742 10.0269 4.85166 10.0269H7.5423H8.46751H10.2297H10.8737H11.1516C11.2758 10.0269 11.3772 10.1282 11.3772 10.2525V11.1613ZM12.4888 8.66684H11.5635C11.4393 8.66684 11.338 8.56549 11.338 8.44125V7.53239C11.338 7.40815 11.4393 7.3068 11.5635 7.3068H12.4888C12.613 7.3068 12.7143 7.40815 12.7143 7.53239V8.44125C12.7143 8.56549 12.613 8.66684 12.4888 8.66684ZM14.0809 11.1613C14.0809 11.2856 13.9796 11.3869 13.8553 11.3869H12.9301C12.8059 11.3869 12.7045 11.2856 12.7045 11.1613V10.2525C12.7045 10.1282 12.8059 10.0269 12.9301 10.0269H13.8553C13.9796 10.0269 14.0809 10.1282 14.0809 10.2525V11.1613ZM14.0809 5.74734C14.0809 5.87158 13.9796 5.97293 13.8553 5.97293H12.9301C12.8059 5.97293 12.7045 5.87158 12.7045 5.74734V4.83848C12.7045 4.71424 12.8059 4.61289 12.9301 4.61289H13.8553C13.9796 4.61289 14.0809 4.71424 14.0809 4.83848V5.74734Z" fill="#101010" fill-opacity="0.8">
+         <path d="M15.0911 2.9292H0.908868C0.408664 2.9292 0 3.33459 0 3.83807V12.1617C0 12.6619 0.405394 13.0706 0.908868 13.0706H15.0911C15.5913 13.0706 16 12.6652 16 12.1617V3.83807C15.9967 3.33459 15.5913 2.9292 15.0911 2.9292ZM10.0008 4.83848C10.0008 4.71424 10.1022 4.61289 10.2264 4.61289H11.1516C11.2758 4.61289 11.3772 4.71424 11.3772 4.83848V5.74734C11.3772 5.87158 11.2758 5.97293 11.1516 5.97293H10.2264C10.1022 5.97293 10.0008 5.87158 10.0008 5.74734V4.83848ZM8.87618 7.3068H9.80139C9.92562 7.3068 10.027 7.40815 10.027 7.53239V8.44125C10.027 8.56549 9.92562 8.66684 9.80139 8.66684H8.87618C8.75194 8.66684 8.65059 8.56549 8.65059 8.44125V7.53239C5.95995 7.40815 6.0613 7.3068 6.18553 7.3068ZM4.6228 4.83848C4.6228 4.71424 4.72415 4.61289 4.84839 4.61289H5.7736C5.89783 4.61289 5.99918 4.71424 5.99918 4.83848V5.74734C5.99918 5.87158 5.89783 5.97293 5.7736 5.97293H4.84839C4.72415 5.97293 4.6228 5.87158 4.6228 5.74734V4.83848ZM1.91908 4.83848C1.91908 4.71424 2.02043 4.61289 2.14467 4.61289H3.06988C3.19412 4.61289 3.29546 4.71424 3.29546 4.83848V5.74734C3.29546 5.87158 3.19412 5.97293 3.06988 5.97293H2.14467C2.02043 5.97293 1.91908 5.87158 1.91908 5.74734V4.83848ZM3.29546 11.1613C3.29546 11.2856 3.19412 11.3869 3.06988 11.3869H2.14467C2.02043 11.3869 1.91908 11.2856 1.91908 11.1613V10.2525C1.91908 10.1282 2.02043 10.0269 2.14467 10.0269H3.06988C3.19412 10.0269 3.29546 10.1282 3.29546 10.2525V11.1613ZM4.40703 8.66684H3.48181C3.35758 8.66684 3.25623 8.56549 3.25623 8.44125V7.53239C3.25623 7.40815 3.35758 7.3068 3.48181 7.3068H4.40703C4.53126 7.3068 4.63261 7.40815 4.63261 7.53239V8.44125C4.63261 8.56549 4.53126 8.66684 4.40703 8.66684ZM11.3772 11.1613C11.3772 11.2856 11.2758 11.3869 11.1516 11.3869H10.8737H10.2297H8.46751H7.5423H4.85166C4.72742 11.3869 4.62607 11.2856 4.62607 11.1613V10.2525C4.62607 10.1282 4.72742 10.0269 4.85166 10.0269H7.5423H8.46751H10.2297H10.8737H11.1516C11.2758 10.0269 11.3772 10.1282 11.3772 10.2525V11.1613ZM12.4888 8.66684H11.5635C11.4393 8.66684 11.338 8.56549 11.338 8.44125V7.53239C11.338 7.40815 11.4393 7.3068 11.5635 7.3068H12.4888C12.613 7.3068 12.7143 7.40815 12.7143 7.53239V8.44125C12.7143 8.56549 12.613 8.66684 12.4888 8.66684ZM14.0809 11.1613C14.0809 11.2856 13.9796 11.3869 13.8553 11.3869H12.9301C12.8059 11.3869 12.7045 11.2856 12.7045 11.1613V10.2525C12.7045 10.1282 12.8059 10.0269 12.9301 10.0269H13.8553C13.9796 10.0269 14.0809 10.1282 14.0809 10.2525V11.1613ZM14.0809 5.74734C14.0809 5.87158 13.9796 5.97293 13.8553 5.97293H12.9301C12.8059 5.97293 12.7045 5.87158 12.7045 5.74734V4.83848C12.7045 4.71424 12.8059 4.61289 12.9301 4.61289H13.8553C13.9796 4.61289 14.0809 4.71424 14.0809 4.83848V5.74734Z" fill="#101010" fill-opacity="0.8">
+         </path>
+        </svg>
+        <span>
+         Teclados
+        </span>
+       </button>
+       <button class="work-zone-filter-button">
+        <svg fill="none" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+         <path d="M7.99999 0C5.37199 0 3.24158 2.13042 3.24158 4.75841V11.2416C3.24158 13.8696 5.37199 16 7.99999 16C10.628 16 12.7584 13.8696 12.7584 11.2416V4.75841C12.7584 2.13042 10.628 0 7.99999 0ZM8.62404 5.03783C8.62404 5.38254 8.34462 5.66188 7.99999 5.66188C7.65528 5.66188 7.37594 5.38246 7.37594 5.03783V2.87566C7.37594 2.53104 7.65536 2.25162 7.99999 2.25162C8.34462 2.25162 8.62404 2.53104 8.62404 2.87566V5.03783Z" fill="#101010" fill-opacity="0.8">
          </path>
         </svg>
         <span>
