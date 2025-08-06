@@ -48,9 +48,9 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      font-size: 0.75rem; /* text-xs */
+      font-size: 0.875rem; /* text-sm - Aumentado para mayor visibilidad */
       color: #4b5563; /* text-gray-700 */
-      padding: 0.25rem 0.5rem; /* py-1 px-2 */
+      padding: 0.5rem 0.5rem; /* py-2 px-2 - Aumentado para mayor área de toque */
       border-radius: 0.375rem; /* rounded-md */
       transition: all 0.2s ease-in-out; /* Transición suave para hover */
       flex-grow: 1; /* Para que ocupen el espacio disponible equitativamente */
@@ -61,7 +61,7 @@
     }
     .bottom-nav-button i {
       margin-bottom: 0.25rem; /* mb-1 */
-      font-size: 1.125rem; /* text-lg */
+      font-size: 1.25rem; /* text-xl - Aumentado para mayor visibilidad */
     }
     .bottom-nav-button .notification-badge {
       position: absolute;
@@ -70,8 +70,8 @@
       background-color: #3b82f6; /* bg-blue-600 */
       color: white;
       border-radius: 9999px; /* rounded-full */
-      width: 1rem; /* w-4 */
-      height: 1rem; /* h-4 */
+      width: 1.125rem; /* w-4.5 - Aumentado */
+      height: 1.125rem; /* h-4.5 - Aumentado */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -130,7 +130,7 @@
 
     .category-item {
         flex: 0 0 auto; /* No crecer, no encoger, base en auto (contenido) */
-        width: 100px; /* Ancho fijo para cada ítem en móvil, ajusta según necesidad */
+        width: 110px; /* Ancho fijo para cada ítem en móvil, ajustado para ser un poco más grande */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -150,13 +150,13 @@
 
     .category-item img {
         margin-bottom: 0.5rem; /* mb-2 */
-        width: 4rem; /* w-16 */
-        height: 4rem; /* h-16 */
+        width: 4.5rem; /* w-18 - Aumentado */
+        height: 4.5rem; /* h-18 - Aumentado */
         object-fit: contain;
     }
 
     .category-item span {
-        font-size: 0.875rem; /* text-sm */
+        font-size: 0.875rem; /* text-sm - Mantenido, pero el tamaño del ítem es mayor */
         font-weight: 500; /* font-medium */
         text-align: center;
     }
@@ -377,7 +377,7 @@
 
 
     .soytechno-header {
-        background-color: #00193F; /* Azul oscuro de SoyTechno */
+        background-color: #019df4; /* Azul de SoyTechno */
         color: white;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         padding: 0.75rem 0; /* Ajustado padding para que mobile-header-content maneje el horizontal */
@@ -393,9 +393,7 @@
         display: flex; /* Ahora es un flex container */
         align-items: center; /* Centra verticalmente los elementos */
         position: relative;
-        width: 100%;
-        margin-top: 0.5rem; /* Espacio desde la fila superior */
-        margin-bottom: 0.75rem; /* Espacio debajo de la barra de búsqueda */
+        flex-grow: 1; /* Permite que el input tome el espacio disponible */
     }
 
     .mobile-search-container .search-input-wrapper {
@@ -406,10 +404,10 @@
     .mobile-search-container input {
         width: 100%;
         border-radius: 9999px; /* rounded-full */
-        padding: 0.5rem 1rem 0.5rem 2.5rem; /* Ajusta el padding para el icono */
+        padding: 0.625rem 1rem 0.625rem 2.5rem; /* Ajusta el padding para el icono, aumentado */
         border: 1px solid #e5e7eb; /* border-gray-300 */
         background-color: #f3f4f6; /* bg-gray-100 */
-        font-size: 0.875rem;
+        font-size: 1rem; /* Aumentado el tamaño de fuente */
         color: #1a1a1a; /* Texto oscuro en el input */
     }
 
@@ -419,12 +417,13 @@
         top: 50%;
         transform: translateY(-50%);
         color: #9ca3af; /* text-gray-400 */
+        font-size: 1.125rem; /* Aumentado el tamaño del icono */
     }
 
     .mobile-search-container .search-button-mobile {
         flex-shrink: 0; /* Evita que el botón se encoja */
-        width: 2.5rem; /* Ancho fijo */
-        height: 2.5rem; /* Alto fijo */
+        width: 2.8rem; /* Ancho fijo, aumentado */
+        height: 2.8rem; /* Alto fijo, aumentado */
         border-radius: 9999px; /* Totalmente redondeado */
         background-color: #3b82f6; /* Azul de botón */
         color: white;
@@ -433,6 +432,7 @@
         justify-content: center;
         margin-left: 0.5rem; /* Espacio a la izquierda del botón */
         transition: background-color 0.2s ease-in-out;
+        font-size: 1.125rem; /* Aumentado el tamaño del icono del botón */
     }
     .mobile-search-container .search-button-mobile:hover {
         background-color: #2563eb; /* Azul más oscuro al pasar el ratón */
@@ -447,21 +447,29 @@
         /* Mobile header specific adjustments */
         .soytechno-header .mobile-header-content {
             display: flex;
-            flex-direction: column; /* Stack top row and search bar */
-            align-items: center; /* Center items horizontally */
+            flex-direction: row; /* Ahora es una fila */
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
-            padding: 0 1rem; /* Add horizontal padding to the whole mobile header content */
+            padding: 0.75rem 1rem; /* Padding horizontal para el header móvil */
         }
-        .soytechno-header .mobile-header-top-row {
+        /* La clase mobile-header-top-row ya no es necesaria con la nueva estructura */
+        /* .soytechno-header .mobile-header-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%; /* Make top row full width within its container */
-            margin-bottom: 0.75rem; /* Space between top row and search bar */
-        }
-        .mobile-search-container {
-            display: flex !important; /* Asegurar que sea flex en móvil */
-        }
+            width: 100%;
+            margin-bottom: 0.75rem;
+        } */
+        /* Eliminado el mobile-search-trigger y su lógica de JS */
+        /* .mobile-search-trigger {
+            display: block !important;
+            margin-left: auto;
+        } */
+        /* Eliminado el display flex !important de mobile-search-container aquí, ahora se controla con mobile-search-full-width-container */
+        /* .mobile-search-container {
+            display: flex !important;
+        } */
         .categories-nav-bar { /* Ensure it's hidden on mobile */
             display: none !important;
         }
@@ -763,34 +771,31 @@
      </a>
     </div>
    </div>
-   <!-- Contenido del encabezado para Móvil/Tablet -->
-   <div class="mobile-header-content md:hidden w-full px-4">
-    <!-- Fila superior: Usuario, Logo, Menú -->
-    <div class="mobile-header-top-row flex justify-between items-center w-full mb-3">
-     <button aria-label="Cuenta de usuario" class="text-white text-lg">
-      <i class="fas fa-user">
-      </i>
-     </button>
-     <a class="block" href="#">
-      <img alt="PideloAhora logo" class="soytechno-logo h-8" src="./Group 1000005334.svg"/>
-     </a>
-     <button aria-label="Abrir menú" class="text-white text-lg" id="menu-button-mobile">
-      <i class="fas fa-bars">
-      </i>
-     </button>
-    </div>
-    <!-- Barra de búsqueda para Móvil - Visible directamente en el header -->
-    <div class="mobile-search-container w-full mt-2 mb-3">
+
+   <!-- Contenido del encabezado para Móvil/Tablet (una sola barra continua) -->
+   <div class="mobile-header-content md:hidden w-full px-4 py-3 flex items-center justify-between">
+    <!-- Icono de usuario a la izquierda -->
+    <button aria-label="Cuenta de usuario" class="text-white text-xl flex-shrink-0">
+     <i class="fas fa-user">
+     </i>
+    </button>
+    <!-- Logo en el centro -->
+    <a class="block mx-2 flex-shrink-0" href="#">
+     <img alt="PideloAhora logo" class="soytechno-logo h-9" src="./Group 1000005334.svg"/>
+    </a>
+    <!-- Barra de búsqueda (oculta por defecto, se muestra con el icono de búsqueda) -->
+    <div class="mobile-search-container flex-grow">
      <div class="search-input-wrapper">
-       <input class="w-full border-gray-300 rounded-full py-2 pl-10 pr-4 text-gray-900 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Search for products" type="text"/>
-       <i class="fas fa-search search-icon-inside">
-       </i>
-     </div>
-     <button class="search-button-mobile">
-      <i class="fas fa-search">
+      <input class="w-full border-gray-300 rounded-full py-2 pl-10 pr-4 text-gray-900 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Search for products" type="text"/>
+      <i class="fas fa-search search-icon-inside">
       </i>
-     </button>
+     </div>
     </div>
+    <!-- Botón de menú a la derecha -->
+    <button aria-label="Abrir menú" class="text-white text-xl ml-2 flex-shrink-0" id="menu-button-mobile">
+     <i class="fas fa-bars">
+     </i>
+    </button>
    </div>
   </header>
   <!-- Nueva barra de navegación de Categorías para escritorio (light blue) -->
@@ -1196,7 +1201,7 @@
    <section class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
     <!-- Banner principal izquierdo -->
     <div class="rounded-lg overflow-hidden relative shadow-md">
-     <img alt="Sala moderna con aire acondicionado blanco instalado en pared" class="w-full h-[350px] object-cover" src="https://storage.googleapis.com/a1aa/image/990a514d-277a-4efb-deb4-3ad0ad3e5c3c.jpg"/>
+     <img alt="Sala moderna con aire acondicionado blanco instalado en pared" class="w-full h-[350px] object-cover" src="https://http2.mlstatic.com/D_NQ_NP967572-MLA81834851773_012025-B.webp"/>
      <div class="absolute bottom-4 left-4 bg-white bg-opacity-90 p-3 rounded-lg text-sm font-semibold cursor-pointer hover:bg-opacity-100 transition-opacity">
       Comprar ahora
      </div>
@@ -1231,7 +1236,7 @@
      </div>
      <!-- Nuevos banners en la hero section -->
      <div class="rounded-lg overflow-hidden relative shadow-md">
-      <img alt="Gaming Consoles" class="w-full h-[150px] object-cover" src="https://placehold.co/400x150/1A1A4D/FFFFFF?text=MEJORES+CONSOLAS"/>
+      <img alt="Gaming Consoles" class="w-full h-[150px] object-cover" src="https://http2.mlstatic.com/D_NQ_NP854058-MLA81834917143_012025-B.webp"/>
       <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center p-4 text-white text-center">
        <h3 class="font-bold text-lg mb-1">
         Las mejores consolas del mercado
@@ -1242,7 +1247,7 @@
       </div>
      </div>
      <div class="rounded-lg overflow-hidden relative shadow-md">
-      <img alt="Samsung TV AI" class="w-full h-[150px] object-cover" src="https://placehold.co/400x150/1A1A4D/FFFFFF?text=NUEVOS+TV+SAMSUNG"/>
+      <img alt="Samsung TV AI" class="w-full h-[150px] object-cover" src="https://http2.mlstatic.com/D_NQ_NP649562-MLA81564231060_012025-B.webp"/>
       <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center p-4 text-white text-center">
        <h3 class="font-bold text-lg mb-1">
         Nuevos TV Samsung Vision AI
@@ -1276,7 +1281,7 @@
       <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
        Nuevo
       </span>
-      <img alt="Samsung Galaxy S23 Edge smartphone" class="mb-4 w-40 h-40 object-contain" src="https://rapikom-media.s3.amazonaws.com/panel/backend/imagenes/productos/08/17107865560880.jpg">
+      <img alt="Samsung Galaxy S23 Edge smartphone" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_601468-MLV69494322105_052023-E.webp">
       <h3 class="text-base font-bold mb-1">
        Samsung Galaxy S23
       </h3>
@@ -1317,9 +1322,9 @@
       <span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
        PREVENTA
       </span>
-      <img alt="Samsung Galaxy Z Fold 7 smartphone" class="mb-4 w-40 h-40 object-contain" src="https://rapikom-media.s3.amazonaws.com/panel/backend/imagenes/productos/08/17096684883170.webp">
+      <img alt="Samsung Galaxy Z Fold 7 smartphone" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_662218-MLV70868425571_082023-E.webp">
       <h3 class="text-base font-bold mb-1">
-       Samsung Galaxy Z Fold 7
+       Samsung Galaxy Z Fold 
       </h3>
       <p class="text-xs text-blue-600 mb-2">
        Teléfono celular Samsung
@@ -1358,7 +1363,48 @@
       <span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
        PREVENTA
       </span>
-      <img alt="Samsung Galaxy Z Flip 7 smartphone" class="mb-4 w-40 h-40 object-contain" src="https://rapikom-media.s3.amazonaws.com/panel/backend/imagenes/productos/08/17107922865390.webp">
+      <img alt="Samsung Galaxy Z Flip 7 smartphone" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_800674-MLV69039414990_042023-E.webp">
+      <h3 class="text-base font-bold mb-1">
+       Samsung Galaxy Z Flip 7
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Samsung
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       939,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+     <!-- Producto 3: Samsung Galaxy Z Flip 7 -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       PREVENTA
+      </span>
+      <img alt="Samsung Galaxy Z Flip 7 smartphone" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_977623-MLV70903958806_082023-E.webp">
       <h3 class="text-base font-bold mb-1">
        Samsung Galaxy Z Flip 7
       </h3>
@@ -1396,7 +1442,7 @@
       <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
        Nuevo
       </span>
-      <img alt="Tecno Spark 40 PRO+ smartphone" class="mb-4 w-40 h-40 object-contain" src="https://rapikom-media.s3.amazonaws.com/panel/backend/imagenes/productos/08/17107967104210.jpg">
+      <img alt="Tecno Spark 40 PRO+ smartphone" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_919867-MLV69805259540_062023-E.webp">
       <h3 class="text-base font-bold mb-1">
        Tecno Spark 40 PRO+
       </h3>
@@ -1434,7 +1480,7 @@
       <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
        Nuevo
       </span>
-      <img alt="Smartphone genérico moderno con pantalla brillante" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_657856-MLV70256355877_072023-E.webp">
+      <img alt="Smartphone genérico moderno con pantalla brillante" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_634086-MLV80145944087_102024-E.webp">
       <h3 class="text-base font-bold mb-1">
        Otro Smartphone
       </h3>
@@ -1469,6 +1515,7 @@
      </div>
     </div>
    </section>
+   
    <!-- Últimas tendencias en tecnología -->
    <section class="mb-10">
     <h2 class="text-lg font-semibold mb-4">
@@ -1509,12 +1556,12 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
      <!-- Columna izquierda con la imagen grande -->
      <div class="col-span-1">
-      <img alt="Setup gamer con escritorio, monitor, teclado y luces LED moradas" class="rounded-lg shadow-md w-full h-full object-cover" src="https://http2.mlstatic.com/D_NQ_857099-MLA82303640070_022025-OO.webp"/>
+      <img alt="Setup gamer con escritorio, monitor, teclado y luces LED moradas" class="rounded-lg shadow-md w-full h-full object-cover" src="https://http2.mlstatic.com/D_NQ_NP741117-MLA81675817629_122024-B.webp"/>
      </div>
      <!-- Columna derecha con las dos imágenes apiladas -->
      <div class="grid grid-cols-1 gap-4">
-      <img alt="Setup gamer con laptop y accesorios iluminados en azul y morado" class="rounded-lg shadow-md w-full h-full object-cover" src="https://assets-v3.pcfactory.cl/uploads/9f323fa5-c7e7-4e42-bb3b-b8bde739043a/original/Big5-sustentabilidad-875x289px.webp"/>
-      <img alt="Teclado mecánico y mouse gamer con luces RGB en escritorio oscuro" class="rounded-lg shadow-md w-full h-full object-cover" src="https://assets-v3.pcfactory.cl/uploads/7adb63f6-073a-4b37-9339-1067f8d4b68a/original/Big5-asesorate_online-875x289px.webp"/>
+      <img alt="Setup gamer con laptop y accesorios iluminados en azul y morado" class="rounded-lg shadow-md w-full h-full object-cover" src="https://http2.mlstatic.com/D_NQ_NP806657-MLA83011647959_032025-B.webp"/>
+      <img alt="Teclado mecánico y mouse gamer con luces RGB en escritorio oscuro" class="rounded-lg shadow-md w-full h-full object-cover" src="https://http2.mlstatic.com/D_NQ_NP835339-MLA83011648667_032025-B.webp"/>
      </div>
     </div>
    </section>
@@ -1765,6 +1812,51 @@
        Añadir Al Carrito
       </button>
      </div>
+      <!-- Producto 4: Laptop Gaming HP Victus 15FA2093DX -->
+     <div class="bg-white rounded-lg border border-gray-200 p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       NUEVO
+      </span>
+      <img alt="Laptop Gaming HP Victus 15FA2093DX" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_NQ_NP_792569-MLV69976312444_062023-O.webp"/>
+      <div class="product-card-content">
+       <h3 class="text-sm font-semibold product-card-title">
+        Laptop Gaming HP Victus 15FA2093DX / Core i7-13620H / 16GB / 1TB SSD / NVIDIA RTX 3050 8GB / 15.6" / W11
+       </h3>
+       <div class="flex flex-wrap justify-center gap-2 mb-2">
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Zona Gamer
+        </span>
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops Gamer
+        </span>
+       </div>
+       <div class="flex text-yellow-400 text-sm mb-2">
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+       </div>
+       <div class="flex items-center text-green-600 text-xs mb-2">
+        <i class="fas fa-check-circle mr-1">
+        </i>
+        <span>
+         Disponible
+        </span>
+       </div>
+       <p class="text-lg font-bold text-gray-900 mb-4">
+        2.409,00$
+       </p>
+      </div>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Añadir Al Carrito
+      </button>
+     </div>
      <!-- Producto 5: Laptop HP Victus 15-FA2701wm -->
      <div class="bg-white rounded-lg border border-gray-200 p-4 flex flex-col items-center text-center relative">
       <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
@@ -1904,61 +1996,264 @@
       </button>
      </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
-     <!-- Router Card -->
-     <div class="work-zone-sub-card router-card">
-      <div class="work-zone-sub-card-content">
-       <h3>
-        Routers de alta velocidad
-       </h3>
-       <p>
-        Conéctate sin límites en una experiencia de internet fluida y sin interrupciones
-       </p>
-       <button>
-        Ver más
-       </button>
-      </div>
-     </div>
-     <!-- Impresora Card -->
-     <div class="work-zone-sub-card printer-card">
-      <div class="work-zone-sub-card-content">
-       <h3>
-        Impresoras que ofrecen nitidez y calidad
-       </h3>
-       <p>
-        Obtén tus ideas y diseños con la máxima calidad
-       </p>
-       <button>
-        Ver más
-       </button>
-      </div>
-     </div>
-     <!-- Laptop Card -->
-     <div class="work-zone-sub-card laptop-card">
-      <div class="work-zone-sub-card-content">
-       <h3>
-        Potencia y versatilidad en el diseño de tu Laptop
-       </h3>
-       <p>
-        Juega y lleva tu trabajo a todos lados con las mejores marcas
-       </p>
-       <button>
-        Ver más
-       </button>
-      </div>
-     </div>
-    </div>
-   </section>
+    
    <!-- Distribuidores oficiales -->
-   <section class="mb-10 max-w-[1280px] mx-auto text-center">
-    <h3 class="text-lg font-semibold mb-6">
-     PideloAhora distribuidores oficiales de:
-    </h3>
-    <div class="flex flex-wrap justify-center gap-6">
-     <img alt="Logo distribuidores oficiales LG con fondo negro y colores vivos" class="rounded-lg shadow-md" height="80" src="https://storage.googleapis.com/a1aa/image/b7c318a6-bcc7-49a4-6f83-e3e4e2cb6b5d.jpg" width="200"/>
-     <img alt="Logo Samsung distribuidor oficial con fondo negro y texto blanco" class="rounded-lg shadow-md" height="80" src="https://storage.googleapis.com/a1aa/image/93348f55-3c0e-44fe-706b-df956abb90e1.jpg" width="200"/>
-     <img alt="Logo distribuidores oficiales Aiwa con fondo blanco y texto rojo" class="rounded-lg shadow-md" height="80" src="https://storage.googleapis.com/a1aa/image/f20cbb73-97d8-42ce-1364-b85cbd1eabb1.jpg" width="200"/>
+   <section class="mb-10">
+    <h2 class="text-lg font-semibold mb-4">
+     Últimas tendencias en tecnología
+    </h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+     <!-- Producto 1: Samsung Galaxy S23 Edge -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <img alt="Samsung Galaxy S23 Edge smartphone" class="mb-4 w-40 h-40 object-contain" src="https://rapikom-media.s3.amazonaws.com/panel/backend/imagenes/productos/08/17107865560880.jpg">
+      <h3 class="text-base font-bold mb-1">
+       Samsung Galaxy S23
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Samsung
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       1.552,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+     <!-- Producto 2: Samsung Galaxy Z Fold 7 -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       PREVENTA
+      </span>
+      <img alt="Samsung Galaxy Z Fold 7 smartphone" class="mb-4 w-40 h-40 object-contain" src="https://rapikom-media.s3.amazonaws.com/panel/backend/imagenes/productos/08/17096684883170.webp">
+      <h3 class="text-base font-bold mb-1">
+       Samsung Galaxy Z Fold 
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Samsung
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       1.919,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+     <!-- Producto 3: Samsung Galaxy Z Flip 7 -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       PREVENTA
+      </span>
+      <img alt="Samsung Galaxy Z Flip 7 smartphone" class="mb-4 w-40 h-40 object-contain" src="https://rapikom-media.s3.amazonaws.com/panel/backend/imagenes/productos/08/17107922865390.webp">
+      <h3 class="text-base font-bold mb-1">
+       Samsung Galaxy Z Flip 7
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Samsung
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       939,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+     <!-- Producto 4: Tecno Spark 40 PRO+ -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <img alt="Tecno Spark 40 PRO+ smartphone" class="mb-4 w-40 h-40 object-contain" src="https://rapikom-media.s3.amazonaws.com/panel/backend/imagenes/productos/08/17107967104210.jpg">
+      <h3 class="text-base font-bold mb-1">
+       Tecno Spark 40 PRO+
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Tecno
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       309,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+      <!-- Producto 4: Tecno Spark 40 PRO+ -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <img alt="Tecno Spark 40 PRO+ smartphone" class="mb-4 w-40 h-40 object-contain" src="https://rapikom-media.s3.amazonaws.com/panel/backend/imagenes/productos/08/17107967104210.jpg">
+      <h3 class="text-base font-bold mb-1">
+       Tecno Spark 40 PRO+
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Tecno
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       309,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+     <!-- Producto 5: Placeholder for a fifth product if needed for 5-column grid -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <img alt="Smartphone genérico moderno con pantalla brillante" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_657856-MLV70256355877_072023-E.webp">
+      <h3 class="text-base font-bold mb-1">
+       Otro Smartphone
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Genérico
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       XXX,XX$
+       </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
     </div>
+    
+   </section>
+   
+   <!-- Otros -->
+   <section class="bg-blue-100 rounded-lg p-6 mb-10 max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between shadow-md">
+    <div class="mb-4 sm:mb-0 max-w-xl">
+     <h4 class="font-semibold text-lg mb-2">
+      Conéctate con nosotros en Radio PideloAhora
+     </h4>
+     <p class="text-sm text-gray-700">
+      Escucha las últimas novedades, entrevistas y música mientras compras.
+     </p>
+    </div>
+    <button class="bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-800 whitespace-nowrap transition-colors">
+     Comprar ahora
+    </button>
    </section>
    <!-- Nuestros servicios -->
    <section class="mb-10 max-w-[1280px] mx-auto">
@@ -1995,6 +2290,284 @@
      </div>
     </div>
    </section>
+
+   <!-- Ofertas electrónicas -->
+   <section class="mb-10">
+    <h2 class="text-lg font-semibold mb-4">
+     No te pierdas nuestras Ofertas Electrónicas
+    </h2>
+    <div class="flex space-x-4 mb-6">
+     <button class="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+      ¡Nuevos Modelos!
+     </button>
+     <button class="bg-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors">
+      ¡Los más populares!
+     </button>
+     <button class="bg-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors">
+      ¡Les bajamos el precio!
+     </button>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+     <!-- Producto 1: Laptop HP 14-DQ0011DX -->
+     <div class="bg-white rounded-lg border border-gray-200 p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       NUEVO
+      </span>
+      <img alt="Laptop HP 14-DQ0011DX" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_642862-MLV53228482838_012023-E.webp"/>
+      <div class="product-card-content">
+       <h3 class="text-sm font-semibold product-card-title">
+        Laptop HP 14-DQ0011DX - Intel Inside-N150 / 4GB / 128GB SSD / 14" / US / W11
+       </h3>
+       <div class="flex flex-wrap justify-center gap-2 mb-2">
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops
+        </span>
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops HP
+        </span>
+       </div>
+       <div class="flex text-yellow-400 text-sm mb-2">
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+       </div>
+       <div class="flex items-center text-green-600 text-xs mb-2">
+        <i class="fas fa-check-circle mr-1">
+        </i>
+        <span>
+         Disponible
+        </span>
+       </div>
+       <p class="text-lg font-bold text-gray-900 mb-4">
+        480,00$
+       </p>
+      </div>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Añadir Al Carrito
+      </button>
+     </div>
+     <!-- Producto 1: Laptop HP 14-DQ0011DX -->
+     <div class="bg-white rounded-lg border border-gray-200 p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       NUEVO
+      </span>
+      <img alt="Laptop HP 14-DQ0011DX" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_885653-MLV82671100556_032025-E.webp"/>
+      <div class="product-card-content">
+       <h3 class="text-sm font-semibold product-card-title">
+        Laptop HP 14-DQ0011DX - Intel Inside-N150 / 4GB / 128GB SSD / 14" / US / W11
+       </h3>
+       <div class="flex flex-wrap justify-center gap-2 mb-2">
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops
+        </span>
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops HP
+        </span>
+       </div>
+       <div class="flex text-yellow-400 text-sm mb-2">
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+       </div>
+       <div class="flex items-center text-green-600 text-xs mb-2">
+        <i class="fas fa-check-circle mr-1">
+        </i>
+        <span>
+         Disponible
+        </span>
+       </div>
+       <p class="text-lg font-bold text-gray-900 mb-4">
+        480,00$
+       </p>
+      </div>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Añadir Al Carrito
+      </button>
+     </div>
+     <!-- Producto 2: Laptop HP 17-CN0063CL -->
+     <div class="bg-white rounded-lg border border-gray-200 p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       NUEVO
+      </span>
+      <img alt="Laptop HP 17-CN0063CL" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_992058-MLV71069203734_082023-E.webp"/>
+      <div class="product-card-content">
+       <h3 class="text-sm font-semibold product-card-title">
+        Laptop HP 17-CN0063CL - Intel Core i7-150U / 16GB / 1TB SSD / Tactil 17.3" / W11
+       </h3>
+       <div class="flex flex-wrap justify-center gap-2 mb-2">
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops
+        </span>
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops HP
+        </span>
+       </div>
+       <div class="flex text-yellow-400 text-sm mb-2">
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+       </div>
+       <div class="flex items-center text-green-600 text-xs mb-2">
+        <i class="fas fa-check-circle mr-1">
+        </i>
+        <span>
+         Disponible
+        </span>
+       </div>
+       <p class="text-lg font-bold text-gray-900 mb-4">
+        1.559,00$
+       </p>
+      </div>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Añadir Al Carrito
+      </button>
+     </div>
+     <!-- Producto 3: Laptop HP 255 G10 -->
+     <div class="bg-white rounded-lg border border-gray-200 p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       NUEVO
+      </span>
+      <img alt="Laptop HP 255 G10" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_738235-MLV73666697567_122023-E.webp"/>
+      <div class="product-card-content">
+       <h3 class="text-sm font-semibold product-card-title">
+        Laptop HP 255 G10 (4B2ZYUA#ABA) / AMD Ryzen 7 7730U / 16GB / 512GB SSD / 15.6" / W11
+       </h3>
+       <div class="flex flex-wrap justify-center gap-2 mb-2">
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops
+        </span>
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops HP
+        </span>
+       </div>
+       <div class="flex text-yellow-400 text-sm mb-2">
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+       </div>
+       <div class="flex items-center text-green-600 text-xs mb-2">
+        <i class="fas fa-check-circle mr-1">
+        </i>
+        <span>
+         Disponible
+        </span>
+       </div>
+       <p class="text-lg font-bold text-gray-900 mb-4">
+        999,00$
+       </p>
+      </div>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Añadir Al Carrito
+      </button>
+     </div>
+     <!-- Producto 4: Laptop Gaming HP Victus 15FA2093DX -->
+     <div class="bg-white rounded-lg border border-gray-200 p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       NUEVO
+      </span>
+      <img alt="Laptop Gaming HP Victus 15FA2093DX" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_689259-MLV75275890199_032024-E.webp"/>
+      <div class="product-card-content">
+       <h3 class="text-sm font-semibold product-card-title">
+        Laptop Gaming HP Victus 15FA2093DX / Core i7-13620H / 16GB / 1TB SSD / NVIDIA RTX 3050 8GB / 15.6" / W11
+       </h3>
+       <div class="flex flex-wrap justify-center gap-2 mb-2">
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Zona Gamer
+        </span>
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops Gamer
+        </span>
+       </div>
+       <div class="flex text-yellow-400 text-sm mb-2">
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+       </div>
+       <div class="flex items-center text-green-600 text-xs mb-2">
+        <i class="fas fa-check-circle mr-1">
+        </i>
+        <span>
+         Disponible
+        </span>
+       </div>
+       <p class="text-lg font-bold text-gray-900 mb-4">
+        2.409,00$
+       </p>
+      </div>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Añadir Al Carrito
+      </button>
+     </div>
+     <!-- Producto 5: Laptop HP Victus 15-FA2701wm -->
+     <div class="bg-white rounded-lg border border-gray-200 p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       NUEVO
+      </span>
+      <img alt="Laptop HP Victus 15-FA2701wm" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_978527-MLV54059932339_022023-E.webp"/>
+      <div class="product-card-content">
+       <h3 class="text-sm font-semibold product-card-title">
+        Laptop HP Victus 15-FA2701wm - Intel Core i5-13420H / 16GB / 512GB SSD / NVIDIA RTX 4050 6GB / 15.6" / W11
+       </h3>
+       <div class="flex flex-wrap justify-center gap-2 mb-2">
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops
+        </span>
+        <span class="bg-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+         Laptops HP
+        </span>
+       </div>
+       <div class="flex items-center text-green-600 text-xs mb-2">
+        <i class="fas fa-check-circle mr-1">
+        </i>
+        <span>
+         Disponible
+       </span>
+       </div>
+       <p class="text-lg font-bold text-gray-900 mb-4">
+        1.479,00$
+       </p>
+      </div>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Añadir Al Carrito
+      </button>
+     </div>
+    </div>
+   </section>
    <!-- Acerca de PideloAhora -->
    <section class="bg-blue-100 rounded-lg p-6 mb-10 max-w-[1280px] mx-auto text-sm text-gray-800 shadow-md">
     <h3 class="font-semibold mb-3">
@@ -2003,6 +2576,249 @@
     <p>
      En PideloAhora encontrarás la mejor selección de productos tecnológicos con garantía oficial y atención personalizada. Nuestro compromiso es ofrecerte calidad, innovación y los mejores precios para que disfrutes de la tecnología al máximo.
     </p>
+   </section>
+    <!-- Distribuidores oficiales -->
+   <section class="mb-10">
+    <h2 class="text-lg font-semibold mb-4">
+     Últimas tendencias en tecnología
+    </h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+     <!-- Producto 1: Samsung Galaxy S23 Edge -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <img alt="Samsung Galaxy S23 Edge smartphone" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_861282-MLV80460001500_112024-E.webp">
+      <h3 class="text-base font-bold mb-1">
+       Samsung Galaxy S23
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Samsung
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       1.552,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+     <!-- Producto 2: Samsung Galaxy Z Fold 7 -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       PREVENTA
+      </span>
+      <img alt="Samsung Galaxy Z Fold 7 smartphone" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_792719-MLV73304402986_122023-E.webp">
+      <h3 class="text-base font-bold mb-1">
+       Samsung Galaxy Z Fold 
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Samsung
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       1.919,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+     <!-- Producto 3: Samsung Galaxy Z Flip 7 -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       PREVENTA
+      </span>
+      <img alt="Samsung Galaxy Z Flip 7 smartphone" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_963329-MLV81400798780_122024-E.webp">
+      <h3 class="text-base font-bold mb-1">
+       Samsung Galaxy Z Flip 7
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Samsung
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       939,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+     <!-- Producto 4: Tecno Spark 40 PRO+ -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <img alt="Tecno Spark 40 PRO+ smartphone" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_832211-MLV79443841862_102024-E.webp">
+      <h3 class="text-base font-bold mb-1">
+       Tecno Spark 40 PRO+
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Tecno
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       309,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+      <!-- Producto 4: Tecno Spark 40 PRO+ -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <img alt="Tecno Spark 40 PRO+ smartphone" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_NQ_NP_792905-MLV74177634827_012024-O.webp">
+      <h3 class="text-base font-bold mb-1">
+       Tecno Spark 40 PRO+
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Tecno
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       309,00$
+      </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+     <!-- Producto 5: Placeholder for a fifth product if needed for 5-column grid -->
+     <div class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center relative">
+      <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+       Nuevo
+      </span>
+      <img alt="Smartphone genérico moderno con pantalla brillante" class="mb-4 w-40 h-40 object-contain" src="https://http2.mlstatic.com/D_Q_NP_2X_854083-MLV82102410799_012025-E.webp">
+      <h3 class="text-base font-bold mb-1">
+       Otro Smartphone
+      </h3>
+      <p class="text-xs text-blue-600 mb-2">
+       Teléfono celular Genérico
+      </p>
+      <div class="flex text-yellow-400 text-sm mb-2">
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+      <div class="flex items-center text-green-600 text-xs mb-2">
+       <i class="fas fa-check-circle mr-1">
+       </i>
+       <span>
+        Disponible
+       </span>
+      </div>
+      <p class="text-lg font-bold text-gray-900 mb-4">
+       XXX,XX$
+       </p>
+      <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 w-full transition-colors">
+       Seleccionar Opciones
+      </button>
+     </div>
+    </div>
+    
    </section>
    <!-- Pie de página -->
    <footer class="bg-white border-t border-gray-300 py-8 text-xs text-gray-600 max-w-[1280px] mx-auto px-4">
