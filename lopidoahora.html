@@ -12,6 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet" />
     <style>
+       
         /* Estilos generales del cuerpo */
         body {
             font-family: 'Inter', sans-serif;
@@ -506,10 +507,10 @@
         }
 
 
-        /* Nuevos estilos para la barra superior inspirados en SoyTechno */
-        .soytechno-top-bar {
+        /* Nuevos estilos para la barra superior inspirados en lopidoahora*/
+        .lopidoahora-top-bar {
             background-color: #FACC15;
-            /* Amarillo de SoyTechno */
+            /* Amarillo de lopidoahora*/
             color: #1a1a1a;
             /* Texto oscuro */
             padding: 0.5rem 1rem;
@@ -523,7 +524,7 @@
             /* Semibold */
         }
 
-        .soytechno-top-bar img {
+        .lopidoahora-top-bar img {
             height: 1rem;
             /* Altura del logo Cashbea */
             margin-right: 0.5rem;
@@ -531,16 +532,16 @@
         }
 
 
-        .soytechno-header {
+        .lopidoahora-header {
             background-color: #019df4;
-            /* Azul de SoyTechno */
+            /* Azul de lopidoahora*/
             color: white;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            padding: 0.75rem 0;
+            padding:0;
             /* Ajustado padding para que mobile-header-content maneje el horizontal */
         }
 
-        .soytechno-logo {
+        .lopidoahora-logo {
             height: 2.5rem;
             /* Ajusta el tamaño del logo */
             width: auto;
@@ -618,29 +619,29 @@
         }
 
 
-        /* Ocultar elementos específicos en mobile y desktop según SoyTechno */
+        /* Ocultar elementos específicos en mobile y desktop según lopidoahora*/
         @media (max-width: 767px) {
 
             /* Mobile */
-            .soytechno-top-bar-desktop {
+            .lopidoahora-top-bar-desktop {
                 /* Ocultar el banner amarillo de escritorio en móvil */
                 display: none !important;
             }
 
             /* Mobile header specific adjustments */
-            .soytechno-header .mobile-header-content {
+            .lopidoahora-header .mobile-header-content {
                 display: flex;
                 flex-direction: row;
                 /* Ahora es una fila */
                 justify-content: space-between;
                 align-items: center;
                 width: 100%;
-                padding: 0.75rem 1rem;
+                padding: 0.35rem 1rem;
                 /* Padding horizontal para el header móvil */
             }
 
             /* La clase mobile-header-top-row ya no es necesaria con la nueva estructura */
-            /* .soytechno-header .mobile-header-top-row {
+            /* .lopidoahora-header .mobile-header-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -664,12 +665,12 @@
 
         /* Tablet (md breakpoint) - Ocultar la barra azul clara */
         @media (min-width: 768px) and (max-width: 1023px) {
-            .soytechno-top-bar {
+            .lopidoahora-top-bar {
                 /* Ocultar el banner amarillo de móvil en tablet */
                 display: none !important;
             }
 
-            .soytechno-header .desktop-header-content {
+            .lopidoahora-header .desktop-header-content {
                 /* Mostrar el header de escritorio, pero ajustado para tablet */
                 display: flex;
                 max-width: 1280px;
@@ -677,23 +678,23 @@
                 align-items: center;
                 justify-content: space-between;
                 width: 100%;
-                padding: 0.75rem 1rem;
+                padding: 0 1rem;
                 /* Ajustar padding para tablets */
             }
 
-            .soytechno-header .mobile-header-content {
+            .lopidoahora-header .mobile-header-content {
                 display: none !important;
                 /* Ocultar contenido móvil en tablet */
             }
 
-            .soytechno-logo {
+            .lopidoahora-logo {
                 height: 2.5rem;
                 /* Tamaño por defecto para tablet */
                 margin-right: 1rem;
                 /* Espacio después del logo */
             }
 
-            .soytechno-search-bar {
+            .lopidoahora-search-bar {
                 flex-grow: 1;
                 /* Permite que tome el espacio disponible */
                 margin: 0 1rem;
@@ -701,7 +702,7 @@
                 position: relative;
             }
 
-            .soytechno-header .desktop-nav-links {
+            .lopidoahora-header .desktop-nav-links {
                 /* Ocultar enlaces de navegación de escritorio en tablet */
                 display: none !important;
             }
@@ -724,37 +725,37 @@
         @media (min-width: 1024px) {
 
             /* lg breakpoint */
-            .soytechno-top-bar {
+            .lopidoahora-top-bar {
                 /* Ocultar el banner amarillo de móvil en desktop */
                 display: none !important;
             }
 
-            .soytechno-header .desktop-header-content {
-                padding: 0.75rem 2rem;
+            .lopidoahora-header .desktop-header-content {
+                padding: 0.35rem 2rem;
                 /* Más padding horizontal para escritorio completo */
                 display: flex !important;
                 /* Asegurar que se muestre en escritorio */
             }
 
-            .soytechno-header .mobile-header-content {
+            .lopidoahora-header .mobile-header-content {
                 display: none !important;
                 /* Ocultar contenido móvil en escritorio */
             }
 
-            .soytechno-logo {
+            .lopidoahora-logo {
                 height: 3rem;
                 /* Logo más grande en escritorio completo */
                 margin-right: 0;
                 /* Resetear margen para escritorio completo */
             }
 
-            .soytechno-search-bar {
+            .lopidoahora-search-bar {
                 flex-grow: 1;
                 margin: 0 2rem;
                 /* Más margen para escritorio completo */
             }
 
-            .soytechno-header .desktop-nav-links {
+            .lopidoahora-header .desktop-nav-links {
                 display: flex !important;
                 /* Mostrar enlaces de navegación de escritorio */
                 gap: 1.5rem;
@@ -771,7 +772,7 @@
                 /* ¡IMPORTANTE: Mostrar en escritorio! */
                 background-color: #E1EBFF;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-                padding: 0.75rem 0;
+                padding: 0.25rem 0;
                 align-items: center;
                 justify-content: flex-start;
                 width: 100%;
@@ -967,6 +968,7 @@
                 font-size: 0.625rem;
             }
         }
+
     </style>
 </head>
 
