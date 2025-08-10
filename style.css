@@ -1,0 +1,956 @@
+
+        /* Estilos generales del cuerpo */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f8fa;
+            /* Fondo suave para un look limpio */
+            color: #1a1a1a;
+            /* Color de texto principal */
+            overflow-x: hidden;
+            /* Evita el scroll horizontal */
+        }
+
+        /* Estilos para el sidebar */
+        .sidebar {
+            width: 280px;
+            /* Ancho ajustado para más espacio */
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Sombra sutil para el sidebar */
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Ocultar el scrollbar pero permitir el scroll */
+        .overflow-x-auto::-webkit-scrollbar {
+            display: none;
+            /* Para WebKit (Chrome, Safari) */
+        }
+
+        .overflow-x-auto {
+            -ms-overflow-style: none;
+            /* Para IE y Edge */
+            scrollbar-width: none;
+            /* Para Firefox */
+        }
+
+        /* Estilos para los botones de la barra de navegación inferior */
+        .bottom-nav-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 0.875rem;
+            /* text-sm - Aumentado para mayor visibilidad */
+            color: #4b5563;
+            /* text-gray-700 */
+            padding: 0.5rem 0.5rem;
+            /* py-2 px-2 - Aumentado para mayor área de toque */
+            border-radius: 0.375rem;
+            /* rounded-md */
+            transition: all 0.2s ease-in-out;
+            /* Transición suave para hover */
+            flex-grow: 1;
+            /* Para que ocupen el espacio disponible equitativamente */
+            justify-content: center;
+            /* Centra el contenido verticalmente */
+        }
+
+        .bottom-nav-button:hover {
+            color: #2563eb;
+            /* hover:text-blue-600 */
+        }
+
+        .bottom-nav-button i {
+            margin-bottom: 0.25rem;
+            /* mb-1 */
+            font-size: 1.25rem;
+            /* text-xl - Aumentado para mayor visibilidad */
+        }
+
+        .bottom-nav-button .notification-badge {
+            position: absolute;
+            top: -0.25rem;
+            /* -top-1 */
+            right: 0;
+            background-color: #3b82f6;
+            /* bg-blue-600 */
+            color: white;
+            border-radius: 9999px;
+            /* rounded-full */
+            width: 1.125rem;
+            /* w-4.5 - Aumentado */
+            height: 1.125rem;
+            /* h-4.5 - Aumentado */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            /* text-xs */
+        }
+
+        /* Estilos para alinear los botones "Añadir al Carrito" en las tarjetas de producto */
+        .product-card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* Empuja el botón al final */
+            flex-grow: 1;
+            /* Permite que el contenido crezca */
+            min-height: 150px;
+            /* Ajusta esta altura según sea necesario para tu contenido más largo */
+        }
+
+        .product-card-title {
+            min-height: 40px;
+            /* Altura mínima para el título, ajusta si tus títulos son más largos/cortos */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Limita el título a 2 líneas */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.5rem;
+            /* Ajuste de margen para el título */
+        }
+
+        .product-card-details {
+            flex-grow: 1;
+            /* Permite que los detalles ocupen el espacio restante */
+            margin-bottom: 0.5rem;
+            /* Espacio antes del precio/botón */
+        }
+
+        /* Estilos para la sección de categorías innovadoras */
+        .innovative-categories-section {
+            background-color: white;
+            /* Fondo blanco para el bloque */
+            border-radius: 0.5rem;
+            /* Bordes redondeados */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            /* Sombra sutil */
+            padding: 1.5rem;
+            /* Padding interno */
+        }
+
+        .innovative-categories-title {
+            color: #00193F;
+            /* Color azul oscuro para el título */
+            font-size: 1.5rem;
+            /* Tamaño de fuente más grande */
+            font-weight: 700;
+            /* Negrita */
+            margin-bottom: 1.5rem;
+            /* Más espacio debajo del título */
+        }
+
+        .category-items-container {
+            /* Por defecto, para móviles, será un flexbox con scroll horizontal */
+            display: flex;
+            flex-wrap: nowrap;
+            /* Evita que los ítems se envuelvan a la siguiente línea */
+            overflow-x: auto;
+            /* Permite el scroll horizontal */
+            -webkit-overflow-scrolling: touch;
+            /* Mejora el scroll en iOS */
+            gap: 1rem;
+            /* Espacio entre los ítems */
+            padding-bottom: 0.5rem;
+            /* Pequeño padding para que el scrollbar no tape el contenido */
+            justify-content: space-between;
+            /* Distribuye los ítems uniformemente */
+        }
+
+        .category-item {
+            flex: 0 0 auto;
+            /* No crecer, no encoger, base en auto (contenido) */
+            width: 110px;
+            /* Ancho fijo para cada ítem en móvil, ajustado para ser un poco más grande */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.75rem;
+            /* p-3 */
+            background-color: white;
+            /* Las tarjetas individuales no necesitan fondo si el contenedor ya lo tiene */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            /* Eliminamos la sombra de los ítems individuales si el contenedor ya tiene una */
+            transition: box-shadow 0.3s ease;
+            /* transition-shadow */
+            cursor: pointer;
+            text-decoration: none;
+            /* Eliminar subrayado de enlaces */
+            color: inherit;
+            /* Heredar color de texto */
+        }
+
+        .category-item:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* hover:shadow-md */
+        }
+
+        .category-item img {
+            margin-bottom: 0.5rem;
+            /* mb-2 */
+            width: 4.5rem;
+            /* w-18 - Aumentado */
+            height: 4.5rem;
+            /* h-18 - Aumentado */
+            object-fit: contain;
+        }
+
+        .category-item span {
+            font-size: 0.875rem;
+            /* text-sm - Mantenido, pero el tamaño del ítem es mayor */
+            font-weight: 500;
+            /* font-medium */
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+
+            /* md breakpoint */
+            .category-items-container {
+                display: grid;
+                /* Vuelve a grid en desktop */
+                /* Ajusta el número de columnas para que se vea en una sola fila */
+                grid-template-columns: repeat(7, minmax(0, 1fr));
+                /* 7 columnas para que quepan todos los elementos en una fila */
+                gap: 1rem;
+                /* Mantiene el gap */
+                overflow-x: visible;
+                /* Deshabilita el scroll horizontal en desktop */
+                padding-bottom: 0;
+                justify-content: unset;
+                /* Deshabilita justify-content para grid */
+            }
+
+            .category-item {
+                width: auto;
+                /* El ancho se ajusta automáticamente en el grid */
+                box-shadow: none;
+                /* Eliminar sombra individual en desktop */
+                padding: 0;
+                /* Eliminar padding individual en desktop */
+            }
+
+            .category-item:hover {
+                box-shadow: none;
+                /* Eliminar sombra en hover en desktop */
+            }
+        }
+
+        /* Custom styles for the "Actualiza tu Zona de Trabajo" section */
+        .work-zone-section {
+            background-color: #fff;
+            /* White background */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            padding: 1.5rem;
+            /* p-6 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* shadow-lg */
+        }
+
+        .work-zone-image-container {
+            position: relative;
+            width: 100%;
+            height: 238px;
+            /* Fixed height from your HTML snippet */
+            overflow: hidden;
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* subtle shadow */
+        }
+
+        .work-zone-image-desktop {
+            display: none;
+            /* Hidden by default */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .work-zone-image-mobile {
+            display: block;
+            /* Visible by default */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 768px) {
+
+            /* md breakpoint */
+            .work-zone-image-desktop {
+                display: block;
+                /* Visible on desktop */
+            }
+
+            .work-zone-image-mobile {
+                display: none;
+                /* Hidden on desktop */
+            }
+        }
+
+        .work-zone-filter-button {
+            background-color: #e1ebff;
+            /* btn-default-bgcolor from your CSS */
+            color: #1c61e7;
+            /* btn-default-color from your CSS */
+            font-weight: 600;
+            /* font-semibold */
+            padding: 0.5rem 0.75rem;
+            /* py-2 px-3 */
+            border-radius: 0.3125rem;
+            /* 5px from your CSS */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            /* space-x-1 */
+        }
+
+        .work-zone-filter-button:hover {
+            background-color: #dbdff5;
+            /* btn-default-bgcolor-hover */
+            color: #1c61e7;
+            /* btn-default-color-hover */
+        }
+
+        /* Styles for the three specific cards */
+        .work-zone-sub-card {
+            background-color: #00193F;
+            /* Dark blue background */
+            color: white;
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            padding: 1.5rem;
+            /* Padding for text content */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* shadow-md */
+            position: relative;
+            /* For positioning the background image */
+            overflow: hidden;
+            /* Hide overflowing background image */
+            min-height: 200px;
+            /* Ensure consistent height for cards */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* Pushes the button to the bottom */
+            text-align: left;
+            /* Align text to the left */
+        }
+
+        .work-zone-sub-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            /* Changed to cover */
+            background-repeat: no-repeat;
+            background-position: right center;
+            /* Position image to the right */
+            opacity: 0.7;
+            /* Increased opacity */
+            z-index: 0;
+            /* Send to back */
+            transform: scale(1.1);
+            /* Added scale for 3D effect */
+            filter: brightness(0.7);
+            /* Darken image for better text contrast */
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+            /* Smooth transition */
+        }
+
+        .work-zone-sub-card:hover::before {
+            transform: scale(1.05);
+            /* Slight scale down on hover */
+            filter: brightness(0.8);
+            /* Slightly lighten on hover */
+        }
+
+        /* Specific background images for each card */
+        .router-card::before {
+            background-image: url('https://assets.pcfactory.cl/public/foto/51685/1_500.jpg?t=1753739116287');
+        }
+
+        .printer-card::before {
+            background-image: url('https://assets.pcfactory.cl/public/foto/49109/1_500.jpg?t=1753738752403');
+        }
+
+        .laptop-card::before {
+            background-image: url('https://pideloahora.com/wp-content/uploads/2024/06/laptop-potencia-versatilidad.png');
+        }
+
+        .work-zone-sub-card-content {
+            position: relative;
+            /* Bring content to front */
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .work-zone-sub-card h3 {
+            font-weight: 700;
+            /* font-bold */
+            font-size: 1.25rem;
+            /* text-xl */
+            margin-bottom: 0.5rem;
+            /* mb-2 */
+            line-height: 1.2;
+        }
+
+        .work-zone-sub-card p {
+            font-size: 0.875rem;
+            /* text-sm */
+            margin-bottom: 1rem;
+            /* mb-4 */
+            line-height: 1.5;
+        }
+
+        .work-zone-sub-card button {
+            align-self: flex-start;
+            /* Align button to start (left) */
+            background-color: #3b82f6;
+            /* bg-blue-600 */
+            color: white;
+            font-weight: 600;
+            /* font-semibold */
+            padding: 0.5rem 1rem;
+            /* py-2 px-4 */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            font-size: 0.875rem;
+            /* text-sm */
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .work-zone-sub-card button:hover {
+            background-color: #2563eb;
+            /* hover:bg-blue-700 */
+        }
+
+        /* Estilos para los logos de marca en la sección "Últimas tendencias en tecnología" */
+        .brand-logo-container {
+            width: 120px;
+            /* Aumento del ancho fijo para los logos */
+            height: 50px;
+            /* Aumento de la altura fija para los logos */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            /* Aumento del padding */
+            border-radius: 0.375rem;
+            /* rounded-md */
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .brand-logo-container:hover {
+            background-color: #f3f4f6;
+            /* hover:bg-gray-100 */
+        }
+
+        .brand-logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Contenedor de los logos para ajustar el espaciado */
+        .brand-logos-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            /* Aumento del gap entre logos */
+            padding: 1rem;
+            /* Añadir padding al contenedor */
+            background-color: white;
+            /* Fondo blanco para el contenedor */
+            border-radius: 0.5rem;
+            /* Bordes redondeados */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            /* Sombra sutil */
+        }
+
+
+        /* Nuevos estilos para la barra superior inspirados en lopidoahora*/
+        .lopidoahora-top-bar {
+            background-color: #FACC15;
+            /* Amarillo de lopidoahora*/
+            color: #1a1a1a;
+            /* Texto oscuro */
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Centrar el contenido */
+            font-size: 0.875rem;
+            /* text-sm */
+            font-weight: 600;
+            /* Semibold */
+        }
+
+        .lopidoahora-top-bar img {
+            height: 1rem;
+            /* Altura del logo Cashbea */
+            margin-right: 0.5rem;
+            /* Espacio a la derecha del logo */
+        }
+
+
+        .lopidoahora-header {
+            background-color: #019df4;
+            /* Azul de lopidoahora*/
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            padding:0;
+            /* Ajustado padding para que mobile-header-content maneje el horizontal */
+        }
+
+        .lopidoahora-logo {
+            height: 2.5rem;
+            /* Ajusta el tamaño del logo */
+            width: auto;
+        }
+
+        /* Estilos para la barra de búsqueda en móvil */
+        .mobile-search-container {
+            display: flex;
+            /* Ahora es un flex container */
+            align-items: center;
+            /* Centra verticalmente los elementos */
+            position: relative;
+            flex-grow: 1;
+            /* Permite que el input tome el espacio disponible */
+        }
+
+        .mobile-search-container .search-input-wrapper {
+            position: relative;
+            flex-grow: 1;
+            /* Permite que el input tome el espacio disponible */
+        }
+
+        .mobile-search-container input {
+            width: 100%;
+            border-radius: 9999px;
+            /* rounded-full */
+            padding: 0.625rem 1rem 0.625rem 2.5rem;
+            /* Ajusta el padding para el icono, aumentado */
+            border: 1px solid #e5e7eb;
+            /* border-gray-300 */
+            background-color: #f3f4f6;
+            /* bg-gray-100 */
+            font-size: 1rem;
+            /* Aumentado el tamaño de fuente */
+            color: #1a1a1a;
+            /* Texto oscuro en el input */
+        }
+
+        .mobile-search-container .search-icon-inside {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            /* text-gray-400 */
+            font-size: 1.125rem;
+            /* Aumentado el tamaño del icono */
+        }
+
+        .mobile-search-container .search-button-mobile {
+            flex-shrink: 0;
+            /* Evita que el botón se encoja */
+            width: 2.8rem;
+            /* Ancho fijo, aumentado */
+            height: 2.8rem;
+            /* Alto fijo, aumentado */
+            border-radius: 9999px;
+            /* Totalmente redondeado */
+            background-color: #3b82f6;
+            /* Azul de botón */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.5rem;
+            /* Espacio a la izquierda del botón */
+            transition: background-color 0.2s ease-in-out;
+            font-size: 1.125rem;
+            /* Aumentado el tamaño del icono del botón */
+        }
+
+        .mobile-search-container .search-button-mobile:hover {
+            background-color: #2563eb;
+            /* Azul más oscuro al pasar el ratón */
+        }
+
+
+        /* Ocultar elementos específicos en mobile y desktop según lopidoahora*/
+        @media (max-width: 767px) {
+
+            /* Mobile */
+            .lopidoahora-top-bar-desktop {
+                /* Ocultar el banner amarillo de escritorio en móvil */
+                display: none !important;
+            }
+
+            /* Mobile header specific adjustments */
+            .lopidoahora-header .mobile-header-content {
+                display: flex;
+                flex-direction: row;
+                /* Ahora es una fila */
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 0.35rem 1rem;
+                /* Padding horizontal para el header móvil */
+            }
+
+            /* La clase mobile-header-top-row ya no es necesaria con la nueva estructura */
+            /* .lopidoahora-header .mobile-header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 0.75rem;
+        } */
+            /* Eliminado el mobile-search-trigger y su lógica de JS */
+            /* .mobile-search-trigger {
+            display: block !important;
+            margin-left: auto;
+        } */
+            /* Eliminado el display flex !important de mobile-search-container aquí, ahora se controla con mobile-search-full-width-container */
+            /* .mobile-search-container {
+            display: flex !important;
+        } */
+            .categories-nav-bar {
+                /* Ensure it's hidden on mobile */
+                display: none !important;
+            }
+        }
+
+        /* Tablet (md breakpoint) - Ocultar la barra azul clara */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .lopidoahora-top-bar {
+                /* Ocultar el banner amarillo de móvil en tablet */
+                display: none !important;
+            }
+
+            .lopidoahora-header .desktop-header-content {
+                /* Mostrar el header de escritorio, pero ajustado para tablet */
+                display: flex;
+                max-width: 1280px;
+                margin: 0 auto;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                padding: 0 1rem;
+                /* Ajustar padding para tablets */
+            }
+
+            .lopidoahora-header .mobile-header-content {
+                display: none !important;
+                /* Ocultar contenido móvil en tablet */
+            }
+
+            .lopidoahora-logo {
+                height: 2.5rem;
+                /* Tamaño por defecto para tablet */
+                margin-right: 1rem;
+                /* Espacio después del logo */
+            }
+
+            .lopidoahora-search-bar {
+                flex-grow: 1;
+                /* Permite que tome el espacio disponible */
+                margin: 0 1rem;
+                /* Ajustar margen para tablets */
+                position: relative;
+            }
+
+            .lopidoahora-header .desktop-nav-links {
+                /* Ocultar enlaces de navegación de escritorio en tablet */
+                display: none !important;
+            }
+
+            /* Mostrar el botón de hamburguesa en tablet */
+            #menu-button-tablet {
+                display: block !important;
+                margin-left: 1rem;
+                /* Espacio antes de la hamburguesa */
+            }
+
+            /* Ocultar la barra de categorías en tablet */
+            .categories-nav-bar {
+                display: none !important;
+                /* ¡IMPORTANTE: Ocultar en tablet! */
+            }
+        }
+
+        /* Large Desktop (lg breakpoint and up) - Mostrar la barra azul clara */
+        @media (min-width: 1024px) {
+
+            /* lg breakpoint */
+            .lopidoahora-top-bar {
+                /* Ocultar el banner amarillo de móvil en desktop */
+                display: none !important;
+            }
+
+            .lopidoahora-header .desktop-header-content {
+                padding: 0.35rem 2rem;
+                /* Más padding horizontal para escritorio completo */
+                display: flex !important;
+                /* Asegurar que se muestre en escritorio */
+            }
+
+            .lopidoahora-header .mobile-header-content {
+                display: none !important;
+                /* Ocultar contenido móvil en escritorio */
+            }
+
+            .lopidoahora-logo {
+                height: 3rem;
+                /* Logo más grande en escritorio completo */
+                margin-right: 0;
+                /* Resetear margen para escritorio completo */
+            }
+
+            .lopidoahora-search-bar {
+                flex-grow: 1;
+                margin: 0 2rem;
+                /* Más margen para escritorio completo */
+            }
+
+            .lopidoahora-header .desktop-nav-links {
+                display: flex !important;
+                /* Mostrar enlaces de navegación de escritorio */
+                gap: 1.5rem;
+            }
+
+            #menu-button-tablet {
+                display: none !important;
+                /* Ocultar botón de hamburguesa en escritorio */
+            }
+
+            /* Mostrar la barra de categorías en escritorio */
+            .categories-nav-bar {
+                display: flex !important;
+                /* ¡IMPORTANTE: Mostrar en escritorio! */
+                background-color: #E1EBFF;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                padding: 0.25rem 0;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+            }
+
+            .categories-nav-bar .max-w-[1280px] {
+                max-width: 1280px;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                justify-content: space-between;
+                padding: 0 1rem;
+            }
+
+            /* Categories dropdown button */
+            .categories-dropdown-button {
+                background-color: #3B82F6;
+                color: white;
+                font-weight: 600;
+                padding: 0.75rem 1.25rem;
+                border-radius: 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                transition: background-color 0.2s ease-in-out;
+            }
+
+            .categories-dropdown-button:hover {
+                background-color: #2563eb;
+            }
+
+            /* Dropdown menu for categories */
+            .dropdown-menu {
+                display: none;
+                position: absolute;
+                background-color: white;
+                min-width: 220px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 10;
+                border-radius: 0.5rem;
+                padding: 0.5rem 0;
+                top: 100%;
+                left: 0;
+            }
+
+            .dropdown:hover .dropdown-menu {
+                /* Keep this for hover functionality */
+                display: block;
+            }
+
+            .dropdown-menu a {
+                color: #1a1a1a;
+                padding: 0.75rem 1rem;
+                text-decoration: none;
+                display: flex;
+                /* Added flex to align icon and text */
+                align-items: center;
+                gap: 0.75rem;
+                /* Space between icon and text */
+                font-size: 0.875rem;
+            }
+
+            .dropdown-menu a:hover {
+                background-color: #f3f4f6;
+            }
+
+            .dropdown-menu a i {
+                /* Style for icons within dropdown menu */
+                font-size: 1rem;
+                color: #3B82F6;
+                /* Blue color for icons */
+            }
+
+            /* Navigation links within categories-nav-bar */
+            .categories-nav-bar .nav-links-group {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                /* Reducido de 1.5rem para mayor compacidad */
+                margin-left: 1rem;
+                /* Reducido de 1.5rem */
+                flex-grow: 1;
+            }
+
+            .categories-nav-bar .nav-link {
+                color: #4b5563;
+                font-weight: 700;
+                padding: 0.5rem 0;
+                transition: color 0.2s ease-in-out;
+                text-decoration: none;
+                white-space: nowrap;
+                font-size: 0.75rem;
+            }
+
+            .categories-nav-bar .nav-link:hover {
+                color: #2563eb;
+            }
+
+            /* Icons on the right side of categories-nav-bar */
+            .categories-nav-bar .desktop-nav-icons {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                /* Reducido de 1.5rem para mayor compacidad */
+                margin-left: auto;
+            }
+
+            .categories-nav-bar .desktop-nav-icons .icon-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                font-size: 0.75rem;
+                color: #1a1a1a;
+                transition: color 0.2s ease-in-out;
+                position: relative;
+                background: none;
+                border: none;
+                padding: 0;
+                cursor: pointer;
+            }
+
+            .categories-nav-bar .desktop-nav-icons .icon-item:hover {
+                color: #2563eb;
+            }
+
+            .categories-nav-bar .desktop-nav-icons .icon-item i {
+                font-size: 1.25rem;
+                margin-bottom: 0.25rem;
+                color: #4b5563;
+            }
+
+            /* Estilo específico para el icono del carrito (azul y redondeado) */
+            .categories-nav-bar .desktop-nav-icons .icon-item.cart-button {
+                background-color: #3b82f6;
+                color: white;
+                border-radius: 9999px;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                padding: 0;
+                flex-shrink: 0;
+            }
+
+            .categories-nav-bar .desktop-nav-icons .icon-item.cart-button i {
+                color: white;
+                margin-bottom: 0;
+            }
+
+            .categories-nav-bar .desktop-nav-icons .icon-item.cart-button span {
+                display: none;
+            }
+
+
+            .categories-nav-bar .desktop-nav-icons .currency-dropdown {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-size: 0.75rem;
+                color: #1a1a1a;
+                font-weight: 600;
+                cursor: pointer;
+                position: relative;
+                margin-right: 1rem;
+                /* Reducido de 1.5rem */
+            }
+
+            .categories-nav-bar .desktop-nav-icons .currency-dropdown span {
+                line-height: 1;
+            }
+
+            .categories-nav-bar .desktop-nav-icons .currency-dropdown i {
+                font-size: 0.625rem;
+                margin-left: 0.25rem;
+            }
+
+            .categories-nav-bar .desktop-nav-icons .notification-badge {
+                position: absolute;
+                top: -0.25rem;
+                right: -0.25rem;
+                background-color: #3b82f6;
+                color: white;
+                border-radius: 9999px;
+                width: 1rem;
+                height: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.625rem;
+            }
+        }
