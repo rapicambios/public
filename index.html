@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -757,6 +758,130 @@
             border-radius: 1.5rem; /* Rounded corners for the GIF */
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Shadow for depth */
         }
+/* ** INICIO: Ajustes Específicos para el Swiper de Países (popular-products-swiper-container) ** */
+/* Contenedor principal del Swiper de países */
+#countries-swiper-container { /* Usamos el ID del HTML */
+    width: 100%;
+    overflow: hidden; /* Crucial para carruseles */
+    padding: 4rem 2.5rem; /* Espacio para las flechas */
+    position: relative;
+    box-sizing: border-box;
+    display: block; /* Asegura que esté visible en desktop */
+}
+
+/* Oculta los puntos de paginación si están accidentalmente dentro de CUALQUIER slide */
+.swiper-slide .swiper-pagination,
+.swiper-slide .swiper-pagination-bullets,
+.swiper-slide .swiper-pagination-bullet,
+.swiper-slide [class*="swiper-pagination"] {
+    display: none !important;
+}
+
+/* Estilos para cada slide (tarjeta de país) */
+#countries-swiper-container .swiper-slide {
+    /* Altura fija para asegurar uniformidad en todas las tarjetas */
+    height: 180px;
+    /* Asegura que el contenido dentro de la tarjeta no se desborde */
+    overflow: hidden;
+    /* Flexbox para centrar el contenido verticalmente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box; /* Incluye padding y borde en la altura/ancho */
+}
+
+/* Estilos para el contenedor interno de la tarjeta de país */
+.country-card-wrapper {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1.5rem; /* Padding consistente */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centrado vertical para uniformidad */
+    height: 100%; /* Ocupa toda la altura de la slide */
+    width: 100%; /* Ocupa todo el ancho de la slide */
+    box-sizing: border-box;
+}
+
+.country-card-wrapper:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 18px 25px -3px rgba(0, 0, 0, 0.2), 0 8px 10px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para la imagen de la bandera dentro de la tarjeta de país */
+.country-card-image {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Estilos para el nombre del país dentro de la tarjeta */
+.country-card-name {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    color: var(--color-heading-blue);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Asegura que el texto se mantenga en una línea con puntos suspensivos */
+    margin-bottom: 0; /* Elimina cualquier margen inferior que pueda afectar la altura */
+    max-width: 100%; /* Asegura que el texto no desborde el ancho de la tarjeta */
+}
+
+/* Posicionamiento de las flechas de navegación para el Swiper de Países */
+#countries-swiper-container .swiper-button-next,
+#countries-swiper-container .swiper-button-prev {
+    color: var(--color-orange-button-end) !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+    position: absolute;
+    z-index: 10;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+#countries-swiper-container .swiper-button-next { right: 0.5rem; }
+#countries-swiper-container .swiper-button-prev { left: 0.5rem; }
+#countries-swiper-container .swiper-button-next:hover,
+#countries-swiper-container .swiper-button-prev:hover {
+    transform: translateY(-50%) scale(1.2) !important;
+    color: var(--color-orange-button-start) !important;
+}
+/* Posicionamiento correcto para la paginación principal del Swiper de Países */
+#countries-swiper-container .swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    padding-top: 10px;
+}
+/* Estilo para los puntos de paginación */
+#countries-swiper-container .swiper-pagination-bullet {
+    background-color: var(--color-paragraph-gray); /* Puntos inactivos */
+    opacity: 0.5;
+    margin: 0 0.4rem;
+    width: 8px; /* Tamaño estándar */
+    height: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+#countries-swiper-container .swiper-pagination-bullet-active {
+    background-color: var(--color-orange-button-end) !important; /* Color del punto activo */
+    opacity: 1;
+    width: 10px; /* Punto activo ligeramente más grande */
+    height: 10px;
+}
+/* ** FIN: Ajustes Específicos para el Swiper de Países ** */
+
+
 
         /* Estilos para las tarjetas de "Productos más Populares" */
         .popular-product-card-ecommerce { /* Renamed to avoid conflict */
@@ -1572,34 +1697,95 @@
             </button>
         </div>
     </section>
-
-    <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 bg-gradient-visa-worldwide rounded-3xl shadow-xl">
+<section class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 bg-gradient-visa-worldwide rounded-3xl shadow-xl opacity-0 translate-y-4 fade-in-up" style="transition: opacity 0.6s ease-out, transform 0.6s ease-out;">
         <h2 class="text-center font-extrabold text-3xl mb-4 text-white-on-dark">
             Envía dinero a estos países
         </h2>
         <p class="text-center text-base text-white-on-dark mb-12 max-w-2xl mx-auto opacity-90">
             Envía dinero a tus familiares y amigos o compra la moneda que necesitas de forma fácil y rápida desde donde estés, a más de +70 países de destino con el respaldo y seguridad de Fastwldtradex.
         </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
-                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="Bandera de Venezuela" class="w-20 h-auto mb-4 rounded shadow">
-                <p class="font-semibold text-lg text-heading-primary">Venezuela</p>
-            </div>
-            <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
-                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-chile-100.png" alt="Bandera de Chile" class="w-20 h-auto mb-4 rounded shadow">
-                <p class="font-semibold text-lg text-heading-primary">Chile</p>
-            </div>
-            <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
-                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-peru-100.png" alt="Bandera de Perú" class="w-20 h-auto mb-4 rounded shadow">
-                <p class="font-semibold text-lg text-heading-primary">Peru</p>
-            </div>
-            <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
-                <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-bolivia-100.png" alt="Bandera de Bolivia" class="w-20 h-auto mb-4 rounded shadow">
-                <p class="font-semibold text-lg text-heading-primary">Bolivia</p>
-            </div>
-        </div>
-        <div class="text-center">
-            <button class="bg-gradient-Guacamayacash-button font-semibold rounded-md px-8 py-4 shadow-lg text-lg" onclick="window.location.href='https://api.whatsapp.com/send/?phone=569586448299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Guacamaya%20Cash%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFGuacamayacashORG%20'">
+        <!-- Swiper Container for Countries -->
+        <div id="countries-swiper-container" class="swiper-container swiper-initialized swiper-horizontal swiper-backface-hidden">
+            <div class="swiper-wrapper" id="swiper-wrapper-dc465822cc546bf4" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-414.5px, 0px, 0px); transition-delay: 0ms;">
+                <!-- Country 1 -->
+                
+                <!-- Country 2 -->
+                
+                <!-- Country 3 -->
+                
+                <!-- Country 4 -->
+                
+                <!-- Country 5 -->
+                
+                <!-- Country 6 -->
+                
+                <!-- Country 7 -->
+                
+                <!-- Country 8 -->
+                
+                <!-- Country 9 -->
+                
+                <!-- Country 10 -->
+                
+            <div class="swiper-slide" role="group" aria-label="1 / 10" style="width: 177.25px; margin-right: 30px;" data-swiper-slide-index="0">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
+                        <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="Bandera de Estados Unidos" class="w-20 h-auto mb-4 rounded shadow">
+                        <p class="font-semibold text-lg text-heading-primary">E.E.E</p>
+                    </div>
+                </div><div class="swiper-slide swiper-slide-prev" role="group" aria-label="2 / 10" style="width: 177.25px; margin-right: 30px;" data-swiper-slide-index="1">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
+                        <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="Bandera de Venezuela" class="w-20 h-auto mb-4 rounded shadow">
+                        <p class="font-semibold text-lg text-heading-primary">Venezuela</p>
+                    </div>
+                </div><div class="swiper-slide swiper-slide-active" role="group" aria-label="3 / 10" style="width: 177.25px; margin-right: 30px;" data-swiper-slide-index="2">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
+                        <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-chile-100.png" alt="Bandera de Chile" class="w-20 h-auto mb-4 rounded shadow">
+                        <p class="font-semibold text-lg text-heading-primary">Chile</p>
+                    </div>
+                </div><div class="swiper-slide swiper-slide-next" role="group" aria-label="4 / 10" style="width: 177.25px; margin-right: 30px;" data-swiper-slide-index="3">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
+                        <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-peru-100.png" alt="Bandera de Perú" class="w-20 h-auto mb-4 rounded shadow">
+                        <p class="font-semibold text-lg text-heading-primary">Peru</p>
+                    </div>
+                </div><div class="swiper-slide" role="group" aria-label="5 / 10" style="width: 177.25px; margin-right: 30px;" data-swiper-slide-index="4">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card" style="transform: translateY(0px) scale(1); box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;">
+                        <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-bolivia-100.png" alt="Bandera de Bolivia" class="w-20 h-auto mb-4 rounded shadow">
+                        <p class="font-semibold text-lg text-heading-primary">Bolivia</p>
+                    </div>
+                </div><div class="swiper-slide" role="group" aria-label="6 / 10" style="width: 177.25px; margin-right: 30px;" data-swiper-slide-index="5">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
+                        <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="Bandera de Colombia" class="w-20 h-auto mb-4 rounded shadow">
+                        <p class="font-semibold text-lg text-heading-primary">Colombia</p>
+                    </div>
+                </div><div class="swiper-slide" role="group" aria-label="7 / 10" style="width: 177.25px; margin-right: 30px;" data-swiper-slide-index="6">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card" style="transform: translateY(0px) scale(1); box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;">
+                        <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="Bandera de Ecuador" class="w-20 h-auto mb-4 rounded shadow">
+                        <p class="font-semibold text-lg text-heading-primary">Ecuador</p>
+                    </div>
+                </div><div class="swiper-slide" role="group" aria-label="8 / 10" style="width: 177.25px; margin-right: 30px;" data-swiper-slide-index="7">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
+                        <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="Bandera de Argentina" class="w-20 h-auto mb-4 rounded shadow">
+                        <p class="font-semibold text-lg text-heading-primary">Argentina</p>
+                    </div>
+                </div><div class="swiper-slide" role="group" aria-label="9 / 10" style="width: 177.25px; margin-right: 30px;" data-swiper-slide-index="8">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
+                        <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="Bandera de México" class="w-20 h-auto mb-4 rounded shadow">
+                        <p class="font-semibold text-lg text-heading-primary">México</p>
+                    </div>
+                </div><div class="swiper-slide" role="group" aria-label="10 / 10" style="width: 177.25px; margin-right: 30px;" data-swiper-slide-index="9">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center shadow-md interactive-card">
+                        <img src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" alt="Bandera de España" class="w-20 h-auto mb-4 rounded shadow">
+                        <p class="font-semibold text-lg text-heading-primary">España</p>
+                    </div>
+                </div></div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 3" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-dc465822cc546bf4"></div>
+            <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-dc465822cc546bf4"></div>
+        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+        <div class="text-center mt-12">
+            <button class="bg-gradient-rapicambios-button font-semibold rounded-md px-8 py-4 shadow-lg text-lg" onclick="window.location.href='https://api.whatsapp.com/send/?phone=569586448299&amp;text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20'">
                 Vender
             </button>
         </div>
@@ -2071,941 +2257,996 @@
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-        // JavaScript para alternar el menú móvil
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+       document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('open');
-                });
-            }
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+    }
 
-            // JavaScript para texto animado en el encabezado
-            const words = ["Worldcoins", "Criptomonedas", "Tokens", "Activos Digitales"];
-            let currentWordIndex = 0;
-            const animatedWordsWrapper = document.querySelector('.animated-words-wrapper');
-            let wordAnimationInterval; // Variable para almacenar el ID del intervalo
+    // JavaScript para texto animado en el encabezado
+    const words = ["Worldcoins", "Criptomonedas", "Tokens", "Activos Digitales"];
+    let currentWordIndex = 0;
+    const animatedWordsWrapper = document.querySelector('.animated-words-wrapper');
+    let wordAnimationInterval; // Variable para almacenar el ID del intervalo
 
-            // Function to dynamically create word elements
-            function createWordElements() {
-                if (animatedWordsWrapper) {
-                    // Clear existing words to prevent duplicates on resize
-                    animatedWordsWrapper.innerHTML = '';
-                    words.forEach((word, index) => {
-                        const span = document.createElement('span');
-                        span.classList.add('animated-word');
-                        span.textContent = word;
-                        animatedWordsWrapper.appendChild(span);
-                        if (index === 0) {
-                            span.classList.add('active'); // The first word is active by default
-                        }
-                    });
+    // Function to dynamically create word elements
+    function createWordElements() {
+        if (animatedWordsWrapper) {
+            // Clear existing words to prevent duplicates on resize
+            animatedWordsWrapper.innerHTML = '';
+            words.forEach((word, index) => {
+                const span = document.createElement('span');
+                span.classList.add('animated-word');
+                span.textContent = word;
+                animatedWordsWrapper.appendChild(span);
+                if (index === 0) {
+                    span.classList.add('active'); // The first word is active by default
                 }
-            }
+            });
+        }
+    }
 
-            function animateWords() {
-                if (!animatedWordsWrapper) return;
+    function animateWords() {
+        if (!animatedWordsWrapper) return;
 
-                // Stop animation on mobile
-                // Note: The previous logic for stopping animation based on window width
-                // is moved inside the resize event listener to be more efficient.
-                // This function should only run if the interval is active and on desktop.
-                if (window.innerWidth < 1024) {
-                    return; // Do not animate if window is mobile size
-                }
+        // Stop animation on mobile
+        // Note: The previous logic for stopping animation based on window width
+        // is moved inside the resize event listener to be more efficient.
+        // This function should only run if the interval is active and on desktop.
+        if (window.innerWidth < 1024) {
+            return; // Do not animate if window is mobile size
+        }
 
 
-                const wordElements = Array.from(animatedWordsWrapper.children);
-                wordElements.forEach(wordElement => {
-                    wordElement.classList.remove('active', 'previous');
-                });
+        const wordElements = Array.from(animatedWordsWrapper.children);
+        wordElements.forEach(wordElement => {
+            wordElement.classList.remove('active', 'previous');
+        });
 
-                const nextWordIndex = (currentWordIndex + 1) % words.length;
-                wordElements[currentWordIndex].classList.add('previous');
-                wordElements[nextWordIndex].classList.add('active');
+        const nextWordIndex = (currentWordIndex + 1) % words.length;
+        wordElements[currentWordIndex].classList.add('previous');
+        wordElements[nextWordIndex].classList.add('active');
 
-                currentWordIndex = nextWordIndex;
-            }
+        currentWordIndex = nextWordIndex;
+    }
 
-            createWordElements(); // Initial creation of word elements
+    createWordElements(); // Initial creation of word elements
 
-            // Start animation on desktop if applicable
-            if (window.innerWidth >= 1024) {
+    // Start animation on desktop if applicable
+    if (window.innerWidth >= 1024) {
+        wordAnimationInterval = setInterval(animateWords, 2500);
+    }
+
+    // Handle window resize for word animation
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) {
+            if (!wordAnimationInterval) {
+                createWordElements(); // Recreate elements in case they were removed or reset
                 wordAnimationInterval = setInterval(animateWords, 2500);
             }
-
-            // Handle window resize for word animation
-            window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1024) {
-                    if (!wordAnimationInterval) {
-                        createWordElements(); // Recreate elements in case they were removed or reset
-                        wordAnimationInterval = setInterval(animateWords, 2500);
-                    }
-                } else {
-                    clearInterval(wordAnimationInterval); // Clear interval when switching to mobile
-                    wordAnimationInterval = null;
-                    // Reset words to the first one for mobile view, or hide if desired
-                    const wordElements = Array.from(animatedWordsWrapper.children);
-                    wordElements.forEach((wordElement, index) => {
-                        wordElement.classList.remove('active', 'previous');
-                        if (index === 0) {
-                            wordElement.classList.add('active'); // Show first word on mobile
-                        }
-                    });
-                    currentWordIndex = 0; // Reset index for consistency
+        } else {
+            clearInterval(wordAnimationInterval); // Clear interval when switching to mobile
+            wordAnimationInterval = null;
+            // Reset words to the first one for mobile view, or hide if desired
+            const wordElements = Array.from(animatedWordsWrapper.children);
+            wordElements.forEach((wordElement, index) => {
+                wordElement.classList.remove('active', 'previous');
+                if (index === 0) {
+                    wordElement.classList.add('active'); // Show first word on mobile
                 }
             });
+            currentWordIndex = 0; // Reset index for consistency
+        }
+    });
 
 
-            // Worldcoin Price Fetcher for Desktop and Mobile
-            const wldPriceDesktop = document.getElementById('wld-price-desktop');
-            const wldPriceStatusDesktop = document.getElementById('worldcoin-price-status-desktop');
-            const wldPriceMobile = document.getElementById('wld-price-mobile'); // Referencia al elemento dentro de la slide móvil
-            const wldPriceStatusMobile = document.getElementById('worldcoin-price-status-mobile'); // Referencia al elemento dentro de la slide móvil
-            const BINANCE_API_URL = "https://api.binance.com/api/v3/ticker/price?symbol=WLDUSDT";
+    // Worldcoin Price Fetcher for Desktop and Mobile
+    const wldPriceDesktop = document.getElementById('wld-price-desktop');
+    const wldPriceStatusDesktop = document.getElementById('worldcoin-price-status-desktop');
+    const wldPriceMobile = document.getElementById('wld-price-mobile'); // Referencia al elemento dentro de la slide móvil
+    const wldPriceStatusMobile = document.getElementById('worldcoin-price-status-mobile'); // Referencia al elemento dentro de la slide móvil
+    const BINANCE_API_URL = "https://api.binance.com/api/v3/ticker/price?symbol=WLDUSDT";
 
-            async function fetchWorldcoinPrice() {
-                try {
-                    const response = await fetch(BINANCE_API_URL);
+    async function fetchWorldcoinPrice() {
+        try {
+            const response = await fetch(BINANCE_API_URL);
 
-                    if (!response.ok) {
-                        const errorText = await response.text().catch(() => 'No hay información de error adicional');
-                        throw new Error(`La respuesta de la red no fue correcta: ${response.status} - ${response.statusText}. Detalles del error: ${errorText}`);
-                    }
-
-                    const data = await response.json();
-
-                    if (data && data.price) {
-                        const price = parseFloat(data.price);
-                        const formattedPrice = price.toFixed(3);
-                        
-                        // Update desktop widget if it exists
-                        if (wldPriceDesktop) wldPriceDesktop.textContent = formattedPrice;
-                        if (wldPriceStatusDesktop) wldPriceStatusDesktop.textContent = 'Precio en vivo (vía Binance)';
-                        
-                        // Update mobile widget if it exists (now inside the Swiper)
-                        if (wldPriceMobile) wldPriceMobile.textContent = formattedPrice;
-                        if (wldPriceStatusMobile) wldPriceStatusMobile.textContent = 'Precio en vivo (vía Binance)'; 
-
-                    } else {
-                        if (wldPriceDesktop) wldPriceDesktop.textContent = 'N/A';
-                        if (wldPriceStatusDesktop) wldPriceStatusDesktop.textContent = 'Precio no disponible';
-                        
-                        if (wldPriceMobile) wldPriceMobile.textContent = 'N/A';
-                        if (wldPriceStatusMobile) wldPriceStatusMobile.textContent = 'Precio no disponible';
-                        console.warn('La estructura de datos de la API de Binance no es la esperada para WLDUSDT. Respuesta completa:', data);
-                    }
-
-                } catch (error) {
-                    console.error('Error al obtener el precio de Worldcoin desde Binance:', error);
-                    if (wldPriceDesktop) wldPriceDesktop.textContent = 'Error';
-                    if (wldPriceStatusDesktop) wldPriceStatusDesktop.textContent = 'No se pudo cargar el precio.';
-                    
-                    if (wldPriceMobile) wldPriceMobile.textContent = 'Error';
-                    if (wldPriceStatusMobile) wldPriceStatusMobile.textContent = 'No se pudo cargar el precio.';
-
-                    if (error instanceof TypeError && error.message === 'Failed to fetch') {
-                        console.error('Posible problema de CORS o conectividad de red. Revisa la consola del navegador para más detalles.');
-                    }
-                }
+            if (!response.ok) {
+                const errorText = await response.text().catch(() => 'No hay información de error adicional');
+                throw new Error(`La respuesta de la red no fue correcta: ${response.status} - ${response.statusText}. Detalles del error: ${errorText}`);
             }
 
-            fetchWorldcoinPrice(); // Llamada inicial
-            setInterval(fetchWorldcoinPrice, 30000); // Actualizar cada 30 segundos
+            const data = await response.json();
 
+            if (data && data.price) {
+                const price = parseFloat(data.price);
+                const formattedPrice = price.toFixed(3);
+                
+                // Update desktop widget if it exists
+                if (wldPriceDesktop) wldPriceDesktop.textContent = formattedPrice;
+                if (wldPriceStatusDesktop) wldPriceStatusDesktop.textContent = 'Precio en vivo (vía Binance)';
+                
+                // Update mobile widget if it exists (now inside the Swiper)
+                if (wldPriceMobile) wldPriceMobile.textContent = formattedPrice;
+                if (wldPriceStatusMobile) wldPriceStatusMobile.textContent = 'Precio en vivo (vía Binance)'; 
 
-            // Initialize Swiper.js for the info cards slider (mobile only)
-            let infoCardsSwiper;
-            const swiperContainer = document.querySelector('.swiper-container-info-cards');
-
-            function initInfoCardsSwiper() {
-                // Destroy existing Swiper instance before creating a new one if it exists
-                if (infoCardsSwiper) {
-                    infoCardsSwiper.destroy(true, true);
-                    infoCardsSwiper = null; // Clear the instance
-                }
-
-                // Initialize Swiper only on mobile if the container is visible
-                if (window.innerWidth < 1024 && swiperContainer) {
-                    infoCardsSwiper = new Swiper(swiperContainer, {
-                        loop: true,
-                        autoplay: {
-                            delay: 4000,
-                            disableOnInteraction: false,
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        slidesPerView: 1.2, // Show 1.1 slides to indicate more content
-                        spaceBetween: 20, // Adjusted spacing
-                        centeredSlides: true, // Center the active slide
-                    });
-                }
+            } else {
+                if (wldPriceDesktop) wldPriceDesktop.textContent = 'N/A';
+                if (wldPriceStatusDesktop) wldPriceStatusDesktop.textContent = 'Precio no disponible';
+                
+                if (wldPriceMobile) wldPriceMobile.textContent = 'N/A';
+                if (wldPriceStatusMobile) wldPriceStatusMobile.textContent = 'Precio no disponible';
+                console.warn('La estructura de datos de la API de Binance no es la esperada para WLDUSDT. Respuesta completa:', data);
             }
 
-            initInfoCardsSwiper(); // Initial call
+        } catch (error) {
+            console.error('Error al obtener el precio de Worldcoin desde Binance:', error);
+            if (wldPriceDesktop) wldPriceDesktop.textContent = 'Error';
+            if (wldPriceStatusDesktop) wldPriceStatusDesktop.textContent = 'No se pudo cargar el precio.';
+            
+            if (wldPriceMobile) wldPriceMobile.textContent = 'Error';
+            if (wldPriceStatusMobile) wldPriceStatusMobile.textContent = 'No se pudo cargar el precio.';
 
-            // NEW: Initialize Swiper.js for the combined cards slider (mobile only)
-            let combinedCardsSwiper;
-            const combinedSwiperContainer = document.querySelector('.swiper-container-combined-cards');
-
-            function initCombinedCardsSwiper() {
-                if (combinedCardsSwiper) {
-                    combinedCardsSwiper.destroy(true, true);
-                    combinedCardsSwiper = null;
-                }
-
-                if (window.innerWidth < 1024 && combinedSwiperContainer) {
-                    combinedCardsSwiper = new Swiper(combinedSwiperContainer, {
-                        loop: true,
-                        autoplay: {
-                            delay: 5000, // Slightly different delay
-                            disableOnInteraction: false,
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        slidesPerView: 1.2, // Show 1.1 slides to indicate more content
-                        spaceBetween: 20, // Adjusted spacing
-                        centeredSlides: true,
-                    });
-                }
+            if (error instanceof TypeError && error.message === 'Failed to fetch') {
+                console.error('Posible problema de CORS o conectividad de red. Revisa la consola del navegador para más detalles.');
             }
+        }
+    }
 
-            initCombinedCardsSwiper(); // Initial call for the new Swiper
+    fetchWorldcoinPrice(); // Llamada inicial
+    setInterval(fetchWorldcoinPrice, 30000); // Actualizar cada 30 segundos
 
-            // Re-initialize Swipers on resize if needed
-            window.addEventListener('resize', () => {
-                initInfoCardsSwiper(); // Re-init first Swiper
-                initCombinedCardsSwiper(); // Re-init second Swiper
-                initPopularProductsSwiper(); // Re-init popular products Swiper
+
+    // Initialize Swiper.js for the info cards slider (mobile only)
+    let infoCardsSwiper;
+    const swiperContainer = document.querySelector('.swiper-container-info-cards');
+
+    function initInfoCardsSwiper() {
+        // Destroy existing Swiper instance before creating a new one if it exists
+        if (infoCardsSwiper) {
+            infoCardsSwiper.destroy(true, true);
+            infoCardsSwiper = null; // Clear the instance
+        }
+
+        // Initialize Swiper only on mobile if the container is visible
+        if (window.innerWidth < 1024 && swiperContainer) {
+            infoCardsSwiper = new Swiper(swiperContainer, {
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                slidesPerView: 1.2, // Show 1.1 slides to indicate more content
+                spaceBetween: 20, // Adjusted spacing
+                centeredSlides: true, // Center the active slide
             });
+        }
+    }
 
+    initInfoCardsSwiper(); // Initial call
 
-            // Efecto de brillo en las cards del slider (si están visibles)
-            document.querySelectorAll('.card-glow').forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--x', `${x}px`);
-                    card.style.setProperty('--y', `${y}px`);
-                });
+    // NEW: Initialize Swiper.js for the combined cards slider (mobile only)
+    let combinedCardsSwiper;
+    const combinedSwiperContainer = document.querySelector('.swiper-container-combined-cards');
+
+    function initCombinedCardsSwiper() {
+        if (combinedCardsSwiper) {
+            combinedCardsSwiper.destroy(true, true);
+            combinedCardsSwiper = null;
+        }
+
+        if (window.innerWidth < 1024 && combinedSwiperContainer) {
+            combinedCardsSwiper = new Swiper(combinedSwiperContainer, {
+                loop: true,
+                autoplay: {
+                    delay: 5000, // Slightly different delay
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                slidesPerView: 1.2, // Show 1.1 slides to indicate more content
+                spaceBetween: 20, // Adjusted spacing
+                centeredSlides: true,
             });
-
-            // Implementación de Intersection Observer para efectos de aparición (scroll-reveal)
-            // Se han excluido los elementos dentro del slider principal para evitar conflictos con Swiper
-            const elementsToAnimate = document.querySelectorAll('section, .worldcoin-widget-desktop, .main-hero-text-container');
-            // Filtrar para evitar elementos dentro del Swiper ya que el Swiper controla su visibilidad
-            const filteredElements = Array.from(elementsToAnimate).filter(element => {
-                // Ensure it's not the swiper container itself or a child of it
-                return !element.classList.contains('swiper-container-info-cards') && !element.closest('.swiper-container-info-cards') &&
-                       !element.classList.contains('swiper-container-combined-cards') && !element.closest('.swiper-container-combined-cards') &&
-                       !element.classList.contains('swiper-container-popular-products') && !element.closest('.swiper-container-popular-products'); // Added popular products swiper
-            });
-
-            const observerOptions = {
-                root: null, // viewport
-                rootMargin: '0px',
-                threshold: 0.1 // 10% del elemento visible
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in-up'); // Clase para la animación
-                        observer.unobserve(entry.target); // Dejar de observar una vez que se anima
-                    }
-                });
-            }, observerOptions);
-
-            filteredElements.forEach(element => {
-                element.classList.add('opacity-0', 'translate-y-4'); // Estado inicial oculto
-                element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-                observer.observe(element);
-            });
-
-            // Clase para la animación de aparición
-            const styleSheet = document.createElement('style');
-            styleSheet.innerHTML = `
-                .fade-in-up {
-                    opacity: 1 !important;
-                    transform: translateY(0) !important;
-                }
-            `;
-            document.head.appendChild(styleSheet);
-
-
-            // Efecto de mouse hover en cards de productos populares (simulando 3D ligero)
-            document.querySelectorAll('.grid.grid-cols-2 a .flex.flex-col.h-full, .grid.grid-cols-5 a .flex.flex-col.h-full').forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    const rotateX = ((e.clientY - centerY) / rect.height) * 8; // Rotación ligeramente más brutal
-                    const rotateY = ((e.clientX - centerX) / rect.width) * -8; // Rotación ligeramente más brutal
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`; // Añadir escala
-                });
-
-                card.addEventListener('mouseleave', (e) => {
-                    // Obtener la posición del ratón al salir para un retorno más natural
-                    const rect = card.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    const currentRotateX = ((e.clientY - centerY) / rect.height) * 8;
-                    const currentRotateY = ((e.clientX - centerX) / rect.width) * -8;
-
-                    card.style.transition = 'transform 0.5s ease-out'; // Transición más suave al volver
-                    card.style.transform = `perspective(1000px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(1)`; // Volver a escala normal
-                    setTimeout(() => {
-                        card.style.transition = ''; // Eliminar la transición después de un breve tiempo
-                        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)'; // Asegurar el estado final
-                    }, 500);
-                });
-                card.style.transition = 'transform 0.2s ease-out'; // Transición rápida para el movimiento del mouse
-            });
-
-            // Más interactividad para tarjetas generales (que no son "card-glow" o las de productos populares)
-            document.querySelectorAll('.interactive-card').forEach(card => {
-                // Evitar aplicar el efecto a cards que ya tienen un hover especial o están dentro del Swiper
-                if (!card.classList.contains('card-glow') && !card.closest('.swiper-container-info-cards') && !card.closest('.swiper-container-combined-cards') && !card.closest('.swiper-container-popular-products')) { // Added popular products swiper
-                    card.addEventListener('mouseenter', () => {
-                        card.style.transform = 'translateY(-8px) scale(1.03)';
-                        card.style.boxShadow = '0 18px 25px -3px rgba(0, 0, 0, 0.2), 0 8px 10px -2px rgba(0, 0, 0, 0.1)';
-                        card.style.transition = 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out';
-                    });
-                    card.addEventListener('mouseleave', () => {
-                        card.style.transform = 'translateY(0) scale(1)';
-                        card.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
-                    });
-                }
-            });
-
-            // Suave scroll para enlaces internos
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            // Timer for "Oferta del Día"
-            function updateCountdown() {
-                const now = new Date();
-                // Set the end date for the countdown (e.g., end of today + some hours)
-                // For demonstration, let's set it to tomorrow at midnight (00:00:00)
-                const tomorrow = new Date(now);
-                tomorrow.setDate(now.getDate() + 1);
-                tomorrow.setHours(0, 0, 0, 0);
-
-                const timeLeft = tomorrow.getTime() - now.getTime(); // Time difference in milliseconds
-
-                if (timeLeft < 0) {
-                    // If the countdown is over, display 00:00:00
-                    document.getElementById('countdown-hours').textContent = '00';
-                    document.getElementById('countdown-minutes').textContent = '00';
-                    document.getElementById('countdown-seconds').textContent = '00';
-                    return;
-                }
-
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-                document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('countdown-seconds').textContent = String(seconds).padStart(2, '0');
-            }
-
-            // Update the countdown every second
-            setInterval(updateCountdown, 1000);
-            updateCountdown(); // Initial call to display immediately
-
-
-            // --- E-commerce Logic ---
-            // Array de productos simulado (adaptado a los productos de tu nuevo index2.html)
-            const products = [
-                { id: 'worldcoin', name: 'Worldcoin', price: 1.00, image: 'https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png', type: 'crypto', description: 'Precio en vivo (vía Binance)', category: 'Criptomonedas' },
-                { id: 'eneba-10eur', name: 'Eneba (10 EUR)', price: 9.64, originalPrice: 55.00, discount: 3.6, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Facebook-Ads-by-Rewarble.webp', type: 'offer-of-day', description: 'Ahorra 0,36 US$', category: 'Juegos' },
-                { id: 'mastercard-gift-card', name: 'Mastercard Gift Card', price: 110.00, originalPrice: 100.00, discount: 30, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/My-Prepaid-Center-Mastercard.webp', type: 'weekly-offer', description: 'Hasta -30% de descuento en tu compra.', category: 'Tarjetas Prepago' },
-                { id: 'onlyfans-gift-card', name: 'OnlyFans Gift Card', price: 55.00, originalPrice: 50.00, discount: 9, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp', type: 'weekly-offer', description: 'Ahorra hasta un 9% en tu suscripción.', category: 'Entretenimiento' },
-                { id: 'google-play-gift-card', name: 'Google Play Gift Card', price: 55.00, originalPrice: 50.00, discount: 9.6, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Google-Play.webp', type: 'weekly-offer', description: 'Consigue hasta un 9.6% de descuento.', category: 'Apps y Software' },
-                { id: 'uber-eats-gift-card', name: 'Uber Eats Gift Card', price: 55.00, originalPrice: 50.00, discount: 2, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp', type: 'weekly-offer', description: 'Obtén hasta un 2% de ahorro en tus pedidos.', category: 'Comida' },
-                { id: 'mastercard-prepagada-gift-card', name: 'Mastercard prepagada Gift Card', price: 110.00, originalPrice: 100.00, discount: 3, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mastercard-by-Rewarble.webp', type: 'weekly-offer', description: 'Hasta un 3% de descuento en tarjetas.', category: 'Tarjetas Prepago' },
-                { id: 'vanilla-gift-card', name: 'Vanilla Gift Gift Card', price: 110.00, originalPrice: 100.00, discount: 9.6, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Vanilla-Gift.webp', type: 'weekly-offer', description: 'Hasta un 9.6% de ahorro en Vanilla Gift.', category: 'Tarjetas Prepago' },
-
-                { id: 'amazon-gift-card', name: 'Amazon Gift Card', price: 110.00, minVal: 100, maxVal: 2000, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Amazon.webp', type: 'popular', description: 'Tarjetas de regalo para tus compras en Amazon.', category: 'E-commerce' },
-                { id: 'steam-gift-card', name: 'Steam Gift Card', price: 55.00, minVal: 55.00, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Steam.webp', type: 'popular', description: 'Crédito para juegos y software en Steam.', category: 'Juegos' },
-                { id: 'onlyfans-by-rewarble', name: 'OnlyFans by Rewarble', price: 55.00, minVal: 55.00, maxVal: 1000, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp', type: 'popular', description: 'Acceso a contenido exclusivo de OnlyFans.', category: 'Entretenimiento' },
-                { id: 'itunes-gift-card', name: 'iTunes Gift Card', price: 100.00, minVal: 100.00, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/iTunes.webp', type: 'popular', description: 'Crédito para apps, música y más en iTunes.', category: 'Apps y Software' },
-                { id: 'playstation-gift-card', name: 'PlayStation Gift Card', price: 55.00, minVal: 55.00, maxVal: 250, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/PlayStation.webp', type: 'popular', description: 'Tarjetas para juegos y contenido de PlayStation Store.', category: 'Juegos' },
-                { id: 'apple-gift-card', name: 'Apple Gift Card', price: 100.00, minVal: 100.00, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Apple.webp', type: 'popular', description: 'Para productos, accesorios y servicios de Apple.', category: 'Apps y Software' },
-                { id: 'razer-gold-gift-card', name: 'Razer Gold Gift Card', price: 100.00, minVal: 100.00, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Razer.webp', type: 'popular', description: 'Crédito unificado para gamers de Razer Gold.', category: 'Juegos' },
-                { id: 'doordash-gift-card', name: 'DoorDash Gift Card', price: 100.00, minVal: 100.00, maxVal: 250, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/DoorDash.webp', type: 'popular', description: 'Pedidos de comida a domicilio con DoorDash.', category: 'Comida' },
-                { id: 'macys-gift-card', name: 'Macy\'s Gift Card', price: 100.00, minVal: 100.00, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Macys.webp', type: 'popular', description: 'Compras en tiendas Macy\'s y online.', category: 'E-commerce' },
-                { id: 'uber-gift-card', name: 'Uber Gift Card', price: 55.00, minVal: 55.00, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber.webp', type: 'popular', description: 'Viajes y pedidos con Uber.', category: 'Transporte' },
-                { id: 'roblox-gift-card', name: 'Roblox Gift Card', price: 100.00, minVal: 100.00, maxVal: 200, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Roblox.webp', type: 'popular', description: 'Crédito para Robux y experiencias en Roblox.', category: 'Juegos' },
-                { id: 'airbnb-gift-card', name: 'Airbnb Gift Card', price: 100.00, minVal: 100.00, maxVal: 1.000, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.webp', type: 'popular', description: 'Reservas de alojamientos y experiencias en Airbnb.', category: 'Viajes' },
-                { id: 'best-buy-gift-card', name: 'Best Buy Gift Card', price: 100.00, minVal: 100.00, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Best-Buy.webp', type: 'popular', description: 'Compras de electrónica en Best Buy.', category: 'Electrónica' },
-                { id: 'att-gift-card', name: 'AT&T Gift Card', price: 100.00, minVal: 100.00, maxVal: 200, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/AT-T.webp', type: 'popular', description: 'Recargas y servicios de AT&T.', category: 'Servicios' },
-                { id: 'target-gift-card', name: 'Target Gift Card', price: 100.00, minVal: 100.00, maxVal: 2000, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Target.webp', type: 'popular', description: 'Compras en tiendas Target y online.', category: 'E-commerce' }
-            ];
-
-            // Estado del carrito
-            let cart = [];
-
-            // Referencias del DOM
-            const cartSidebar = document.getElementById('cart-sidebar');
-            const openCartBtn = document.getElementById('open-cart-btn'); // Desktop cart button
-            const closeCartBtn = document.getElementById('close-cart-btn');
-            const cartOverlay = document.getElementById('cart-overlay');
-            const cartItemsContainer = document.getElementById('cart-items');
-            const cartItemCount = document.getElementById('cart-item-count'); // Desktop cart count
-            const cartSubtotalSpan = document.getElementById('cart-subtotal');
-            const cartTotalSpan = document.getElementById('cart-total');
-            const emptyCartMessage = document.getElementById('empty-cart-message');
-            const proceedToCheckoutBtn = document.getElementById('proceed-to-checkout-btn');
-
-            const mainContent = document.querySelector('main'); // Use main content
-            const checkoutSection = document.getElementById('checkout-section');
-            const backToCartBtn = document.getElementById('back-to-cart-btn');
-            const placeOrderBtn = document.getElementById('place-order-btn');
-            const checkoutSummaryItems = document.getElementById('checkout-summary-items');
-            const checkoutTotalSummary = document.getElementById('checkout-total-summary');
-            const orderConfirmationModal = document.getElementById('order-confirmation-modal');
-            const closeConfirmationModalBtn = document.getElementById('close-confirmation-modal-btn');
-
-            // NEW: All Products Section DOM elements
-            const allProductsSection = document.getElementById('all-products-section');
-            const showAllProductsBtn = document.getElementById('show-all-products-btn');
-            const backToHomeBtn = document.getElementById('back-to-home-btn');
-            const allProductsGrid = document.getElementById('all-products-grid');
-            const categoryFiltersContainer = document.getElementById('category-filters');
-            const noProductsMessage = document.getElementById('no-products-message');
-
-
-            // Add a check to ensure mainContent exists
-            if (!mainContent) {
-                console.error("Main content element not found!");
-                return; // Exit if main content is not available
-            }
-
-
-            /**
-             * Carga el carrito desde sessionStorage.
-             */
-            const loadCartFromSessionStorage = () => {
-                try {
-                    const storedCart = sessionStorage.getItem('shoppingCart');
-                    if (storedCart) {
-                        cart = JSON.parse(storedCart);
-                    }
-                } catch (error) {
-                    console.error('Error al cargar el carrito de sessionStorage:', error);
-                    cart = []; // Restablecer el carrito si hay un error de parseo
-                }
-            };
-
-            /**
-             * Guarda el carrito en sessionStorage.
-             */
-            const saveCartToSessionStorage = () => {
-                try {
-                    sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
-                } catch (error) {
-                    console.error('Error al guardar el carrito en sessionStorage:', error);
-                }
-            };
-
-            /**
-             * Renderiza los productos en la sección de "Productos más Populares" (desktop y mobile).
-             */
-            const renderProducts = () => {
-                const popularProductsGridDesktop = document.getElementById('popular-products-grid-desktop');
-                const popularProductsSwiperWrapper = document.getElementById('popular-products-swiper-wrapper');
-
-                // Clear existing content in both
-                if (popularProductsGridDesktop) popularProductsGridDesktop.innerHTML = '';
-                if (popularProductsSwiperWrapper) popularProductsSwiperWrapper.innerHTML = '';
-
-                products.filter(p => p.type === 'popular').forEach(product => {
-                    // Render for desktop grid
-                    if (popularProductsGridDesktop) { // No need for window.innerWidth check here, handled by desktop-only class
-                        popularProductsGridDesktop.appendChild(createPopularProductCardDesktop(product));
-                    }
-                    // Render for mobile carousel
-                    if (popularProductsSwiperWrapper) { // No need for window.innerWidth check here, handled by mobile-only class
-                        popularProductsSwiperWrapper.appendChild(createPopularProductCardMobile(product));
-                    }
-                });
-            };
-
-            /**
-             * Crea el HTML para una tarjeta de producto popular (desktop).
-             * @param {Object} product - El objeto producto.
-             * @returns {HTMLElement} - El elemento HTML de la tarjeta.
-             */
-            const createPopularProductCardDesktop = (product) => {
-                const cardLink = document.createElement('a');
-                cardLink.href = "#"; // No hay enlace real, por ahora.
-                // Removed max-w-xs from here, now handled by CSS media query
-                cardLink.className = "block w-full h-full text-white interactive-card mx-auto"; // Added mx-auto for centering within grid cell
-                cardLink.dataset.productId = product.id; // Add product ID for event delegation
-
-                cardLink.innerHTML = `
-                    <div class="popular-product-card-ecommerce">
-                        <div class="relative flex justify-center items-center h-32 mb-2">
-                            <picture>
-                                <source type="image/webp" srcset="${product.image}">
-                                <img alt="Tarjeta de regalo de ${product.name}" class="object-contain" src="${product.image}" height="125" width="198" onerror="this.onerror=null; this.src='https://placehold.co/198x125/cccccc/333333?text=No+Image';">
-                            </picture>
-                        </div>
-                        <div class="flex flex-col justify-between pt-2 pb-0">
-                            <span class="card-title font-bold text-lg mb-0 text-white">${product.name}</span>
-                            <p class="card-text-price text-sm text-gray-300 mb-2">USD ${product.minVal.toFixed(2)} - ${product.maxVal.toFixed(2)}</p>
-                            <button class="add-to-cart-btn bg-button-orange text-white py-2 px-4 rounded-md text-sm font-semibold mt-auto" data-product-id="${product.id}">
-                                Añadir al Carrito
-                            </button>
-                        </div>
-                    </div>
-                `;
-                return cardLink;
-            };
-
-            /**
-             * Crea el HTML para una tarjeta de producto popular (mobile carousel slide).
-             * @param {Object} product - El objeto producto.
-             * @returns {HTMLElement} - El elemento HTML de la slide.
-             */
-            const createPopularProductCardMobile = (product) => {
-                const slideDiv = document.createElement('div');
-                slideDiv.className = 'swiper-slide popular-product-card-ecommerce interactive-card';
-                slideDiv.dataset.productId = product.id;
-
-                slideDiv.innerHTML = `
-                    <img src="${product.image}" alt="Logo de ${product.name}" class="card-image">
-                    <h3 class="font-semibold text-white">${product.name}</h3>
-                    <p class="price-range text-gray-300">USD ${product.minVal.toFixed(2)} - ${product.maxVal.toFixed(2)}</p>
-                    <button class="add-to-cart-btn bg-button-orange text-base px-6 py-3 rounded-md mt-4" data-product-id="${product.id}">Añadir al Carrito</button>
-                `;
-                return slideDiv;
-            };
-
-
-            /**
-             * Abre la barra lateral del carrito.
-             */
-            const openCartSidebar = () => {
-                cartSidebar.classList.add('open');
-                cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
-                cartOverlay.classList.add('opacity-100', 'pointer-events-auto');
-            };
-
-            /**
-             * Cierra la barra lateral del carrito.
-             */
-            const closeCartSidebar = () => {
-                cartSidebar.classList.remove('open');
-                cartOverlay.classList.remove('opacity-100', 'pointer-events-auto');
-                cartOverlay.classList.add('opacity-0', 'pointer-events-none');
-            };
-
-            /**
-             * Añade un producto al carrito.
-             * @param {string} productId - El ID del producto a añadir.
-             */
-            const addToCart = (productId) => {
-                const product = products.find(p => p.id === productId);
-                if (!product) {
-                    console.error('Producto no encontrado:', productId);
-                    return;
-                }
-
-                const existingCartItem = cart.find(item => item.productId === productId);
-
-                if (existingCartItem) {
-                    existingCartItem.quantity++;
-                } else {
-                    cart.push({
-                        productId: product.id,
-                        name: product.name,
-                        price: product.price,
-                        image: product.image,
-                        quantity: 1
-                    });
-                }
-                saveCartToSessionStorage();
-                renderCart();
-                openCartSidebar(); // Abre el carrito automáticamente al añadir
-            };
-
-            /**
-             * Actualiza la cantidad de un producto en el carrito.
-             * @param {string} productId - El ID del producto.
-             * @param {number} quantity - La nueva cantidad.
-             */
-            const updateCartItemQuantity = (productId, quantity) => {
-                const itemIndex = cart.findIndex(item => item.productId === productId);
-                if (itemIndex > -1) {
-                    if (quantity <= 0) {
-                        removeFromCart(productId);
-                    } else {
-                        cart[itemIndex].quantity = quantity;
-                    }
-                    saveCartToSessionStorage();
-                    renderCart();
-                }
-            };
-
-            /**
-             * Elimina un producto del carrito.
-             * @param {string} productId - El ID del producto a eliminar.
-             */
-            const removeFromCart = (productId) => {
-                cart = cart.filter(item => item.productId !== productId);
-                saveCartToSessionStorage();
-                renderCart();
-            };
-
-            /**
-             * Renderiza los elementos del carrito en la barra lateral.
-             */
-            const renderCart = () => {
-                cartItemsContainer.innerHTML = ''; // Limpiar items existentes
-                if (cart.length === 0) {
-                    emptyCartMessage.classList.remove('hidden');
-                    proceedToCheckoutBtn.disabled = true;
-                    proceedToCheckoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                } else {
-                    emptyCartMessage.classList.add('hidden');
-                    proceedToCheckoutBtn.disabled = false;
-                    proceedToCheckoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-
-                    cart.forEach(item => {
-                        const cartItemDiv = document.createElement('div');
-                        cartItemDiv.className = 'flex items-center space-x-4 p-3 bg-white rounded-lg shadow-sm border border-gray-200';
-                        cartItemDiv.innerHTML = `
-                            <img src="${item.image}" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/333333?text=Item';" alt="${item.name}" class="w-16 h-16 object-contain rounded-md">
-                            <div class="flex-grow">
-                                <h4 class="font-semibold text-gray-800">${item.name}</h4>
-                                <p class="text-gray-600">$${item.price.toFixed(2)}</p>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <button class="decrease-quantity-btn text-blue-600 hover:text-blue-800 font-bold text-lg" data-product-id="${item.productId}">-</button>
-                                <span class="quantity-display font-medium text-gray-700">${item.quantity}</span>
-                                <button class="increase-quantity-btn text-blue-600 hover:text-blue-800 font-bold text-lg" data-product-id="${item.productId}">+</button>
-                            </div>
-                            <button class="remove-from-cart-btn text-red-500 hover:text-red-700 text-xl" data-product-id="${item.productId}">&times;</button>
-                        `;
-                        cartItemsContainer.appendChild(cartItemDiv);
-                    });
-                }
-                calculateCartTotals();
-                updateCartItemCount();
-            };
-
-            /**
-             * Calcula y actualiza los totales del carrito (subtotal, total).
-             */
-            const calculateCartTotals = () => {
-                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                // Podrías añadir lógica de impuestos, envío aquí
-                const total = subtotal; // Simplificado por ahora
-
-                cartSubtotalSpan.textContent = `$${total.toFixed(2)}`;
-                cartTotalSpan.textContent = `$${total.toFixed(2)}`;
-            };
-
-            /**
-             * Actualiza el contador de ítems en el icono del carrito del encabezado.
-             */
-            const updateCartItemCount = () => {
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                if (cartItemCount) cartItemCount.textContent = totalItems;
-
-                if (cartItemCount) { // Check for desktop count
-                    if (totalItems === 0) {
-                        cartItemCount.classList.add('hidden');
-                    } else {
-                        cartItemCount.classList.remove('hidden');
-                    }
-                }
-            };
-
-            /**
-             * Muestra la sección de checkout y oculta el contenido principal.
-             */
-            const showCheckoutSection = () => {
-                mainContent.classList.add('hidden-section');
-                allProductsSection.classList.add('hidden-section'); // Ensure all products section is hidden
-                checkoutSection.classList.remove('hidden-section');
-                closeCartSidebar(); // Cierra el carrito si está abierto
-                renderCheckoutSummary();
-            };
-
-            /**
-             * Muestra la sección principal y oculta el checkout.
-             */
-            const showMainContent = () => {
-                checkoutSection.classList.add('hidden-section');
-                allProductsSection.classList.add('hidden-section'); // Ensure all products section is hidden
-                mainContent.classList.remove('hidden-section');
-            };
-
-            /**
-             * Renderiza el resumen de los ítems en la sección de checkout.
-             */
-            const renderCheckoutSummary = () => {
-                checkoutSummaryItems.innerHTML = ''; // Limpiar
-                cart.forEach(item => {
-                    const itemDiv = document.createElement('div');
-                    itemDiv.className = 'flex justify-between items-center text-gray-700';
-                    itemDiv.innerHTML = `
-                        <span>${item.name} x ${item.quantity}</span>
-                        <span>$${(item.price * item.quantity).toFixed(2)}</span>
-                    `;
-                    checkoutSummaryItems.appendChild(itemDiv);
-                });
-                checkoutTotalSummary.textContent = cartTotalSpan.textContent; // Usar el total ya calculado
-            };
-
-            /**
-             * Maneja el evento de confirmar pedido.
-             */
-            const handlePlaceOrder = (event) => {
-                event.preventDefault(); // Evitar el envío del formulario
-                const form = document.getElementById('checkout-form');
-                if (form.checkValidity()) {
-                    // Simular un proceso de pedido
-                    console.log('Pedido confirmado:', {
-                        fullName: document.getElementById('full-name').value,
-                        email: document.getElementById('email').value,
-                        address: document.getElementById('address').value,
-                        city: document.getElementById('city').value,
-                        zip: document.getElementById('zip').value,
-                        paymentMethod: document.querySelector('input[name="payment-method"]:checked').value,
-                        cart: cart
-                    });
-
-                    // Mostrar modal de confirmación
-                    orderConfirmationModal.classList.remove('hidden');
-
-                    // Limpiar carrito después del pedido simulado
-                    cart = [];
-                    saveCartToSessionStorage();
-                    renderCart();
-                    // Opcional: limpiar el formulario
-                    form.reset();
-                } else {
-                    // Si el formulario no es válido, activamos la validación nativa del navegador
-                    form.reportValidity();
-                }
-            };
-
-            // NEW: Functions for All Products Section
-            /**
-             * Muestra la sección de todos los productos y oculta el contenido principal.
-             */
-            window.showAllProductsPage = () => {
-                mainContent.classList.add('hidden-section');
-                checkoutSection.classList.add('hidden-section'); // Ensure checkout is hidden
-                allProductsSection.classList.remove('hidden-section');
-                renderAllProducts(); // Render all products initially
-                setupCategoryFilters(); // Setup category filters
-                window.scrollTo(0, 0); // Scroll to top of the page
-            };
-
-            /**
-             * Renderiza todos los productos en la cuadrícula, opcionalmente filtrados por categoría.
-             * @param {string} [filterCategory='all'] - La categoría por la que filtrar.
-             */
-            const renderAllProducts = (filterCategory = 'all') => {
-                allProductsGrid.innerHTML = ''; // Clear existing products
-                const filteredProducts = filterCategory === 'all'
-                    ? products.filter(p => p.category) // Only show products with a category in this section
-                    : products.filter(p => p.category === filterCategory);
-
-                if (filteredProducts.length === 0) {
-                    noProductsMessage.classList.remove('hidden');
-                } else {
-                    noProductsMessage.classList.add('hidden');
-                    filteredProducts.forEach(product => {
-                        const productCard = document.createElement('div');
-                        productCard.className = 'product-card interactive-card';
-                        productCard.dataset.productId = product.id;
-                        productCard.innerHTML = `
-                            <img src="${product.image}" alt="Imagen de ${product.name}" onerror="this.onerror=null; this.src='https://placehold.co/120x120/0B1B3F/FFFFFF?text=No+Image';">
-                            <h3>${product.name}</h3>
-                            <p>${product.description}</p>
-                            <span class="price">$${product.price.toFixed(2)}</span>
-                            <button class="add-to-cart-btn bg-button-orange text-white py-2 px-4 rounded-md text-sm font-semibold mt-auto" data-product-id="${product.id}">
-                                Añadir al Carrito
-                            </button>
-                        `;
-                        allProductsGrid.appendChild(productCard);
-                    });
-                }
-            };
-
-            /**
-             * Configura los filtros de categoría en la barra lateral.
-             */
-            const setupCategoryFilters = () => {
-                categoryFiltersContainer.innerHTML = ''; // Clear existing filters
-                const allCategories = ['Todas las Categorías', ...new Set(products.map(p => p.category).filter(Boolean))]; // Get unique categories
-
-                allCategories.forEach(category => {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'category-item';
-                    listItem.textContent = category;
-                    listItem.dataset.category = category;
-                    categoryFiltersContainer.appendChild(listItem);
-
-                    // Add click listener for filtering
-                    listItem.addEventListener('click', () => {
-                        // Remove active class from all categories
-                        document.querySelectorAll('.category-item').forEach(item => {
-                            item.classList.remove('active');
-                        });
-                        // Add active class to the clicked category
-                        listItem.classList.add('active');
-                        renderAllProducts(category === 'Todas las Categorías' ? 'all' : category);
-                    });
-                });
-                // Set 'Todas las Categorías' as active by default
-                const allCategoryItem = categoryFiltersContainer.querySelector('[data-category="Todas las Categorías"]');
-                if (allCategoryItem) {
-                    allCategoryItem.classList.add('active');
-                }
-            };
-
-            // --- Manejadores de Eventos ---
-
-            // Abrir y cerrar carrito (Desktop y Mobile)
-            if (openCartBtn) { 
-                openCartBtn.addEventListener('click', openCartSidebar);
-            }
-           
-            closeCartBtn.addEventListener('click', closeCartSidebar);
-            cartOverlay.addEventListener('click', closeCartSidebar);
-
-            // Delegación de eventos para los botones de añadir al carrito
-            // Se escuchan los clics en todo el documento y se filtran por la clase 'add-to-cart-btn'
-            document.addEventListener('click', (event) => {
-                // Ensure the clicked element or its parent has the 'add-to-cart-btn' class
-                const targetButton = event.target.closest('.add-to-cart-btn');
-                if (targetButton) {
-                    const productId = targetButton.dataset.productId;
-                    if (productId) {
-                        addToCart(productId);
+        }
+    }
+
+    initCombinedCardsSwiper(); // Initial call for the new Swiper
+
+    // Initialize Swiper for Countries Carousel
+    let countriesSwiper;
+    function initCountriesSwiper() {
+        const countriesSwiperContainer = document.getElementById('countries-swiper-container');
+        if (countriesSwiperContainer) {
+            countriesSwiper = new Swiper(countriesSwiperContainer, {
+                loop: true,
+                slidesPerView: 1.2,
+                spaceBetween: 20,
+                centeredSlides: true,
+                pagination: {
+                    el: '#countries-swiper-container .swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '#countries-swiper-container .swiper-button-next',
+                    prevEl: '#countries-swiper-container .swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    // Cuando el ancho de la ventana es >= 640px
+                    640: {
+                        slidesPerView: 2.2,
+                        spaceBetween: 20,
+                        centeredSlides: false,
+                    },
+                    // Cuando el ancho de la ventana es >= 768px
+                    768: {
+                        slidesPerView: 3.2,
+                        spaceBetween: 30,
+                        centeredSlides: false,
+                    },
+                    // Cuando el ancho de la ventana es >= 1024px
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                        centeredSlides: false,
+                    },
+                    // Cuando el ancho de la ventana es >= 1280px
+                    1280: {
+                        slidesPerView: 5,
+                        spaceBetween: 40,
+                        centeredSlides: false,
                     }
                 }
             });
-
-            // Delegación de eventos para botones de cantidad y remover en el carrito
-            cartItemsContainer.addEventListener('click', (event) => {
-                const productId = event.target.dataset.productId;
-                if (!productId) return;
-
-                if (event.target.classList.contains('increase-quantity-btn')) {
-                    const item = cart.find(item => item.productId === productId);
-                    if (item) {
-                        updateCartItemQuantity(productId, item.quantity + 1);
-                    }
-                } else if (event.target.classList.contains('decrease-quantity-btn')) {
-                    const item = cart.find(item => item.productId === productId);
-                    if (item) {
-                        updateCartItemQuantity(productId, item.quantity - 1);
-                    }
-                } else if (event.target.classList.contains('remove-from-cart-btn')) {
-                    removeFromCart(productId);
-                }
-            });
-
-            // Botón "Proceder al Pago"
-            proceedToCheckoutBtn.addEventListener('click', showCheckoutSection);
-
-            // Botón "Volver al Carrito" en checkout (realmente vuelve a la vista principal)
-            backToCartBtn.addEventListener('click', showMainContent);
-
-            // Botón "Confirmar Pedido" en checkout
-            placeOrderBtn.addEventListener('click', handlePlaceOrder);
-
-            // Cerrar modal de confirmación
-            closeConfirmationModalBtn.addEventListener('click', () => {
-                orderConfirmationModal.classList.add('hidden');
-                showMainContent(); // Vuelve a la vista principal después de confirmar el pedido
-            });
-
-            // NEW: Event listener for "Mostrar todos" button
-            if (showAllProductsBtn) {
-                showAllProductsBtn.addEventListener('click', window.showAllProductsPage);
-            }
-
-            // NEW: Event listener for "Volver al Inicio" button in all products section
-            if (backToHomeBtn) {
-                backToHomeBtn.addEventListener('click', showMainContent);
-            }
+        }
+    }
+    initCountriesSwiper(); // Initial call for the countries carousel
 
 
-            // Initialize Swiper.js for the popular products slider (mobile only)
-            let popularProductsSwiper;
-            const popularProductsSwiperContainer = document.getElementById('popular-products-carousel-mobile');
-
-            function initPopularProductsSwiper() {
-                // Destroy existing Swiper instance before creating a new one if it exists
-                if (popularProductsSwiper) {
-                    popularProductsSwiper.destroy(true, true);
-                    popularProductsSwiper = null; // Clear the instance
-                }
-
-                // Initialize Swiper only on mobile if the container is visible
-                if (window.innerWidth < 1024 && popularProductsSwiperContainer) {
-                    popularProductsSwiper = new Swiper(popularProductsSwiperContainer, {
-                        loop: true,
-                        autoplay: {
-                            delay: 4000,
-                            disableOnInteraction: false,
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        slidesPerView: 1.2, // Show 1.1 slides to indicate more content
-                        spaceBetween: 20, // Adjusted spacing
-                        centeredSlides: true, // Center the active slide
-                    });
-                }
-            }
+    // Re-initialize Swipers on resize if needed
+    window.addEventListener('resize', () => {
+        initInfoCardsSwiper(); // Re-init first Swiper
+        initCombinedCardsSwiper(); // Re-init second Swiper
+        initPopularProductsSwiper(); // Re-init popular products Swiper
+        // No explicit re-init needed for countries carousel as breakpoints handle it
+    });
 
 
-            // Initial load and render
-            loadCartFromSessionStorage();
-            renderProducts(); // Render products for both desktop grid and mobile carousel
-            initInfoCardsSwiper(); // Initialize advantages Swiper
-            initCombinedCardsSwiper(); // Initialize combined cards Swiper
-            initPopularProductsSwiper(); // Initialize popular products Swiper after rendering products
-            renderCart(); // Render cart items
+    // Efecto de brillo en las cards del slider (si están visibles)
+    document.querySelectorAll('.card-glow').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
         });
+    });
+
+    // Implementación de Intersection Observer para efectos de aparición (scroll-reveal)
+    // Se han excluido los elementos dentro del slider principal para evitar conflictos con Swiper
+    const elementsToAnimate = document.querySelectorAll('section, .worldcoin-widget-desktop, .main-hero-text-container');
+    // Filtrar para evitar elementos dentro del Swiper ya que el Swiper controla su visibilidad
+    const filteredElements = Array.from(elementsToAnimate).filter(element => {
+        // Ensure it's not the swiper container itself or a child of it
+        return !element.classList.contains('swiper-container-info-cards') && !element.closest('.swiper-container-info-cards') &&
+               !element.classList.contains('swiper-container-combined-cards') && !element.closest('.swiper-container-combined-cards') &&
+               !element.classList.contains('swiper-container-popular-products') && !element.closest('.swiper-container-popular-products') &&
+               !element.classList.contains('countries-swiper-container') && !element.closest('.countries-swiper-container'); // Added countries swiper
+    });
+
+    const observerOptions = {
+        root: null, // viewport
+        rootMargin: '0px',
+        threshold: 0.1 // 10% del elemento visible
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up'); // Clase para la animación
+                observer.unobserve(entry.target); // Dejar de observar una vez que se anima
+            }
+        });
+    }, observerOptions);
+
+    filteredElements.forEach(element => {
+        element.classList.add('opacity-0', 'translate-y-4'); // Estado inicial oculto
+        element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(element);
+    });
+
+    // Clase para la animación de aparición
+    const styleSheet = document.createElement('style');
+    styleSheet.innerHTML = `
+        .fade-in-up {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    `;
+    document.head.appendChild(styleSheet);
+
+
+    // Efecto de mouse hover en cards de productos populares (simulando 3D ligero)
+    document.querySelectorAll('.grid.grid-cols-2 a .flex.flex-col.h-full, .grid.grid-cols-5 a .flex.flex-col.h-full').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const rotateX = ((e.clientY - centerY) / rect.height) * 8; // Rotación ligeramente más brutal
+            const rotateY = ((e.clientX - centerX) / rect.width) * -8; // Rotación ligeramente más brutal
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`; // Añadir escala
+        });
+
+        card.addEventListener('mouseleave', (e) => {
+            // Obtener la posición del ratón al salir para un retorno más natural
+            const rect = card.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const currentRotateX = ((e.clientY - centerY) / rect.height) * 8;
+            const currentRotateY = ((e.clientX - centerX) / rect.width) * -8;
+
+            card.style.transition = 'transform 0.5s ease-out'; // Transición más suave al volver
+            card.style.transform = `perspective(1000px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(1)`; // Volver a escala normal
+            setTimeout(() => {
+                card.style.transition = ''; // Eliminar la transición después de un breve tiempo
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)'; // Asegurar el estado final
+            }, 500);
+        });
+        card.style.transition = 'transform 0.2s ease-out'; // Transición rápida para el movimiento del mouse
+    });
+
+    // Más interactividad para tarjetas generales (que no son "card-glow" o las de productos populares)
+    document.querySelectorAll('.interactive-card').forEach(card => {
+        // Evitar aplicar el efecto a cards que ya tienen un hover especial o están dentro del Swiper
+        if (!card.classList.contains('card-glow') && !card.closest('.swiper-container-info-cards') && !card.closest('.swiper-container-combined-cards') && !card.closest('.swiper-container-popular-products') && !card.closest('.countries-swiper-container')) { // Added countries swiper
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.03)';
+                card.style.boxShadow = '0 18px 25px -3px rgba(0, 0, 0, 0.2), 0 8px 10px -2px rgba(0, 0, 0, 0.1)';
+                card.style.transition = 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+            });
+        }
+    });
+
+    // Suave scroll para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Timer for "Oferta del Día"
+    function updateCountdown() {
+        const now = new Date();
+        // Set the end date for the countdown (e.g., end of today + some hours)
+        // For demonstration, let's set it to tomorrow at midnight (00:00:00)
+        const tomorrow = new Date(now);
+        tomorrow.setDate(now.getDate() + 1);
+        tomorrow.setHours(0, 0, 0, 0);
+
+        const timeLeft = tomorrow.getTime() - now.getTime(); // Time difference in milliseconds
+
+        if (timeLeft < 0) {
+            // If the countdown is over, display 00:00:00
+            document.getElementById('countdown-hours').textContent = '00';
+            document.getElementById('countdown-minutes').textContent = '00';
+            document.getElementById('countdown-seconds').textContent = '00';
+            return;
+        }
+
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('countdown-seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    // Update the countdown every second
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // Initial call to display immediately
+
+
+    // --- E-commerce Logic ---
+    // Array de productos simulado (adaptado a los productos de tu nuevo index2.html)
+    const products = [
+        { id: 'worldcoin', name: 'Worldcoin', price: 3.50, image: 'https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png', type: 'crypto', description: 'Precio en vivo (vía Binance)', category: 'Criptomonedas' },
+        { id: 'eneba-10eur', name: 'Eneba (10 EUR)', price: 9.64, originalPrice: 10.00, discount: 3.6, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Facebook-Ads-by-Rewarble.webp', type: 'offer-of-day', description: 'Ahorra 0,36 US$', category: 'Juegos' },
+        { id: 'mastercard-gift-card', name: 'Mastercard Gift Card', price: 70.00, originalPrice: 100.00, discount: 30, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/My-Prepaid-Center-Mastercard.webp', type: 'weekly-offer', description: 'Hasta -30% de descuento en tu compra.', category: 'Tarjetas Prepago' },
+        { id: 'onlyfans-gift-card', name: 'OnlyFans Gift Card', price: 91.00, originalPrice: 100.00, discount: 9, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp', type: 'weekly-offer', description: 'Ahorra hasta un 9% en tu suscripción.', category: 'Entretenimiento' },
+        { id: 'google-play-gift-card', name: 'Google Play Gift Card', price: 90.40, originalPrice: 100.00, discount: 9.6, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Google-Play.webp', type: 'weekly-offer', description: 'Consigue hasta un 9.6% de descuento.', category: 'Apps y Software' },
+        { id: 'uber-eats-gift-card', name: 'Uber Eats Gift Card', price: 98.00, originalPrice: 100.00, discount: 2, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber-Eats.webp', type: 'weekly-offer', description: 'Obtén hasta un 2% de ahorro en tus pedidos.', category: 'Comida' },
+        { id: 'mastercard-prepagada-gift-card', name: 'Mastercard prepagada Gift Card', price: 97.00, originalPrice: 100.00, discount: 3, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mastercard-by-Rewarble.webp', type: 'weekly-offer', description: 'Hasta un 3% de descuento en tarjetas.', category: 'Tarjetas Prepago' },
+        { id: 'vanilla-gift-card', name: 'Vanilla Gift Gift Card', price: 90.40, originalPrice: 100.00, discount: 9.6, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Vanilla-Gift.webp', type: 'weekly-offer', description: 'Hasta un 9.6% de ahorro en Vanilla Gift.', category: 'Tarjetas Prepago' },
+
+        { id: 'amazon-gift-card', name: 'Amazon Gift Card', price: 1.00, minVal: 1, maxVal: 2000, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Amazon.webp', type: 'popular', description: 'Tarjetas de regalo para tus compras en Amazon.', category: 'E-commerce' },
+        { id: 'steam-gift-card', name: 'Steam Gift Card', price: 10.00, minVal: 10, maxVal: 200, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Steam.webp', type: 'popular', description: 'Crédito para juegos y software en Steam.', category: 'Juegos' },
+        { id: 'onlyfans-by-rewarble', name: 'OnlyFans by Rewarble', price: 1.00, minVal: 1, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/OnlyFans-by-Rewarble.webp', type: 'popular', description: 'Acceso a contenido exclusivo de OnlyFans.', category: 'Entretenimiento' },
+        { id: 'itunes-gift-card', name: 'iTunes Gift Card', price: 2.00, minVal: 2, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/iTunes.webp', type: 'popular', description: 'Crédito para apps, música y más en iTunes.', category: 'Apps y Software' },
+        { id: 'playstation-gift-card', name: 'PlayStation Gift Card', price: 10.00, minVal: 10, maxVal: 250, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/PlayStation.webp', type: 'popular', description: 'Tarjetas para juegos y contenido de PlayStation Store.', category: 'Juegos' },
+        { id: 'apple-gift-card', name: 'Apple Gift Card', price: 2.00, minVal: 2, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Apple.webp', type: 'popular', description: 'Para productos, accesorios y servicios de Apple.', category: 'Apps y Software' },
+        { id: 'razer-gold-gift-card', name: 'Razer Gold Gift Card', price: 1.00, minVal: 1, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Razer.webp', type: 'popular', description: 'Crédito unificado para gamers de Razer Gold.', category: 'Juegos' },
+        { id: 'doordash-gift-card', name: 'DoorDash Gift Card', price: 5.00, minVal: 5, maxVal: 250, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/DoorDash.webp', type: 'popular', description: 'Pedidos de comida a domicilio con DoorDash.', category: 'Comida' },
+        { id: 'macys-gift-card', name: 'Macy\'s Gift Card', price: 5.00, minVal: 5, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Macys.webp', type: 'popular', description: 'Compras en tiendas Macy\'s y online.', category: 'E-commerce' },
+        { id: 'uber-gift-card', name: 'Uber Gift Card', price: 5.00, minVal: 5, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Uber.webp', type: 'popular', description: 'Viajes y pedidos con Uber.', category: 'Transporte' },
+        { id: 'roblox-gift-card', name: 'Roblox Gift Card', price: 5.00, minVal: 5, maxVal: 200, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Roblox.webp', type: 'popular', description: 'Crédito para Robux y experiencias en Roblox.', category: 'Juegos' },
+        { id: 'airbnb-gift-card', name: 'Airbnb Gift Card', price: 25.00, minVal: 25, maxVal: 300, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Airbnb.webp', type: 'popular', description: 'Reservas de alojamientos y experiencias en Airbnb.', category: 'Viajes' },
+        { id: 'best-buy-gift-card', name: 'Best Buy Gift Card', price: 10.00, minVal: 10, maxVal: 500, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Best-Buy.webp', type: 'popular', description: 'Compras de electrónica en Best Buy.', category: 'Electrónica' },
+        { id: 'att-gift-card', name: 'AT&T Gift Card', price: 10.00, minVal: 10, maxVal: 100, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/AT-T.webp', type: 'popular', description: 'Recargas y servicios de AT&T.', category: 'Servicios' },
+        { id: 'target-gift-card', name: 'Target Gift Card', price: 1.00, minVal: 1, maxVal: 2000, image: 'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Target.webp', type: 'popular', description: 'Compras en tiendas Target y online.', category: 'E-commerce' }
+    ];
+
+    // Estado del carrito
+    let cart = [];
+
+    // Referencias del DOM
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const openCartBtn = document.getElementById('open-cart-btn'); // Desktop cart button
+    const closeCartBtn = document.getElementById('close-cart-btn');
+    const cartOverlay = document.getElementById('cart-overlay');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartItemCount = document.getElementById('cart-item-count'); // Desktop cart count
+    const cartSubtotalSpan = document.getElementById('cart-subtotal');
+    const cartTotalSpan = document.getElementById('cart-total');
+    const emptyCartMessage = document.getElementById('empty-cart-message');
+    const proceedToCheckoutBtn = document.getElementById('proceed-to-checkout-btn');
+
+    const mainContent = document.querySelector('main'); // Use main content
+    const checkoutSection = document.getElementById('checkout-section');
+    const backToCartBtn = document.getElementById('back-to-cart-btn');
+    const placeOrderBtn = document.getElementById('place-order-btn');
+    const checkoutSummaryItems = document.getElementById('checkout-summary-items');
+    const checkoutTotalSummary = document.getElementById('checkout-total-summary');
+    const orderConfirmationModal = document.getElementById('order-confirmation-modal');
+    const closeConfirmationModalBtn = document.getElementById('close-confirmation-modal-btn');
+
+    // NEW: All Products Section DOM elements
+    const allProductsSection = document.getElementById('all-products-section');
+    const showAllProductsBtn = document.getElementById('show-all-products-btn');
+    const backToHomeBtn = document.getElementById('back-to-home-btn');
+    const allProductsGrid = document.getElementById('all-products-grid');
+    const categoryFiltersContainer = document.getElementById('category-filters');
+    const noProductsMessage = document.getElementById('no-products-message');
+
+
+    // Add a check to ensure mainContent exists
+    if (!mainContent) {
+        console.error("Main content element not found!");
+        return; // Exit if main content is not available
+    }
+
+
+    /**
+     * Carga el carrito desde sessionStorage.
+     */
+    const loadCartFromSessionStorage = () => {
+        try {
+            const storedCart = sessionStorage.getItem('shoppingCart');
+            if (storedCart) {
+                cart = JSON.parse(storedCart);
+            }
+        } catch (error) {
+            console.error('Error al cargar el carrito de sessionStorage:', error);
+            cart = []; // Restablecer el carrito si hay un error de parseo
+        }
+    };
+
+    /**
+     * Guarda el carrito en sessionStorage.
+     */
+    const saveCartToSessionStorage = () => {
+        try {
+            sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
+        } catch (error) {
+            console.error('Error al guardar el carrito en sessionStorage:', error);
+        }
+    };
+
+    /**
+     * Renderiza los productos en la sección de "Productos más Populares" (desktop y mobile).
+     */
+    const renderProducts = () => {
+        const popularProductsGridDesktop = document.getElementById('popular-products-grid-desktop');
+        const popularProductsSwiperWrapper = document.getElementById('popular-products-swiper-wrapper');
+
+        // Clear existing content in both
+        if (popularProductsGridDesktop) popularProductsGridDesktop.innerHTML = '';
+        if (popularProductsSwiperWrapper) popularProductsSwiperWrapper.innerHTML = '';
+
+        products.filter(p => p.type === 'popular').forEach(product => {
+            // Render for desktop grid
+            if (popularProductsGridDesktop) { // No need for window.innerWidth check here, handled by desktop-only class
+                popularProductsGridDesktop.appendChild(createPopularProductCardDesktop(product));
+            }
+            // Render for mobile carousel
+            if (popularProductsSwiperWrapper) { // No need for window.innerWidth check here, handled by mobile-only class
+                popularProductsSwiperWrapper.appendChild(createPopularProductCardMobile(product));
+            }
+        });
+    };
+
+    /**
+     * Crea el HTML para una tarjeta de producto popular (desktop).
+     * @param {Object} product - El objeto producto.
+     * @returns {HTMLElement} - El elemento HTML de la tarjeta.
+     */
+    const createPopularProductCardDesktop = (product) => {
+        const cardLink = document.createElement('a');
+        cardLink.href = "#"; // No hay enlace real, por ahora.
+        // Removed max-w-xs from here, now handled by CSS media query
+        cardLink.className = "block w-full h-full text-white interactive-card mx-auto"; // Added mx-auto for centering within grid cell
+        cardLink.dataset.productId = product.id; // Add product ID for event delegation
+
+        cardLink.innerHTML = `
+            <div class="popular-product-card-ecommerce">
+                <div class="relative flex justify-center items-center h-32 mb-2">
+                    <picture>
+                        <source type="image/webp" srcset="${product.image}">
+                        <img alt="Tarjeta de regalo de ${product.name}" class="object-contain" src="${product.image}" height="125" width="198" onerror="this.onerror=null; this.src='https://placehold.co/198x125/cccccc/333333?text=No+Image';">
+                    </picture>
+                </div>
+                <div class="flex flex-col justify-between pt-2 pb-0">
+                    <span class="card-title font-bold text-lg mb-0 text-white">${product.name}</span>
+                    <p class="card-text-price text-sm text-gray-300 mb-2">USD ${product.minVal.toFixed(2)} - ${product.maxVal.toFixed(2)}</p>
+                    <button class="add-to-cart-btn bg-button-orange text-white py-2 px-4 rounded-md text-sm font-semibold mt-auto" data-product-id="${product.id}">
+                        Añadir al Carrito
+                    </button>
+                </div>
+            </div>
+        `;
+        return cardLink;
+    };
+
+    /**
+     * Crea el HTML para una tarjeta de producto popular (mobile carousel slide).
+     * @param {Object} product - El objeto producto.
+     * @returns {HTMLElement} - El elemento HTML de la slide.
+     */
+    const createPopularProductCardMobile = (product) => {
+        const slideDiv = document.createElement('div');
+        slideDiv.className = 'swiper-slide popular-product-card-ecommerce interactive-card';
+        slideDiv.dataset.productId = product.id;
+
+        slideDiv.innerHTML = `
+            <img src="${product.image}" alt="Logo de ${product.name}" class="card-image">
+            <h3 class="font-semibold text-white">${product.name}</h3>
+            <p class="price-range text-gray-300">USD ${product.minVal.toFixed(2)} - ${product.maxVal.toFixed(2)}</p>
+            <button class="add-to-cart-btn bg-button-orange text-base px-6 py-3 rounded-md mt-4" data-product-id="${product.id}">Añadir al Carrito</button>
+        `;
+        return slideDiv;
+    };
+
+
+    /**
+     * Abre la barra lateral del carrito.
+     */
+    const openCartSidebar = () => {
+        cartSidebar.classList.add('open');
+        cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        cartOverlay.classList.add('opacity-100', 'pointer-events-auto');
+    };
+
+    /**
+     * Cierra la barra lateral del carrito.
+     */
+    const closeCartSidebar = () => {
+        cartSidebar.classList.remove('open');
+        cartOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+        cartOverlay.classList.add('opacity-0', 'pointer-events-none');
+    };
+
+    /**
+     * Añade un producto al carrito.
+     * @param {string} productId - El ID del producto a añadir.
+     */
+    const addToCart = (productId) => {
+        const product = products.find(p => p.id === productId);
+        if (!product) {
+            console.error('Producto no encontrado:', productId);
+            return;
+        }
+
+        const existingCartItem = cart.find(item => item.productId === productId);
+
+        if (existingCartItem) {
+            existingCartItem.quantity++;
+        } else {
+            cart.push({
+                productId: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                quantity: 1
+            });
+        }
+        saveCartToSessionStorage();
+        renderCart();
+        openCartSidebar(); // Abre el carrito automáticamente al añadir
+    };
+
+    /**
+     * Actualiza la cantidad de un producto en el carrito.
+     * @param {string} productId - El ID del producto.
+     * @param {number} quantity - La nueva cantidad.
+     */
+    const updateCartItemQuantity = (productId, quantity) => {
+        const itemIndex = cart.findIndex(item => item.productId === productId);
+        if (itemIndex > -1) {
+            if (quantity <= 0) {
+                removeFromCart(productId);
+            } else {
+                cart[itemIndex].quantity = quantity;
+            }
+            saveCartToSessionStorage();
+            renderCart();
+        }
+    };
+
+    /**
+     * Elimina un producto del carrito.
+     * @param {string} productId - El ID del producto a eliminar.
+     */
+    const removeFromCart = (productId) => {
+        cart = cart.filter(item => item.productId !== productId);
+        saveCartToSessionStorage();
+        renderCart();
+    };
+
+    /**
+     * Renderiza los elementos del carrito en la barra lateral.
+     */
+    const renderCart = () => {
+        cartItemsContainer.innerHTML = ''; // Limpiar items existentes
+        if (cart.length === 0) {
+            emptyCartMessage.classList.remove('hidden');
+            proceedToCheckoutBtn.disabled = true;
+            proceedToCheckoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        } else {
+            emptyCartMessage.classList.add('hidden');
+            proceedToCheckoutBtn.disabled = false;
+            proceedToCheckoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+            cart.forEach(item => {
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.className = 'flex items-center space-x-4 p-3 bg-white rounded-lg shadow-sm border border-gray-200';
+                cartItemDiv.innerHTML = `
+                    <img src="${item.image}" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/333333?text=Item';" alt="${item.name}" class="w-16 h-16 object-contain rounded-md">
+                    <div class="flex-grow">
+                        <h4 class="font-semibold text-gray-800">${item.name}</h4>
+                        <p class="text-gray-600">$${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="decrease-quantity-btn text-blue-600 hover:text-blue-800 font-bold text-lg" data-product-id="${item.productId}">-</button>
+                        <span class="quantity-display font-medium text-gray-700">${item.quantity}</span>
+                        <button class="increase-quantity-btn text-blue-600 hover:text-blue-800 font-bold text-lg" data-product-id="${item.productId}">+</button>
+                    </div>
+                    <button class="remove-from-cart-btn text-red-500 hover:text-red-700 text-xl" data-product-id="${item.productId}">&times;</button>
+                `;
+                cartItemsContainer.appendChild(cartItemDiv);
+            });
+        }
+        calculateCartTotals();
+        updateCartItemCount();
+    };
+
+    /**
+     * Calcula y actualiza los totales del carrito (subtotal, total).
+     */
+    const calculateCartTotals = () => {
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        // Podrías añadir lógica de impuestos, envío aquí
+        const total = subtotal; // Simplificado por ahora
+
+        cartSubtotalSpan.textContent = `$${total.toFixed(2)}`;
+        cartTotalSpan.textContent = `$${total.toFixed(2)}`;
+    };
+
+    /**
+     * Actualiza el contador de ítems en el icono del carrito del encabezado.
+     */
+    const updateCartItemCount = () => {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        if (cartItemCount) cartItemCount.textContent = totalItems;
+
+        if (cartItemCount) { // Check for desktop count
+            if (totalItems === 0) {
+                cartItemCount.classList.add('hidden');
+            } else {
+                cartItemCount.classList.remove('hidden');
+            }
+        }
+    };
+
+    /**
+     * Muestra la sección de checkout y oculta el contenido principal.
+     */
+    const showCheckoutSection = () => {
+        mainContent.classList.add('hidden-section');
+        allProductsSection.classList.add('hidden-section'); // Ensure all products section is hidden
+        checkoutSection.classList.remove('hidden-section');
+        closeCartSidebar(); // Cierra el carrito si está abierto
+        renderCheckoutSummary();
+    };
+
+    /**
+     * Muestra la sección principal y oculta el checkout.
+     */
+    const showMainContent = () => {
+        checkoutSection.classList.add('hidden-section');
+        allProductsSection.classList.add('hidden-section'); // Ensure all products section is hidden
+        mainContent.classList.remove('hidden-section');
+    };
+
+    /**
+     * Renderiza el resumen de los ítems en la sección de checkout.
+     */
+    const renderCheckoutSummary = () => {
+        checkoutSummaryItems.innerHTML = ''; // Limpiar
+        cart.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'flex justify-between items-center text-gray-700';
+            itemDiv.innerHTML = `
+                <span>${item.name} x ${item.quantity}</span>
+                <span>$${(item.price * item.quantity).toFixed(2)}</span>
+            `;
+            checkoutSummaryItems.appendChild(itemDiv);
+        });
+        checkoutTotalSummary.textContent = cartTotalSpan.textContent; // Usar el total ya calculado
+    };
+
+    /**
+     * Maneja el evento de confirmar pedido.
+     */
+    const handlePlaceOrder = (event) => {
+        event.preventDefault(); // Evitar el envío del formulario
+        const form = document.getElementById('checkout-form');
+        if (form.checkValidity()) {
+            // Simular un proceso de pedido
+            console.log('Pedido confirmado:', {
+                fullName: document.getElementById('full-name').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                zip: document.getElementById('zip').value,
+                paymentMethod: document.querySelector('input[name="payment-method"]:checked').value,
+                cart: cart
+            });
+
+            // Mostrar modal de confirmación
+            orderConfirmationModal.classList.remove('hidden');
+
+            // Limpiar carrito después del pedido simulado
+            cart = [];
+            saveCartToSessionStorage();
+            renderCart();
+            // Opcional: limpiar el formulario
+            form.reset();
+        } else {
+            // Si el formulario no es válido, activamos la validación nativa del navegador
+            form.reportValidity();
+        }
+    };
+
+    // NEW: Functions for All Products Section
+    /**
+     * Muestra la sección de todos los productos y oculta el contenido principal.
+     */
+    window.showAllProductsPage = () => {
+        mainContent.classList.add('hidden-section');
+        checkoutSection.classList.add('hidden-section'); // Ensure checkout is hidden
+        allProductsSection.classList.remove('hidden-section');
+        renderAllProducts(); // Render all products initially
+        setupCategoryFilters(); // Setup category filters
+        window.scrollTo(0, 0); // Scroll to top of the page
+    };
+
+    /**
+     * Renderiza todos los productos en la cuadrícula, opcionalmente filtrados por categoría.
+     * @param {string} [filterCategory='all'] - La categoría por la que filtrar.
+     */
+    const renderAllProducts = (filterCategory = 'all') => {
+        allProductsGrid.innerHTML = ''; // Clear existing products
+        const filteredProducts = filterCategory === 'all'
+            ? products.filter(p => p.category) // Only show products with a category in this section
+            : products.filter(p => p.category === filterCategory);
+
+        if (filteredProducts.length === 0) {
+            noProductsMessage.classList.remove('hidden');
+        } else {
+            noProductsMessage.classList.add('hidden');
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card interactive-card';
+                productCard.dataset.productId = product.id;
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="Imagen de ${product.name}" onerror="this.onerror=null; this.src='https://placehold.co/120x120/0B1B3F/FFFFFF?text=No+Image';">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <span class="price">$${product.price.toFixed(2)}</span>
+                    <button class="add-to-cart-btn bg-button-orange text-white py-2 px-4 rounded-md text-sm font-semibold mt-auto" data-product-id="${product.id}">
+                        Añadir al Carrito
+                    </button>
+                `;
+                allProductsGrid.appendChild(productCard);
+            });
+        }
+    };
+
+    /**
+     * Configura los filtros de categoría en la barra lateral.
+     */
+    const setupCategoryFilters = () => {
+        categoryFiltersContainer.innerHTML = ''; // Clear existing filters
+        const allCategories = ['Todas las Categorías', ...new Set(products.map(p => p.category).filter(Boolean))]; // Get unique categories
+
+        allCategories.forEach(category => {
+            const listItem = document.createElement('li');
+            listItem.className = 'category-item';
+            listItem.textContent = category;
+            listItem.dataset.category = category;
+            categoryFiltersContainer.appendChild(listItem);
+
+            // Add click listener for filtering
+            listItem.addEventListener('click', () => {
+                // Remove active class from all categories
+                document.querySelectorAll('.category-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                // Add active class to the clicked category
+                listItem.classList.add('active');
+                renderAllProducts(category === 'Todas las Categorías' ? 'all' : category);
+            });
+        });
+        // Set 'Todas las Categorías' as active by default
+        const allCategoryItem = categoryFiltersContainer.querySelector('[data-category="Todas las Categorías"]');
+        if (allCategoryItem) {
+            allCategoryItem.classList.add('active');
+        }
+    };
+
+    // --- Manejadores de Eventos ---
+
+    // Abrir y cerrar carrito (Desktop y Mobile)
+    if (openCartBtn) { 
+        openCartBtn.addEventListener('click', openCartSidebar);
+    }
+   
+    closeCartBtn.addEventListener('click', closeCartSidebar);
+    cartOverlay.addEventListener('click', closeCartSidebar);
+
+    // Delegación de eventos para los botones de añadir al carrito
+    // Se escuchan los clics en todo el documento y se filtran por la clase 'add-to-cart-btn'
+    document.addEventListener('click', (event) => {
+        // Ensure the clicked element or its parent has the 'add-to-cart-btn' class
+        const targetButton = event.target.closest('.add-to-cart-btn');
+        if (targetButton) {
+            const productId = targetButton.dataset.productId;
+            if (productId) {
+                addToCart(productId);
+            }
+        }
+    });
+
+    // Delegación de eventos para botones de cantidad y remover en el carrito
+    cartItemsContainer.addEventListener('click', (event) => {
+        const productId = event.target.dataset.productId;
+        if (!productId) return;
+
+        if (event.target.classList.contains('increase-quantity-btn')) {
+            const item = cart.find(item => item.productId === productId);
+            if (item) {
+                updateCartItemQuantity(productId, item.quantity + 1);
+            }
+        } else if (event.target.classList.contains('decrease-quantity-btn')) {
+            const item = cart.find(item => item.productId === productId);
+            if (item) {
+                updateCartItemQuantity(productId, item.quantity - 1);
+            }
+        } else if (event.target.classList.contains('remove-from-cart-btn')) {
+            removeFromCart(productId);
+        }
+    });
+
+    // Botón "Proceder al Pago"
+    proceedToCheckoutBtn.addEventListener('click', showCheckoutSection);
+
+    // Botón "Volver al Carrito" en checkout (realmente vuelve a la vista principal)
+    backToCartBtn.addEventListener('click', showMainContent);
+
+    // Botón "Confirmar Pedido" en checkout
+    placeOrderBtn.addEventListener('click', handlePlaceOrder);
+
+    // Cerrar modal de confirmación
+    closeConfirmationModalBtn.addEventListener('click', () => {
+        orderConfirmationModal.classList.add('hidden');
+        showMainContent(); // Vuelve a la vista principal después de confirmar el pedido
+    });
+
+    // NEW: Event listener for "Mostrar todos" button
+    if (showAllProductsBtn) {
+        showAllProductsBtn.addEventListener('click', window.showAllProductsPage);
+    }
+
+    // NEW: Event listener for "Volver al Inicio" button in all products section
+    if (backToHomeBtn) {
+        backToHomeBtn.addEventListener('click', showMainContent);
+    }
+
+
+    // Initialize Swiper.js for the popular products slider (mobile only)
+    let popularProductsSwiper;
+    const popularProductsSwiperContainer = document.getElementById('popular-products-carousel-mobile');
+
+    function initPopularProductsSwiper() {
+        // Destroy existing Swiper instance before creating a new one if it exists
+        if (popularProductsSwiper) {
+            popularProductsSwiper.destroy(true, true);
+            popularProductsSwiper = null; // Clear the instance
+        }
+
+        // Initialize Swiper only on mobile if the container is visible
+        if (window.innerWidth < 1024 && popularProductsSwiperContainer) {
+            popularProductsSwiper = new Swiper(popularProductsSwiperContainer, {
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                slidesPerView: 1.2, // Show 1.1 slides to indicate more content
+                spaceBetween: 20, // Adjusted spacing
+                centeredSlides: true, // Center the active slide
+            });
+        }
+    }
+
+
+    // Initial load and render
+    loadCartFromSessionStorage();
+    renderProducts(); // Render products for both desktop grid and mobile carousel
+    initInfoCardsSwiper(); // Initialize advantages Swiper
+    initCombinedCardsSwiper(); // Initialize combined cards Swiper
+    initPopularProductsSwiper(); // Initialize popular products Swiper after rendering products
+    renderCart(); // Render cart items
+});
+
     </script>
 </body>
 </html>
-
